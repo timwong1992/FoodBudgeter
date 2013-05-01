@@ -1,25 +1,22 @@
 //
-//  SecondViewController.m
+//  FirstViewController.m
 //  FoodBudgeter
 //
 //  Created by Student on 4/30/13.
 //  Copyright (c) 2013 Tim Wong, Akia Vongdara. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "FoodTableViewController.h"
 
-@interface SecondViewController ()
 
-@end
-
-@implementation SecondViewController
+@implementation FoodTableViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Second", @"Second");
-        self.tabBarItem.image = [UIImage imageNamed:@"second"];
+        self.title = NSLocalizedString(@"First", @"First");
+        self.tabBarItem.image = [UIImage imageNamed:@"first"];
     }
     return self;
 }

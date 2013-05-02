@@ -68,7 +68,7 @@
 
 - (BOOL)addItem:(NSString *)itemName withType:(int)itemType withIngredients:(NSArray *)ingredients withCost:(double)itemCost {
     const char *dbpath = [databasePath UTF8String];
-
+    
     if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
         NSString *insertQuery;
         
@@ -83,7 +83,7 @@
             NSLog(@"Item type not valid");
             return false;
         }
-    
+        
         const char *insert_stmt = [insertQuery UTF8String];
         [self runQuery:insert_stmt onDatabase:itemDB withErrorMessage:"Insert failed!"];
         
@@ -109,6 +109,7 @@
                 [self runQuery:insert_stmt onDatabase:itemDB withErrorMessage:"Insert failed!"];
             }else {
                 NSLog(@"Object was found");
+                sqlite3_close(itemDB);
                 return false;
             }
         }
@@ -118,7 +119,7 @@
         costField.text = @"";
         
         sqlite3_close(itemDB);
-
+        
         return true;
     }
     
@@ -128,15 +129,47 @@
 #pragma mark -
 - (BOOL)isItemInDatabase:(NSString *)itemName {
     const char *dbpath = [databasePath UTF8String];
+    sqlite3_stmt *statement = NULL;
     if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
         NSString *retrievalQuery = [NSString stringWithFormat:@"SELECT item.itemName FROM item JOIN purchase ON item.itemID = purchase.purchaseID WHERE item.itemName = \"%@\"", itemName];
         const char *retrieve_stmt = [retrievalQuery UTF8String];
-        sqlite3_stmt *statement;
         if ([self runQuery:retrieve_stmt onDatabase:itemDB withErrorMessage:"Retrieval failed!"] == SQLITE_OK) {
             sqlite3_prepare(itemDB, retrieve_stmt, -1, &statement, NULL);
             if (sqlite3_step(statement) == SQLITE_ROW)
-                return true;
+                sqlite3_finalize(statement);
+            sqlite3_close(itemDB);
+            return true;
         }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(itemDB);
+    return false;
+}
+
+- (BOOL)getItem:(NSString *)itemName {
+    /*
+    sqlite3_prepare_v2(itemDB, query_stmt, -1, &statement, NULL);
+    while( sqlite3_step(statement) == SQLITE_ROW) {
+        NSString *addressField = [[NSString alloc] initWithUTF8String:
+                                  (const char *) sqlite3_column_text(statement, 0)];
+        
+        NSString *phoneField = [[NSString alloc] initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 1)];
+        //code to do something with extracted data here
+    }
+    sqlite3_finalize(statement);
+     */
+
+}
+
+- (BOOL)removeItem:(NSString *)itemName {
+    sqlite3_stmt  *statement;
+    // get item ID in order to find it in other tables
+    
+    // delete the item
+    NSString *query = [NSString stringWithFormat:@"DELETE FROM item WHERE item.itemName = \"%@\"", itemName];
+    if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Insert failed!"]) {
+        
     }
     return false;
 }

@@ -36,6 +36,11 @@
 withIngredients:(NSArray*)ingredients
        withCost:(double)itemCost;
 
+/*
+ Given item data, remove it from database.
+ */
+- (BOOL)removeItem:(NSString*)itemName;
+
 #warning testing purposes only. refactor into foodtableVC
 /*
  Given a name, check if it exists in the database.

@@ -10,11 +10,15 @@
 
 @implementation DatabaseTest
 
+@synthesize logVC;
+
 - (void)setUp
 {
     [super setUp];
     
     // Set-up code here.
+    logVC = [[LogFoodViewController alloc] initWithNibName:@"LogFoodViewController" bundle:nil];
+
 }
 
 - (void)tearDown
@@ -22,11 +26,15 @@
     // Tear-down code here.
     
     [super tearDown];
+    logVC = nil;
 }
 
-- (void)testExample
-{
-    STFail(@"Unit tests are not implemented yet in DatabaseTest");
+- (void)testAddition {
+    STAssertTrue([self.logVC addItem:@"Test Food" withType:1 withIngredients:nil withCost:10.00], @"Adding item should succeed");
+}
+
+- (void)testRetrieval {
+    
 }
 
 @end

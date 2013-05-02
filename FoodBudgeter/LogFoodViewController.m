@@ -60,10 +60,21 @@
         // add item data to other tables, depending on item type
         if (itemType == 0) {
             insertQuery = [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"%@\")", itemName, @"recipe"];
+            insert_stmt = [insertQuery UTF8String];
+            [self runQuery:insert_stmt onDatabase:itemDB withErrorMessage:"Insert failed!"];
+            
+            // for each ingredient in item data
+            // check ingredient table for the ingredient
+            // if not found, add ingredient into table
+            // add join table entry by getting id's from recipe and ingredient tables
+            
+            //insertQuery = [NSString stringWithFormat:@""];
         }
         // due to previous check, if itemtype is not 0 then it must be 1
         else {
             insertQuery = [NSString stringWithFormat:@"INSERT INTO purchase (itemCost) VALUES (\"%.2f\")", itemCost];
+            insert_stmt = [insertQuery UTF8String];
+            [self runQuery:insert_stmt onDatabase:itemDB withErrorMessage:"Insert failed!"];
         }
         
         // reset view fields

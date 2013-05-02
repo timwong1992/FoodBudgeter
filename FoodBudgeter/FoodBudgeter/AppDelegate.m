@@ -7,10 +7,9 @@
 //
 
 #import "AppDelegate.h"
-
 #import "FoodTableViewController.h"
-
 #import "FoodDetailTableViewController.h"
+#import "LogFoodViewController.h"
 
 @implementation AppDelegate
 
@@ -18,11 +17,13 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    UITableViewController *foodTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodTableViewController" bundle:nil];
-    UIViewController *foodDetailTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodDetailTableViewController" bundle:nil];
-    self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[foodTableVC, foodDetailTableVC];
-    self.window.rootViewController = self.tabBarController;
+    //UITableViewController *foodTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodTableViewController" bundle:nil];
+    //UIViewController *foodDetailTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodDetailTableViewController" bundle:nil];
+    LogFoodViewController *logFoodVC = [[LogFoodViewController alloc] initWithNibName:@"LogFoodViewController" bundle:nil];
+    //self.tabBarController = [[UITabBarController alloc] init];
+    //self.tabBarController.viewControllers = @[logFoodVC];
+    //self.window.rootViewController = self.tabBarController;
+    self.window.rootViewController = logFoodVC;
     [self.window makeKeyAndVisible];
     return YES;
 }

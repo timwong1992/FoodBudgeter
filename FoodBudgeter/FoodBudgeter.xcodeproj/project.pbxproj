@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F24B42B1732C5DA00A8068D /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F24B4291732C5DA00A8068D /* libsqlite3.0.dylib */; };
+		3F24B42C1732C5DA00A8068D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F24B42A1732C5DA00A8068D /* libsqlite3.dylib */; };
 		3FE218261730C14A00CDF44B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218251730C14A00CDF44B /* UIKit.framework */; };
 		3FE218281730C14A00CDF44B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218271730C14A00CDF44B /* Foundation.framework */; };
 		3FE2182A1730C14A00CDF44B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218291730C14A00CDF44B /* CoreGraphics.framework */; };
@@ -22,14 +24,16 @@
 		3FE218461730C14B00CDF44B /* FoodDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE218451730C14B00CDF44B /* FoodDetailTableViewController.m */; };
 		3FE218481730C14B00CDF44B /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE218471730C14B00CDF44B /* second.png */; };
 		3FE2184A1730C14B00CDF44B /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE218491730C14B00CDF44B /* second@2x.png */; };
-		3FE2184D1730C14B00CDF44B /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FE2184B1730C14B00CDF44B /* FirstViewController.xib */; };
-		3FE218501730C14B00CDF44B /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FE2184E1730C14B00CDF44B /* SecondViewController.xib */; };
+		3FE2184D1730C14B00CDF44B /* FoodTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FE2184B1730C14B00CDF44B /* FoodTableViewController.xib */; };
+		3FE218501730C14B00CDF44B /* FoodDetailTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FE2184E1730C14B00CDF44B /* FoodDetailTableViewController.xib */; };
 		9C56A6BA17311E550028C1C4 /* AddRecipe.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C56A6B617311E550028C1C4 /* AddRecipe.png */; };
 		9C56A6BB17311E550028C1C4 /* LogFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C56A6B817311E550028C1C4 /* LogFoodViewController.m */; };
 		9C56A6BC17311E550028C1C4 /* LogFoodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C56A6B917311E550028C1C4 /* LogFoodViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F24B4291732C5DA00A8068D /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		3F24B42A1732C5DA00A8068D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3FE218221730C14A00CDF44B /* FoodBudgeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodBudgeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE218251730C14A00CDF44B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3FE218271730C14A00CDF44B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -51,12 +55,12 @@
 		3FE218451730C14B00CDF44B /* FoodDetailTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoodDetailTableViewController.m; sourceTree = "<group>"; };
 		3FE218471730C14B00CDF44B /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		3FE218491730C14B00CDF44B /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
-		3FE2184C1730C14B00CDF44B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstViewController.xib; sourceTree = "<group>"; };
-		3FE2184F1730C14B00CDF44B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController.xib; sourceTree = "<group>"; };
-		9C56A6B617311E550028C1C4 /* AddRecipe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddRecipe.png; sourceTree = "<group>"; };
-		9C56A6B717311E550028C1C4 /* LogFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogFoodViewController.h; sourceTree = "<group>"; };
-		9C56A6B817311E550028C1C4 /* LogFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogFoodViewController.m; sourceTree = "<group>"; };
-		9C56A6B917311E550028C1C4 /* LogFoodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogFoodViewController.xib; sourceTree = "<group>"; };
+		3FE2184C1730C14B00CDF44B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FoodTableViewController.xib; sourceTree = "<group>"; };
+		3FE2184F1730C14B00CDF44B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FoodDetailTableViewController.xib; sourceTree = "<group>"; };
+		9C56A6B617311E550028C1C4 /* AddRecipe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AddRecipe.png; path = ../AddRecipe.png; sourceTree = "<group>"; };
+		9C56A6B717311E550028C1C4 /* LogFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogFoodViewController.h; path = ../LogFoodViewController.h; sourceTree = "<group>"; };
+		9C56A6B817311E550028C1C4 /* LogFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogFoodViewController.m; path = ../LogFoodViewController.m; sourceTree = "<group>"; };
+		9C56A6B917311E550028C1C4 /* LogFoodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LogFoodViewController.xib; path = ../LogFoodViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F24B42B1732C5DA00A8068D /* libsqlite3.0.dylib in Frameworks */,
+				3F24B42C1732C5DA00A8068D /* libsqlite3.dylib in Frameworks */,
 				3FE218261730C14A00CDF44B /* UIKit.framework in Frameworks */,
 				3FE218281730C14A00CDF44B /* Foundation.framework in Frameworks */,
 				3FE2182A1730C14A00CDF44B /* CoreGraphics.framework in Frameworks */,
@@ -73,13 +79,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F24B4281732C4FB00A8068D /* img */ = {
+			isa = PBXGroup;
+			children = (
+				3FE218401730C14B00CDF44B /* first.png */,
+				3FE218421730C14B00CDF44B /* first@2x.png */,
+				3FE218471730C14B00CDF44B /* second.png */,
+				3FE218491730C14B00CDF44B /* second@2x.png */,
+			);
+			name = img;
+			sourceTree = "<group>";
+		};
 		3FE218191730C14A00CDF44B = {
 			isa = PBXGroup;
 			children = (
-				9C56A6B617311E550028C1C4 /* AddRecipe.png */,
-				9C56A6B717311E550028C1C4 /* LogFoodViewController.h */,
-				9C56A6B817311E550028C1C4 /* LogFoodViewController.m */,
-				9C56A6B917311E550028C1C4 /* LogFoodViewController.xib */,
 				3FE2182B1730C14A00CDF44B /* FoodBudgeter */,
 				3FE218241730C14A00CDF44B /* Frameworks */,
 				3FE218231730C14A00CDF44B /* Products */,
@@ -111,10 +124,7 @@
 				3FE218581730C18300CDF44B /* model */,
 				3FE218571730C18000CDF44B /* delegate */,
 				3FE218561730C17800CDF44B /* controller */,
-				3FE218401730C14B00CDF44B /* first.png */,
-				3FE218421730C14B00CDF44B /* first@2x.png */,
-				3FE218471730C14B00CDF44B /* second.png */,
-				3FE218491730C14B00CDF44B /* second@2x.png */,
+				3F24B4281732C4FB00A8068D /* img */,
 				3FE2182C1730C14A00CDF44B /* Supporting Files */,
 			);
 			path = FoodBudgeter;
@@ -123,6 +133,8 @@
 		3FE2182C1730C14A00CDF44B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3F24B4291732C5DA00A8068D /* libsqlite3.0.dylib */,
+				3F24B42A1732C5DA00A8068D /* libsqlite3.dylib */,
 				3FE2182D1730C14A00CDF44B /* FoodBudgeter-Info.plist */,
 				3FE2182E1730C14A00CDF44B /* InfoPlist.strings */,
 				3FE218311730C14A00CDF44B /* main.m */,
@@ -141,6 +153,9 @@
 				3FE2183E1730C14B00CDF44B /* FoodTableViewController.m */,
 				3FE218441730C14B00CDF44B /* FoodDetailTableViewController.h */,
 				3FE218451730C14B00CDF44B /* FoodDetailTableViewController.m */,
+				9C56A6B717311E550028C1C4 /* LogFoodViewController.h */,
+				9C56A6B817311E550028C1C4 /* LogFoodViewController.m */,
+				9C56A6B617311E550028C1C4 /* AddRecipe.png */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -164,8 +179,9 @@
 		3FE218591730C18800CDF44B /* view */ = {
 			isa = PBXGroup;
 			children = (
-				3FE2184B1730C14B00CDF44B /* FirstViewController.xib */,
-				3FE2184E1730C14B00CDF44B /* SecondViewController.xib */,
+				9C56A6B917311E550028C1C4 /* LogFoodViewController.xib */,
+				3FE2184B1730C14B00CDF44B /* FoodTableViewController.xib */,
+				3FE2184E1730C14B00CDF44B /* FoodDetailTableViewController.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -229,10 +245,10 @@
 				3FE218431730C14B00CDF44B /* first@2x.png in Resources */,
 				3FE218481730C14B00CDF44B /* second.png in Resources */,
 				3FE2184A1730C14B00CDF44B /* second@2x.png in Resources */,
-				3FE2184D1730C14B00CDF44B /* FirstViewController.xib in Resources */,
-				3FE218501730C14B00CDF44B /* SecondViewController.xib in Resources */,
-				9C56A6BA17311E550028C1C4 /* AddRecipe.png in Resources */,
 				9C56A6BC17311E550028C1C4 /* LogFoodViewController.xib in Resources */,
+				3FE2184D1730C14B00CDF44B /* FoodTableViewController.xib in Resources */,
+				3FE218501730C14B00CDF44B /* FoodDetailTableViewController.xib in Resources */,
+				9C56A6BA17311E550028C1C4 /* AddRecipe.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,20 +278,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		3FE2184B1730C14B00CDF44B /* FirstViewController.xib */ = {
+		3FE2184B1730C14B00CDF44B /* FoodTableViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				3FE2184C1730C14B00CDF44B /* en */,
 			);
-			name = FirstViewController.xib;
+			name = FoodTableViewController.xib;
 			sourceTree = "<group>";
 		};
-		3FE2184E1730C14B00CDF44B /* SecondViewController.xib */ = {
+		3FE2184E1730C14B00CDF44B /* FoodDetailTableViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				3FE2184F1730C14B00CDF44B /* en */,
 			);
-			name = SecondViewController.xib;
+			name = FoodDetailTableViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

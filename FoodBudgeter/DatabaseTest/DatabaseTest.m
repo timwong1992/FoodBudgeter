@@ -34,7 +34,7 @@
 }
 
 - (void)testRetrieval {
-    
+    STAssertTrue([self.logVC isItemInDatabase:@"Test Food"], @"Retrieving item should succeed");
 }
 
 @end

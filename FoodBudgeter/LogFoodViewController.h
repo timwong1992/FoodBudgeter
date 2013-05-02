@@ -18,7 +18,6 @@
 @property(nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
 @property(nonatomic, strong) IBOutlet UITextField *nameField;
 @property(nonatomic, strong) IBOutlet UITextField *costField;
-@property(nonatomic, strong) NSString *selectedType;
 @property(nonatomic, strong) NSArray *ingredients;
 
 - (IBAction)addButtonClicked:(id)sender;
@@ -37,11 +36,16 @@
 withIngredients:(NSArray*)ingredients
        withCost:(double)itemCost;
 
+#warning testing purposes only. refactor into foodtableVC
+/*
+ Given a name, check if it exists in the database.
+ */
+- (BOOL)isItemInDatabase:(NSString*)itemName;
 
 /*
- Runs a query.
+ Runs a query and returns its status.
  */
-- (BOOL) runQuery:(const char *)query
+- (int) runQuery:(const char *)query
        onDatabase:(sqlite3 *)database
  withErrorMessage:(char *)errMsg;
 

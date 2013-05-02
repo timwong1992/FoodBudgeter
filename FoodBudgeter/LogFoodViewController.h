@@ -37,12 +37,14 @@
 withIngredients:(NSArray*)ingredients
        withCost:(double)itemCost;
 
+
 /*
- Encapsulated table creation function that runs the create table statement
+ Runs a query.
  */
-- (BOOL)createTable:(sqlite3*)database
-           query:(const char*) statement
-        withErrorMessage:(char*) errMsg;
+- (BOOL) runQuery:(const char *)query
+       onDatabase:(sqlite3 *)database
+ withErrorMessage:(char *)errMsg;
+
 
 
 @end

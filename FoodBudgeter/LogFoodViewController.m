@@ -41,6 +41,8 @@
 
     if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
         NSString *insertQuery;
+        
+        // check what type of item and write appropriate query
         if (itemType == 0) {
             insertQuery = [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"%@\")", itemName, @"recipe"];
         }
@@ -51,12 +53,24 @@
             NSLog(@"Item type not valid");
             return false;
         }
+    
         const char *insert_stmt = [insertQuery UTF8String];
-        sqlite3_prepare(itemDB, insert_stmt, -1, &statement, NULL);
-        if (sqlite3_step(statement) != SQLITE_DONE) {
-            NSLog(@"Failed to add item");
-            return false;
+        [self runQuery:insert_stmt onDatabase:itemDB withErrorMessage:"Insert failed!"];
+        
+        // add item data to other tables, depending on item type
+        if (itemType == 0) {
+            insertQuery = [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"%@\")", itemName, @"recipe"];
         }
+        // due to previous check, if itemtype is not 0 then it must be 1
+        else {
+            insertQuery = [NSString stringWithFormat:@"INSERT INTO purchase (itemCost) VALUES (\"%.2f\")", itemCost];
+        }
+        
+        // reset view fields
+        nameField.text = @"";
+        costField.text = @"";
+        
+        sqlite3_close(itemDB);
 
         return true;
     }
@@ -84,21 +98,20 @@
     if ([filemgr fileExistsAtPath:databasePath] == NO) {
         const char *dbpath = [databasePath UTF8String];
         if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
-            char *errMsg = NULL;
             const char *sql_stmt = "CREATE TABLE IF NOT EXISTS item (itemID INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemType TEXT)";
-            [self createTable:itemDB query:sql_stmt withErrorMessage:errMsg];
+            [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
             
             sql_stmt = "CREATE TABLE IF NOT EXISTS recipe (recipeID INTEGER PRIMARY KEY, FOREIGN KEY(recipeID) REFERENCES item(itemID))";
-            [self createTable:itemDB query:sql_stmt withErrorMessage:errMsg];
+            [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
             
             sql_stmt = "CREATE TABLE IF NOT EXISTS purchase (purchaseID INTEGER PRIMARY KEY, itemCost TEXT, FOREIGN KEY(purchaseID) REFERENCES item(itemID))";
-            [self createTable:itemDB query:sql_stmt withErrorMessage:errMsg];
+            [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
             
             sql_stmt = "CREATE TABLE IF NOT EXISTS ingredient (ingredientID INTEGER PRIMARY KEY, ingredientName TEXT, ingredientCost DOUBLE)";
-            [self createTable:itemDB query:sql_stmt withErrorMessage:errMsg];
+            [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
             
             sql_stmt = "CREATE TABLE IF NOT EXISTS recipe_ingredient (recipeID INTEGER, ingredientID INTEGER, ingredientServings DOUBLE, PRIMARY KEY(recipeID, ingredientID), FOREIGN KEY(recipeID) REFERENCES recipe(recipeID), FOREIGN KEY(ingredientID) REFERENCES ingredient(ingredientID))";
-            [self createTable:itemDB query:sql_stmt withErrorMessage:errMsg];
+            [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
             
         } else {
             NSLog(@"Failed to open/create database");
@@ -106,9 +119,9 @@
     }
 }
 
-- (BOOL) createTable:(sqlite3 *)database query:(const char *)statement withErrorMessage:(char*)errMsg {
-    if (sqlite3_exec(database, statement, NULL, NULL, &errMsg) != SQLITE_OK ) {
-        NSLog(@"Failed to create table");
+- (BOOL)runQuery:(const char *)query onDatabase:(sqlite3 *)database withErrorMessage:(char *)errMsg {
+    if (sqlite3_exec(database, query, NULL, NULL, &errMsg) != SQLITE_OK ) {
+        NSLog(@"%s", errMsg);
         return false;
     }
     return true;

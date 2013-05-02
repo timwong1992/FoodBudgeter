@@ -17,12 +17,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    //UITableViewController *foodTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodTableViewController" bundle:nil];
-    //UIViewController *foodDetailTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodDetailTableViewController" bundle:nil];
+    //FoodTableViewController *foodTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodTableViewController" bundle:nil];
     LogFoodViewController *logFoodVC = [[LogFoodViewController alloc] initWithNibName:@"LogFoodViewController" bundle:nil];
     //self.tabBarController = [[UITabBarController alloc] init];
-    //self.tabBarController.viewControllers = @[logFoodVC];
-    //self.window.rootViewController = self.tabBarController;
+    //self.tabBarController.viewControllers = @[foodTableVC, logFoodVC];
+    //elf.window.rootViewController = self.tabBarController;
     self.window.rootViewController = logFoodVC;
     [self.window makeKeyAndVisible];
     return YES;

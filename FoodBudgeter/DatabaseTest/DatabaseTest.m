@@ -31,6 +31,7 @@
 
 - (void)testAddition {
     STAssertTrue([self.logVC addItem:@"Test Food" withType:1 withIngredients:nil withCost:10.00], @"Adding item should succeed");
+    STAssertFalse([self.logVC addItem:@"Test Food" withType:1 withIngredients:nil withCost:10.00], @"Adding duplicate item should fail");
 }
 
 - (void)testRetrieval {

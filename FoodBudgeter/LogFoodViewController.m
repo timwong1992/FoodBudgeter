@@ -100,15 +100,16 @@
             
             //insertQuery = [NSString stringWithFormat:@""];
         }
-        // due to previous check, if itemtype is not 0 then it must be 1
+        // if itemtype is not 0 then it must be 1
         else {
-            if([self isItemInDatabase:itemName]) {
+            if(![self isItemInDatabase:itemName]) {
                 NSLog(@"Object is new");
                 insertQuery = [NSString stringWithFormat:@"INSERT INTO purchase (itemCost) VALUES (\"%.2f\")", itemCost];
                 insert_stmt = [insertQuery UTF8String];
                 [self runQuery:insert_stmt onDatabase:itemDB withErrorMessage:"Insert failed!"];
             }else {
                 NSLog(@"Object was found");
+                return false;
             }
         }
         

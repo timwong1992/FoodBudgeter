@@ -10,14 +10,15 @@
 
 @implementation DatabaseTest
 
-@synthesize logVC;
+@synthesize dbManager;
 
 - (void)setUp
 {
     [super setUp];
     
     // Set-up code here.
-    logVC = [[LogFoodViewController alloc] initWithNibName:@"LogFoodViewController" bundle:nil];
+    dbManager = [[DBManager alloc] init];
+    [dbManager createDatabase];
 
 }
 
@@ -26,28 +27,28 @@
     // Tear-down code here.
     
     [super tearDown];
-    logVC = nil;
+    dbManager = nil;
 }
 
 - (void)testDatabase {
     // adding
-    STAssertTrue([self.logVC addItem:@"Test Food" withType:1 withIngredients:nil withCost:10.00], @"Adding item should succeed");
-    STAssertEquals([self.logVC numItemsInDatabase], 1, @"Only one item should be in database");
-    STAssertFalse([self.logVC addItem:@"Test Food" withType:1 withIngredients:nil withCost:10.00], @"Adding duplicate item should fail");
-    STAssertEquals([self.logVC numItemsInDatabase], 1, @"Only one item should be in database");
-    STAssertTrue([self.logVC addItem:@"Another test" withType:1 withIngredients:nil withCost:20.00], @"Adding second item should succeed");
-    STAssertEquals([self.logVC numItemsInDatabase], 2, @"Only two items should be in database");
+    STAssertTrue([self.dbManager addItem:@"Test Food" withType:1 withIngredients:nil withCost:10.00], @"Adding item should succeed");
+    STAssertEquals([self.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
+    STAssertFalse([self.dbManager addItem:@"Test Food" withType:1 withIngredients:nil withCost:10.00], @"Adding duplicate item should fail");
+    STAssertEquals([self.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
+    STAssertTrue([self.dbManager addItem:@"Another test" withType:1 withIngredients:nil withCost:20.00], @"Adding second item should succeed");
+    STAssertEquals([self.dbManager numItemsInDatabase], 2, @"Only two items should be in database");
     
     // retrieving
-    STAssertTrue([self.logVC itemID:@"Test Food"] != -1, @"Retrieving existing item should succeed");
-    STAssertFalse([self.logVC itemID:@"Not food"] != -1, @"Retrieving nonexistent item should fail");
+    STAssertTrue([self.dbManager itemID:@"Test Food"] != -1, @"Retrieving existing item should succeed");
+    STAssertFalse([self.dbManager itemID:@"Not food"] != -1, @"Retrieving nonexistent item should fail");
     
-    // deleting
-    STAssertTrue([self.logVC removeItem:@"Test Food"], @"Removing existing item should succeed");
-    STAssertFalse([self.logVC removeItem:@"Not food"], @"Removing nonexistent item should fail");
-    STAssertEquals([self.logVC numItemsInDatabase], 1, @"Only one item should be in database");
-    STAssertTrue([self.logVC removeItem:@"Another test"], @"Removing existing item should succeed");
-    STAssertEquals([self.logVC numItemsInDatabase], 0, @"No item should be in database");
+    // dbManagereting
+    STAssertTrue([self.dbManager removeItem:@"Test Food"], @"Removing existing item should succeed");
+    STAssertFalse([self.dbManager removeItem:@"Not food"], @"Removing nonexistent item should fail");
+    STAssertEquals([self.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
+    STAssertTrue([self.dbManager removeItem:@"Another test"], @"Removing existing item should succeed");
+    STAssertEquals([self.dbManager numItemsInDatabase], 0, @"No item should be in database");
 
 }
 

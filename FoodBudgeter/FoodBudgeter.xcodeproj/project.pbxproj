@@ -19,6 +19,7 @@
 		3F24B44B1732D77F00A8068D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218271730C14A00CDF44B /* Foundation.framework */; };
 		3F24B4511732D77F00A8068D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F24B44F1732D77F00A8068D /* InfoPlist.strings */; };
 		3F24B4541732D77F00A8068D /* DatabaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F24B4531732D77F00A8068D /* DatabaseTest.m */; };
+		3F821470173468DA00D1E292 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F82146F173468DA00D1E292 /* DBManager.m */; };
 		3FE218261730C14A00CDF44B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218251730C14A00CDF44B /* UIKit.framework */; };
 		3FE218281730C14A00CDF44B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218271730C14A00CDF44B /* Foundation.framework */; };
 		3FE2182A1730C14A00CDF44B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218291730C14A00CDF44B /* CoreGraphics.framework */; };
@@ -63,6 +64,8 @@
 		3F24B4521732D77F00A8068D /* DatabaseTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseTest.h; sourceTree = "<group>"; };
 		3F24B4531732D77F00A8068D /* DatabaseTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseTest.m; sourceTree = "<group>"; };
 		3F24B4551732D77F00A8068D /* DatabaseTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DatabaseTest-Prefix.pch"; sourceTree = "<group>"; };
+		3F82146E173468DA00D1E292 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		3F82146F173468DA00D1E292 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		3FE218221730C14A00CDF44B /* FoodBudgeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodBudgeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE218251730C14A00CDF44B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3FE218271730C14A00CDF44B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -221,6 +224,8 @@
 			children = (
 				3FE218341730C14A00CDF44B /* AppDelegate.h */,
 				3FE218351730C14A00CDF44B /* AppDelegate.m */,
+				3F82146E173468DA00D1E292 /* DBManager.h */,
+				3F82146F173468DA00D1E292 /* DBManager.m */,
 			);
 			name = delegate;
 			sourceTree = "<group>";
@@ -365,6 +370,7 @@
 				3F24B4301732D2EA00A8068D /* FoodTableViewController.m in Sources */,
 				3F24B4351732D30100A8068D /* FoodDetailTableViewController.m in Sources */,
 				9C56A6BB17311E550028C1C4 /* LogFoodViewController.m in Sources */,
+				3F821470173468DA00D1E292 /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

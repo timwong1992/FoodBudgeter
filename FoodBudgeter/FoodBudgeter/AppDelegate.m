@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "DBManager.h"
 #import "FoodTableViewController.h"
 #import "FoodDetailTableViewController.h"
 #import "LogFoodViewController.h"
@@ -17,13 +18,20 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    DBManager *dbManager = [[DBManager alloc] init];
+    [dbManager createDatabase];
     //FoodTableViewController *foodTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodTableViewController" bundle:nil];
     LogFoodViewController *logFoodVC = [[LogFoodViewController alloc] initWithNibName:@"LogFoodViewController" bundle:nil];
+    [logFoodVC setDbManager:dbManager];
+    
     //self.tabBarController = [[UITabBarController alloc] init];
     //self.tabBarController.viewControllers = @[foodTableVC, logFoodVC];
-    //elf.window.rootViewController = self.tabBarController;
+    //self.window.rootViewController = self.tabBarController;
+    
     self.window.rootViewController = logFoodVC;
+    
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

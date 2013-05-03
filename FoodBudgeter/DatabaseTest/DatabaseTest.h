@@ -7,9 +7,9 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
-#import "LogFoodViewController.h"
+#import "AppDelegate.h"
 
 @interface DatabaseTest : SenTestCase
-@property(nonatomic, strong) LogFoodViewController *logVC;
+@property(nonatomic, strong) DBManager *dbManager;
 
 @end

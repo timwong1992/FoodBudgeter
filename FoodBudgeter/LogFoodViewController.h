@@ -7,18 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 #import "sqlite3.h"
+#import "DBManager.h"
 
-@interface LogFoodViewController : UIViewController {
-    sqlite3 *itemDB;
-    NSString *databasePath;
-}
-
+@interface LogFoodViewController : UIViewController <DBDelegate>
 
 @property(nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
 @property(nonatomic, strong) IBOutlet UITextField *nameField;
 @property(nonatomic, strong) IBOutlet UITextField *costField;
 @property(nonatomic, strong) NSArray *ingredients;
+@property(nonatomic, strong) DBManager *dbManager;
 
 - (IBAction)addButtonClicked:(id)sender;
 - (IBAction)segmentChanged:(id)sender;
@@ -47,12 +46,6 @@ withIngredients:(NSArray*)ingredients
  */
 - (int)numItemsInDatabase;
 
-/*
- Runs a query and returns its status.
- */
-- (int) runQuery:(const char *)query
-       onDatabase:(sqlite3 *)database
- withErrorMessage:(char *)errMsg;
 
 
 

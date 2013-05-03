@@ -1,0 +1,65 @@
+//
+//  DBManager.h
+//  FoodBudgeter
+//
+//  Created by Student on 5/3/13.
+//  Copyright (c) 2013 Tim Wong, Akia Vongdara. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "AppDelegate.h"
+#import "sqlite3.h"
+
+@class DBManager;
+
+@protocol DBDelegate <NSObject>
+
+@optional
+- (void)databaseHasBeenUpdated;
+
+@end
+
+@interface DBManager : NSObject {
+    NSString *databasePath;
+    sqlite3 *itemDB;
+}
+
+@property (nonatomic, assign) id<DBDelegate> logDelegate;
+@property (nonatomic, assign) id<DBDelegate> viewDelegate;
+
+-(BOOL)createDatabase;
+
+- (sqlite3*)itemDB;
+
+/*
+ Runs a query and returns its status.
+ */
+- (int) runQuery:(const char *)query
+      onDatabase:(sqlite3 *)database
+withErrorMessage:(char *)errMsg;
+
+/*
+ Given item data, adds it to the database. Returns false if the item is a duplicate or the database is not changed.
+ */
+- (BOOL)addItem:(NSString*)itemName
+       withType:(int)itemType
+withIngredients:(NSArray*)ingredients
+       withCost:(double)itemCost;
+
+/*
+ Returns the number of items in the database.
+ */
+- (int)numItemsInDatabase;
+
+/*
+ Given item data, remove it from database. Returns false if the database is not changed.
+ */
+- (BOOL)removeItem:(NSString*)itemName;
+
+/*
+ Given a name, searches for the item in the database and returns its unique itemID.
+ Returns -1 if the item is not found.
+ */
+- (int)itemID:(NSString *)itemName;
+
+@end

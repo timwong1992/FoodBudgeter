@@ -17,7 +17,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        //[self createDatabase];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped)];
+        tap.delegate = self;
+        [self.view addGestureRecognizer:tap];
     }
     return self;
 }
@@ -46,6 +48,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewTapped {
+    [nameField resignFirstResponder];
 }
 
 @end

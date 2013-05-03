@@ -11,7 +11,7 @@
 #import "sqlite3.h"
 #import "DBManager.h"
 
-@interface LogFoodViewController : UIViewController <DBDelegate>
+@interface LogFoodViewController : UIViewController <DBDelegate, UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
 @property(nonatomic, strong) IBOutlet UITextField *nameField;

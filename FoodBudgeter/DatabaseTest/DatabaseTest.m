@@ -29,13 +29,26 @@
     logVC = nil;
 }
 
-- (void)testAddition {
+- (void)testDatabase {
+    // adding
     STAssertTrue([self.logVC addItem:@"Test Food" withType:1 withIngredients:nil withCost:10.00], @"Adding item should succeed");
-    //STAssertFalse([self.logVC addItem:@"Test Food" withType:1 withIngredients:nil withCost:10.00], @"Adding duplicate item should fail");
-    STAssertEquals([self.logVC itemID:@"Test Food"], 1, @"Indexes should be the same (1)");
-    STAssertTrue([self.logVC isItemInDatabase:@"Test Food"], @"Retrieving item should succeed");
-    STAssertFalse([self.logVC isItemInDatabase:@"Not food"], @"Retrieving item should fail");
-    STAssertTrue([self.logVC removeItem:@"Test Food"], @"Removing item should succeed");
+    STAssertEquals([self.logVC numItemsInDatabase], 1, @"Only one item should be in database");
+    STAssertFalse([self.logVC addItem:@"Test Food" withType:1 withIngredients:nil withCost:10.00], @"Adding duplicate item should fail");
+    STAssertEquals([self.logVC numItemsInDatabase], 1, @"Only one item should be in database");
+    STAssertTrue([self.logVC addItem:@"Another test" withType:1 withIngredients:nil withCost:20.00], @"Adding second item should succeed");
+    STAssertEquals([self.logVC numItemsInDatabase], 2, @"Only two items should be in database");
+    
+    // retrieving
+    STAssertTrue([self.logVC itemID:@"Test Food"] != -1, @"Retrieving existing item should succeed");
+    STAssertFalse([self.logVC itemID:@"Not food"] != -1, @"Retrieving nonexistent item should fail");
+    
+    // deleting
+    STAssertTrue([self.logVC removeItem:@"Test Food"], @"Removing existing item should succeed");
+    STAssertFalse([self.logVC removeItem:@"Not food"], @"Removing nonexistent item should fail");
+    STAssertEquals([self.logVC numItemsInDatabase], 1, @"Only one item should be in database");
+    STAssertTrue([self.logVC removeItem:@"Another test"], @"Removing existing item should succeed");
+    STAssertEquals([self.logVC numItemsInDatabase], 0, @"No item should be in database");
+
 }
 
 @end

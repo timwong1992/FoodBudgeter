@@ -24,12 +24,7 @@
 - (IBAction)segmentChanged:(id)sender;
 
 /*
- Retrieves item data from the text fields.
- */
-- (void)retrieveItemData;
-
-/*
- Given item data, adds it to the database.
+ Given item data, adds it to the database. Returns false if the item is a duplicate or the database is not changed.
  */
 - (BOOL)addItem:(NSString*)itemName
        withType:(int)itemType
@@ -37,7 +32,7 @@ withIngredients:(NSArray*)ingredients
        withCost:(double)itemCost;
 
 /*
- Given item data, remove it from database.
+ Given item data, remove it from database. Returns false if the database is not changed.
  */
 - (BOOL)removeItem:(NSString*)itemName;
 
@@ -46,12 +41,6 @@ withIngredients:(NSArray*)ingredients
  Returns -1 if the item is not found.
  */
 - (int)itemID:(NSString *)itemName;
-
-#warning testing purposes only. refactor into foodtableVC
-/*
- Given a name, check if it exists in the database.
- */
-- (BOOL)isItemInDatabase:(NSString*)itemName;
 
 /*
  Returns the number of items in the database.

@@ -39,44 +39,30 @@
     NSFileManager *filemgr = [NSFileManager defaultManager];
     if ([filemgr fileExistsAtPath:databasePath] == NO) {
         NSLog(@"Database being created");
-        if (sqlite3_open([databasePath UTF8String], &itemDB) == SQLITE_OK) {
-            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS item (itemID INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemType TEXT)";
-            [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
-            
-            sql_stmt = "CREATE TABLE IF NOT EXISTS recipe (recipeID INTEGER PRIMARY KEY, FOREIGN KEY(recipeID) REFERENCES item(itemID))";
-            [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
-            
-            sql_stmt = "CREATE TABLE IF NOT EXISTS purchase (purchaseID INTEGER PRIMARY KEY, itemCost TEXT, FOREIGN KEY(purchaseID) REFERENCES item(itemID))";
-            [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
-            
-            sql_stmt = "CREATE TABLE IF NOT EXISTS ingredient (ingredientID INTEGER PRIMARY KEY, ingredientName TEXT, ingredientCost DOUBLE)";
-            [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
-            
-            sql_stmt = "CREATE TABLE IF NOT EXISTS recipe_ingredient (recipeID INTEGER, ingredientID INTEGER, ingredientServings DOUBLE, PRIMARY KEY(recipeID, ingredientID), FOREIGN KEY(recipeID) REFERENCES recipe(recipeID), FOREIGN KEY(ingredientID) REFERENCES ingredient(ingredientID))";
-            [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
-            sqlite3_close(itemDB);
-            return true;
-        } else {
-            NSLog(@"Failed to open/create database");
-        }
+        //if (sqlite3_open([databasePath UTF8String], &itemDB) == SQLITE_OK) {
+        const char *sql_stmt = "CREATE TABLE IF NOT EXISTS item (itemID INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemType TEXT)";
+        [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
+        
+        sql_stmt = "CREATE TABLE IF NOT EXISTS recipe (recipeID INTEGER PRIMARY KEY, FOREIGN KEY(recipeID) REFERENCES item(itemID))";
+        [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
+        
+        sql_stmt = "CREATE TABLE IF NOT EXISTS purchase (purchaseID INTEGER PRIMARY KEY, itemCost TEXT, FOREIGN KEY(purchaseID) REFERENCES item(itemID))";
+        [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
+        
+        sql_stmt = "CREATE TABLE IF NOT EXISTS ingredient (ingredientID INTEGER PRIMARY KEY, ingredientName TEXT, ingredientCost DOUBLE)";
+        [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
+        
+        sql_stmt = "CREATE TABLE IF NOT EXISTS recipe_ingredient (recipeID INTEGER, ingredientID INTEGER, ingredientServings DOUBLE, PRIMARY KEY(recipeID, ingredientID), FOREIGN KEY(recipeID) REFERENCES recipe(recipeID), FOREIGN KEY(ingredientID) REFERENCES ingredient(ingredientID))";
+        [self runQuery:sql_stmt onDatabase:itemDB withErrorMessage:"Table creation failed!"];
+        return true;
     }
     return false;
-}
-
-- (int)numItemsInDatabase {
-    int count = -1;
-    const char *dbpath = [databasePath UTF8String];
-    if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
-        const char *sql_stmt = "SELECT COUNT(*) FROM item";
-        [self runQuery:"SELECT COUNT(*) FROM item" onDatabase:itemDB withErrorMessage:"Getting count failed!"];
-    }
-    return count;
 }
 
 #pragma mark add Item
 
 - (BOOL)addItem:(NSString *)itemName withType:(int)itemType withIngredients:(NSArray *)ingredients withCost:(double)itemCost {
-    if (![self isItemInDatabase:itemName]) {
+    if ([self itemID:itemName] == -1) {
         NSString *insertQuery;
         
         // check what type of item and write appropriate query
@@ -127,25 +113,33 @@
 }
 
 #pragma mark -
-- (BOOL)isItemInDatabase:(NSString *)itemName {
+
+#pragma mark retrieving item data
+
+- (int)numItemsInDatabase {
+    int count = 0;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
-        sqlite3_stmt *statement = NULL;
-        NSString *retrievalQuery = [NSString stringWithFormat:@"SELECT itemName FROM item WHERE item.itemName = \"%@\"", itemName];
-        const char *retrieve_stmt = [retrievalQuery UTF8String];
-        sqlite3_prepare(itemDB, retrieve_stmt, -1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_ROW) {
-            sqlite3_finalize(statement);
-            sqlite3_close(itemDB);
-            return true;
+        // prepare query
+        sqlite3_stmt *statement;
+        
+        // run query
+        sqlite3_prepare(itemDB, "SELECT COUNT(*) FROM item", -1, &statement, NULL);
+        
+        // if it finds a row, clean up and return the ID for that row
+        if(sqlite3_step(statement) == SQLITE_ROW) {
+            count = sqlite3_column_int(statement, 0);
         }
+        
+        // database cleanup
         sqlite3_finalize(statement);
         sqlite3_close(itemDB);
     }
-    return false;
+    return count;
 }
 
 - (int)itemID:(NSString *)itemName {
+    int result = -1;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
         // prepare query
@@ -157,37 +151,46 @@
         
         // if it finds a row, clean up and return the ID for that row
         if(sqlite3_step(statement) == SQLITE_ROW) {
-            int result = sqlite3_column_int(statement, 0);
-            sqlite3_finalize(statement);
-            sqlite3_close(itemDB);
-            return result;
+            result = sqlite3_column_int(statement, 0);
         }
+        
+        // database cleanup
         sqlite3_finalize(statement);
         sqlite3_close(itemDB);
     }
-    return -1;
+    return result;
     
 }
 
+#pragma mark -
+
+#pragma mark removing items
+
 - (BOOL)removeItem:(NSString *)itemName {
-    const char *dbpath = [databasePath UTF8String];
-    if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
-        // get item ID in order to find it in other tables
-        int itemID = [self itemID:itemName];
+    // get item ID in order to find it in other tables
+    int itemID = [self itemID:itemName];
+    if (itemID != -1) {
         // delete the item
         NSString *query = [NSString stringWithFormat:@"DELETE FROM item WHERE item.itemName = \"%@\"", itemName];
-        if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Item table failed"] == SQLITE_OK) {
-#warning only works for purchase at the moment, must add in support for recipe
-            NSLog(@"Deleting from item table success");
-            query = [NSString stringWithFormat:@"DELETE FROM purchase WHERE purchaseID = %d", itemID];
-            if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Purchase table failed"] == SQLITE_OK) {
-                NSLog(@"Deleting from purchase table success");
-                return true;
-            }
+        
+        if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Item table failed"] != SQLITE_OK) {
+            return false;
         }
+#warning only works for purchase at the moment, must add in support for recipe
+        NSLog(@"Deleting from item table success");
+        
+        query = [NSString stringWithFormat:@"DELETE FROM purchase WHERE purchaseID = %d", itemID];
+        if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Purchase table failed"] == SQLITE_OK) {
+            NSLog(@"Deleting from purchase table success");
+            return true;
+        }
+        
     }
+    // item does not exist, so do nothing
     return false;
 }
+
+#pragma mark -
 
 - (IBAction)addButtonClicked:(id)sender {
     [self addItem:nameField.text withType:segmentedControl.selectedSegmentIndex withIngredients:ingredients withCost:[costField.text doubleValue]];

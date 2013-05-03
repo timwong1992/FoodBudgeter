@@ -41,11 +41,19 @@ withIngredients:(NSArray*)ingredients
  */
 - (BOOL)removeItem:(NSString*)itemName;
 
+/*
+ Given a name, searches for the item in the database and returns its unique itemID.
+ Returns -1 if the item is not found.
+ */
+- (int)getItemID:(NSString *)itemName;
+
 #warning testing purposes only. refactor into foodtableVC
 /*
  Given a name, check if it exists in the database.
  */
 - (BOOL)isItemInDatabase:(NSString*)itemName;
+
+- (int)numItemsInDatabase;
 
 /*
  Runs a query and returns its status.

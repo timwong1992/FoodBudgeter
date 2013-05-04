@@ -60,15 +60,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    NSMutableArray *test = [[NSMutableArray alloc] init];
-    NSString *testStr = @"derp";
-    [test addObject:testStr];
-    NSLog(@"%@", [test objectAtIndex:0]);
-    NSLog(@"Made it here");
     // Configure the cell...
-    NSLog(@"%@", (NSString*)[items objectAtIndex:((NSUInteger)indexPath.row)]);
-    NSLog(@"%@", [[items objectAtIndex:((NSUInteger)indexPath.row)] name]);
-    //cell.textLabel.text = [[items objectAtIndex:indexPath.row] name];
+    cell.textLabel.text = (NSString *)[items objectAtIndex:indexPath.row];
+    
     //NSLog(@"Made it here");
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     

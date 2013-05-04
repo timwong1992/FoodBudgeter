@@ -150,7 +150,6 @@
 		3FE218191730C14A00CDF44B = {
 			isa = PBXGroup;
 			children = (
-				3F24B4411732D70800A8068D /* CoreData.framework */,
 				3FE2182B1730C14A00CDF44B /* FoodBudgeter */,
 				3F24B44C1732D77F00A8068D /* DatabaseTest */,
 				3FE218241730C14A00CDF44B /* Frameworks */,
@@ -170,6 +169,7 @@
 		3FE218241730C14A00CDF44B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F24B4411732D70800A8068D /* CoreData.framework */,
 				3F24B43A1732D45900A8068D /* SenTestingKit.framework */,
 				3FE218251730C14A00CDF44B /* UIKit.framework */,
 				3FE218271730C14A00CDF44B /* Foundation.framework */,

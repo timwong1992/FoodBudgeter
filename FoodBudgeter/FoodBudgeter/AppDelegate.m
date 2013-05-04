@@ -20,16 +20,15 @@
     // Override point for customization after application launch.
     DBManager *dbManager = [[DBManager alloc] init];
     [dbManager createDatabase];
-    //FoodTableViewController *foodTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodTableViewController" bundle:nil];
+    FoodTableViewController *foodTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodTableViewController" bundle:nil];
+    [foodTableVC setDbManager:dbManager];
     LogFoodViewController *logFoodVC = [[LogFoodViewController alloc] initWithNibName:@"LogFoodViewController" bundle:nil];
     [logFoodVC setDbManager:dbManager];
     
-    //self.tabBarController = [[UITabBarController alloc] init];
-    //self.tabBarController.viewControllers = @[foodTableVC, logFoodVC];
-    //self.window.rootViewController = self.tabBarController;
-    
-    self.window.rootViewController = logFoodVC;
-    
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.viewControllers = @[foodTableVC, logFoodVC];
+    self.window.rootViewController = self.tabBarController;
+        
     [self.window makeKeyAndVisible];
     
     return YES;

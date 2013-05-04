@@ -30,23 +30,4 @@
 withIngredients:(NSArray*)ingredients
        withCost:(double)itemCost;
 
-/*
- Given item data, remove it from database. Returns false if the database is not changed.
- */
-- (BOOL)removeItem:(NSString*)itemName;
-
-/*
- Given a name, searches for the item in the database and returns its unique itemID.
- Returns -1 if the item is not found.
- */
-- (int)itemID:(NSString *)itemName;
-
-/*
- Returns the number of items in the database.
- */
-- (int)numItemsInDatabase;
-
-
-
-
 @end

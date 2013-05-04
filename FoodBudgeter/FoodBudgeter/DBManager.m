@@ -147,6 +147,31 @@
     return count;
 }
 
+- (NSMutableArray*)itemsInDatabase {
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
+        NSMutableArray *items = [[NSMutableArray alloc]init];
+
+        // prepare query
+        sqlite3_stmt *statement;
+        
+        // run query
+        sqlite3_prepare(itemDB, "SELECT itemName FROM item", -1, &statement, NULL);
+        
+        // if it finds a row, clean up and return the ID f
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            NSString *result = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 0)];
+            [items addObject:result];
+        }
+        
+        // database cleanup
+        sqlite3_finalize(statement);
+        sqlite3_close(itemDB);
+        return items;
+    }
+    return nil;
+}
+
 - (int)itemID:(NSString *)itemName {
     int result = -1;
     const char *dbpath = [databasePath UTF8String];

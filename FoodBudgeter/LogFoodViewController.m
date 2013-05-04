@@ -52,6 +52,7 @@
 
 - (void)viewTapped {
     [nameField resignFirstResponder];
+    [costField resignFirstResponder];
 }
 
 @end

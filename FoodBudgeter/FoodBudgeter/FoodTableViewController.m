@@ -8,11 +8,9 @@
 
 #import "FoodTableViewController.h"
 
-@interface FoodTableViewController ()
-
-@end
-
 @implementation FoodTableViewController
+
+@synthesize dbManager, items;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,7 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    items = [dbManager itemsInDatabase];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -44,16 +42,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [dbManager numItemsInDatabase];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -64,7 +60,17 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+    NSMutableArray *test = [[NSMutableArray alloc] init];
+    NSString *testStr = @"derp";
+    [test addObject:testStr];
+    NSLog(@"%@", [test objectAtIndex:0]);
+    NSLog(@"Made it here");
     // Configure the cell...
+    NSLog(@"%@", (NSString*)[items objectAtIndex:((NSUInteger)indexPath.row)]);
+    NSLog(@"%@", [[items objectAtIndex:((NSUInteger)indexPath.row)] name]);
+    //cell.textLabel.text = [[items objectAtIndex:indexPath.row] name];
+    //NSLog(@"Made it here");
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }

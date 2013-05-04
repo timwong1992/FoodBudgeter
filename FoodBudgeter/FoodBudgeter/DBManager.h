@@ -52,6 +52,11 @@ withIngredients:(NSArray*)ingredients
 - (int)numItemsInDatabase;
 
 /*
+ Returns an array of item names from the database.
+ */
+- (NSMutableArray*)itemsInDatabase;
+
+/*
  Given item data, remove it from database. Returns false if the database is not changed.
  */
 - (BOOL)removeItem:(NSString*)itemName;

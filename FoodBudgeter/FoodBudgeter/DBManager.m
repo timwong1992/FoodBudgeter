@@ -29,7 +29,6 @@
     NSFileManager *filemgr = [NSFileManager defaultManager];
     if ([filemgr fileExistsAtPath:databasePath] == NO) {
         NSLog(@"Database being created");
-        //if (sqlite3_open([databasePath UTF8String], &itemDB) == SQLITE_OK) {
         [self runQuery:"CREATE TABLE IF NOT EXISTS item (itemID INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemType TEXT)"
             onDatabase:itemDB
       withErrorMessage:"Table creation failed!"];
@@ -96,9 +95,12 @@
                 insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe (recipeID) VALUES (\"%d\")", [self itemID:itemName]];
                 [self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Recipe insert failed!"];
                 
+                int recipeID = [self itemID:itemName];
                 // for each ingredient in item data
-                for (id object in ingredients) {
-                    insertQuery = [NSString stringWithFormat:@"INSERT INTO ingredient (ingredientName, ingredientCost) VALUES (\"%@\", \"%d\")", [object valueForKey:[object key]]];
+                for (int i = 0; i < [self numIngredientsInRecipe:recipeID]; i++) {
+                    if ([self ingredientID:itemName] != -1)
+                    insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe_ingredient (recipeID, ingredientID) VALUES (\"%d\", \"%d\")", recipeID, [self ingredientID:itemName]];
+                    [self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Join table insert failed!"];
                 }
                 // check ingredient table for the ingredient
                 // if not found, add ingredient into table

@@ -27,6 +27,12 @@
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[foodTableVC, logFoodVC];
+   
+    UITabBarItem *listItem = [[UITabBarItem alloc] initWithTitle:@"Items" image:nil tag:0];
+    UITabBarItem *logItem = [[UITabBarItem alloc] initWithTitle:@"Log Item" image:[UIImage imageNamed:@"AddRecipe.png"] tag:1];
+    foodTableVC.tabBarItem = listItem;
+    logFoodVC.tabBarItem = logItem;
+    
     self.window.rootViewController = self.tabBarController;
         
     [self.window makeKeyAndVisible];

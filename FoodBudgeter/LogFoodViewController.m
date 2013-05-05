@@ -10,7 +10,7 @@
 
 @implementation LogFoodViewController
 
-@synthesize segmentedControl, nameField, costField, ingredients, dbManager, label;
+@synthesize segmentedControl, nameField, costField, ingredients, dbManager, label, foodVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,7 +41,9 @@
 #pragma mark add Item
 
 - (BOOL)addItem:(NSString *)itemName withType:(int)itemType withIngredients:(NSArray *)_ingredients withCost:(double)itemCost {
-    return [dbManager addItem:itemName withType:itemType withIngredients:_ingredients withCost:itemCost];
+    [dbManager addItem:itemName withType:itemType withIngredients:_ingredients withCost:itemCost];
+    [self refreshTable];
+    return true;
 }
 
 #pragma mark -
@@ -49,6 +51,11 @@
 
 - (IBAction)addButtonClicked:(id)sender {
     [self addItem:nameField.text withType:segmentedControl.selectedSegmentIndex withIngredients:ingredients withCost:[costField.text doubleValue]];
+}
+
+- (void) refreshTable {
+    foodVC.items = [dbManager itemsInDatabase];
+    [foodVC.tableView reloadData];
 }
 
 - (IBAction)anAction {
@@ -69,7 +76,7 @@
                 forState:UIControlStateNormal];
         // CGRectMake( x, y, length, height )
         button.frame = CGRectMake(120, 210.0, 160.0, 40.0);
-        [self.view addSubview:button];
+        //[self.view addSubview:button];
         
     }
     // If on the add bought item screen, create the appropriate view

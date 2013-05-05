@@ -30,8 +30,8 @@
     dbManager = nil;
 }
 
-// Run the test only if hardware to be tested on does not have the app installed.
-- (void)testDatabase {
+// Run the tests only if hardware to be tested on does not have the app installed.
+- (void)testPurchase {
     // adding
     STAssertTrue([self.dbManager addItem:@"Test Food" withType:1 withIngredients:nil withCost:10.00], @"Adding item should succeed");
     STAssertEquals([self.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
@@ -52,5 +52,14 @@
     STAssertEquals([self.dbManager numItemsInDatabase], 0, @"No item should be in database");
 
 }
+
+/*
+- (void)testRecipe {
+    // initial ingredients
+    [self.dbManager addIngredient:@"Tomato" withCost:];
+    // adding
+    STAssertTrue([self.dbManager addItem:@"Test Recipe" withType:1 withIngredients:<#(NSArray *)#> withCost:<#(double)#>], <#description, ...#>)
+}
+ */
 
 @end

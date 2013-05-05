@@ -24,6 +24,7 @@
     [foodTableVC setDbManager:dbManager];
     LogFoodViewController *logFoodVC = [[LogFoodViewController alloc] initWithNibName:@"LogFoodViewController" bundle:nil];
     [logFoodVC setDbManager:dbManager];
+    logFoodVC.foodVC = foodTableVC;
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[foodTableVC, logFoodVC];

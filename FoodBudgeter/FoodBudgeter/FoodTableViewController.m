@@ -50,6 +50,7 @@
 {
     // Return the number of rows in the section.
     return [dbManager numItemsInDatabase];
+    //return 100000;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

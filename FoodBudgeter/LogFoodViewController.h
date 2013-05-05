@@ -38,5 +38,5 @@
 withIngredients:(NSArray*)ingredients
        withCost:(double)itemCost;
 
-- (IBAction)showExample:(id)sender
+- (IBAction)showExample:(id)sender;
 @end

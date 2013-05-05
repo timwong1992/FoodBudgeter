@@ -47,6 +47,12 @@ withIngredients:(NSArray*)ingredients
        withCost:(double)itemCost;
 
 /*
+ Given ingredient data, adds it to the database. Returns false if the ingredient is a duplicate or the database is not changed.
+ */
+- (BOOL)addIngredient:(NSString *)ingredientName
+             withCost:(double)ingredientCost;
+
+/*
  Returns the number of items in the database.
  */
 - (int)numItemsInDatabase;
@@ -60,6 +66,12 @@ withIngredients:(NSArray*)ingredients
  Given item data, remove it from database. Returns false if the database is not changed.
  */
 - (BOOL)removeItem:(NSString*)itemName;
+
+/*
+ Given ingredient data, remove it from the database. Returns false if the database is not changed.
+ */
+- (BOOL)removeIngredient:(NSString *)ingredientName;
+
 
 /*
  Given a name, searches for the item in the database and returns its unique itemID.

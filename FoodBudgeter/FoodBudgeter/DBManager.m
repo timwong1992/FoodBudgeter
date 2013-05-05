@@ -29,7 +29,6 @@
     NSFileManager *filemgr = [NSFileManager defaultManager];
     if ([filemgr fileExistsAtPath:databasePath] == NO) {
         NSLog(@"Database being created");
-        //if (sqlite3_open([databasePath UTF8String], &itemDB) == SQLITE_OK) {
         [self runQuery:"CREATE TABLE IF NOT EXISTS item (itemID INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemType TEXT)"
             onDatabase:itemDB
       withErrorMessage:"Table creation failed!"];
@@ -42,7 +41,7 @@
             onDatabase:itemDB
       withErrorMessage:"Table creation failed!"];
         
-        [self runQuery:"CREATE TABLE IF NOT EXISTS ingredient (ingredientID INTEGER PRIMARY KEY, ingredientName TEXT, ingredientCost DOUBLE)"
+        [self runQuery:"CREATE TABLE IF NOT EXISTS ingredient (ingredientID INTEGER PRIMARY KEY AUTOINCREMENT, ingredientName TEXT, ingredientCost DOUBLE)"
             onDatabase:itemDB
       withErrorMessage:"Table creation failed!"];
         
@@ -93,10 +92,16 @@
             NSLog(@"Insert into item success");
             // add item data to other tables, depending on item type
             if (itemType == 0) {
-                insertQuery = [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"%@\")", itemName, @"recipe"];
+                insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe (recipeID) VALUES (\"%d\")", [self itemID:itemName]];
                 [self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Recipe insert failed!"];
                 
+                int recipeID = [self itemID:itemName];
                 // for each ingredient in item data
+                for (int i = 0; i < [self numIngredientsInRecipe:recipeID]; i++) {
+                    if ([self ingredientID:itemName] != -1)
+                    insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe_ingredient (recipeID, ingredientID) VALUES (\"%d\", \"%d\")", recipeID, [self ingredientID:itemName]];
+                    [self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Join table insert failed!"];
+                }
                 // check ingredient table for the ingredient
                 // if not found, add ingredient into table
                 // add join table entry by getting id's from recipe and ingredient tables
@@ -110,14 +115,22 @@
                     return false;
                 }
             }
-            
-            NSLog(@"Insert success");
-            sqlite3_close(itemDB);
             return true;
         }
         return false;
     }
     NSLog(@"Item was found");
+    return false;
+}
+
+- (BOOL)addIngredient:(NSString *)ingredientName
+             withCost:(double)ingredientCost {
+    if ([self ingredientID:ingredientName] != -1) {
+        NSString *insertQuery = [NSString stringWithFormat:@"INSERT INTO ingredient (ingredientName, ingredientCost) VALUES (\"%@\", \"%.2f\")", ingredientName, ingredientCost];
+        if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Ingredient insert failed!"] == SQLITE_OK) {
+            return true;
+        }
+    }
     return false;
 }
 
@@ -151,7 +164,7 @@
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
         NSMutableArray *items = [[NSMutableArray alloc]init];
-
+        
         // prepare query
         sqlite3_stmt *statement;
         
@@ -196,6 +209,52 @@
     
 }
 
+- (int)ingredientID:(NSString *)ingredientName {
+    int result = -1;
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
+        // prepare query
+        sqlite3_stmt *statement;
+        NSString *query = [NSString stringWithFormat:@"SELECT ingredientID FROM ingredients WHERE ingredientName = \"%@\"", ingredientName];
+        
+        // run query
+        sqlite3_prepare(itemDB, [query UTF8String], -1, &statement, NULL);
+        
+        // if it finds a row, clean up and return the ID for that row
+        if(sqlite3_step(statement) == SQLITE_ROW) {
+            result = sqlite3_column_int(statement, 0);
+        }
+        
+        // database cleanup
+        sqlite3_finalize(statement);
+        sqlite3_close(itemDB);
+    }
+    return result;
+}
+
+- (int)numIngredientsInRecipe:(int)itemID {
+    int result = 0;
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
+        // prepare query
+        sqlite3_stmt *statement;
+        NSString *query = [NSString stringWithFormat:@"SELECT ingredientID FROM recipe_ingredients WHERE recipeID = \"%d\"", itemID];
+        
+        // run query
+        sqlite3_prepare(itemDB, [query UTF8String], -1, &statement, NULL);
+        
+        // increment result for each entry
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            result++;
+        }
+        
+        // database cleanup
+        sqlite3_finalize(statement);
+        sqlite3_close(itemDB);
+    }
+    return result;
+}
+
 #pragma mark -
 
 #pragma mark removing items
@@ -219,6 +278,21 @@
             return true;
         }
         
+    }
+    // item does not exist, so do nothing
+    return false;
+}
+
+- (BOOL)removeIngredient:(NSString *)ingredientName {
+    // get ingredient ID to check if it exists
+    int ingredientID = [self ingredientID:ingredientName];
+    if (ingredientID != -1) {
+        // delete the ingredient
+        NSString *query = [NSString stringWithFormat:@"DELETE FROM ingredients WHERE ingredientName = \"%@\"", ingredientName];
+        
+        if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Item table failed"] != SQLITE_OK) {
+            return false;
+        }
     }
     // item does not exist, so do nothing
     return false;

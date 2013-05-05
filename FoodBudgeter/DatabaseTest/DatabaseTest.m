@@ -30,6 +30,7 @@
     dbManager = nil;
 }
 
+// Run the test only if hardware to be tested on does not have the app installed.
 - (void)testDatabase {
     // adding
     STAssertTrue([self.dbManager addItem:@"Test Food" withType:1 withIngredients:nil withCost:10.00], @"Adding item should succeed");

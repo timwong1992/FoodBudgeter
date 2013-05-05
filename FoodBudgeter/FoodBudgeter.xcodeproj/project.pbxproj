@@ -19,6 +19,10 @@
 		3F24B44B1732D77F00A8068D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218271730C14A00CDF44B /* Foundation.framework */; };
 		3F24B4511732D77F00A8068D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F24B44F1732D77F00A8068D /* InfoPlist.strings */; };
 		3F24B4541732D77F00A8068D /* DatabaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F24B4531732D77F00A8068D /* DatabaseTest.m */; };
+		3F6A58B51735DFA100B80F09 /* GroceryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6A58B41735DFA100B80F09 /* GroceryItem.m */; };
+		3F6A58B81735E20B00B80F09 /* Ingredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6A58B71735E20B00B80F09 /* Ingredient.m */; };
+		3F6A58BB1735E44B00B80F09 /* RecipeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6A58BA1735E44B00B80F09 /* RecipeItem.m */; };
+		3F6A58BE1735E45B00B80F09 /* PurchasedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6A58BD1735E45B00B80F09 /* PurchasedItem.m */; };
 		3F821470173468DA00D1E292 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F82146F173468DA00D1E292 /* DBManager.m */; };
 		3FE218261730C14A00CDF44B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218251730C14A00CDF44B /* UIKit.framework */; };
 		3FE218281730C14A00CDF44B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218271730C14A00CDF44B /* Foundation.framework */; };
@@ -64,6 +68,14 @@
 		3F24B4521732D77F00A8068D /* DatabaseTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseTest.h; sourceTree = "<group>"; };
 		3F24B4531732D77F00A8068D /* DatabaseTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseTest.m; sourceTree = "<group>"; };
 		3F24B4551732D77F00A8068D /* DatabaseTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DatabaseTest-Prefix.pch"; sourceTree = "<group>"; };
+		3F6A58B31735DFA100B80F09 /* GroceryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroceryItem.h; sourceTree = "<group>"; };
+		3F6A58B41735DFA100B80F09 /* GroceryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroceryItem.m; sourceTree = "<group>"; };
+		3F6A58B61735E20B00B80F09 /* Ingredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ingredient.h; sourceTree = "<group>"; };
+		3F6A58B71735E20B00B80F09 /* Ingredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ingredient.m; sourceTree = "<group>"; };
+		3F6A58B91735E44B00B80F09 /* RecipeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeItem.h; sourceTree = "<group>"; };
+		3F6A58BA1735E44B00B80F09 /* RecipeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeItem.m; sourceTree = "<group>"; };
+		3F6A58BC1735E45B00B80F09 /* PurchasedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchasedItem.h; sourceTree = "<group>"; };
+		3F6A58BD1735E45B00B80F09 /* PurchasedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchasedItem.m; sourceTree = "<group>"; };
 		3F82146E173468DA00D1E292 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		3F82146F173468DA00D1E292 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		3FE218221730C14A00CDF44B /* FoodBudgeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodBudgeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +238,14 @@
 				3FE218351730C14A00CDF44B /* AppDelegate.m */,
 				3F82146E173468DA00D1E292 /* DBManager.h */,
 				3F82146F173468DA00D1E292 /* DBManager.m */,
+				3F6A58B91735E44B00B80F09 /* RecipeItem.h */,
+				3F6A58BA1735E44B00B80F09 /* RecipeItem.m */,
+				3F6A58BC1735E45B00B80F09 /* PurchasedItem.h */,
+				3F6A58BD1735E45B00B80F09 /* PurchasedItem.m */,
+				3F6A58B31735DFA100B80F09 /* GroceryItem.h */,
+				3F6A58B41735DFA100B80F09 /* GroceryItem.m */,
+				3F6A58B61735E20B00B80F09 /* Ingredient.h */,
+				3F6A58B71735E20B00B80F09 /* Ingredient.m */,
 			);
 			name = delegate;
 			sourceTree = "<group>";
@@ -371,6 +391,10 @@
 				3F24B4351732D30100A8068D /* FoodDetailTableViewController.m in Sources */,
 				9C56A6BB17311E550028C1C4 /* LogFoodViewController.m in Sources */,
 				3F821470173468DA00D1E292 /* DBManager.m in Sources */,
+				3F6A58B51735DFA100B80F09 /* GroceryItem.m in Sources */,
+				3F6A58B81735E20B00B80F09 /* Ingredient.m in Sources */,
+				3F6A58BB1735E44B00B80F09 /* RecipeItem.m in Sources */,
+				3F6A58BE1735E45B00B80F09 /* PurchasedItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

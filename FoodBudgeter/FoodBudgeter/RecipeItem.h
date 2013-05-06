@@ -10,4 +10,7 @@
 
 @interface RecipeItem : NSObject
 
+@property (nonatomic, strong) NSString *itemName;
+@property (nonatomic, strong) NSMutableArray *itemIngredients;
+
 @end

@@ -10,4 +10,6 @@
 
 @implementation PurchasedItem
 
+@synthesize itemId, itemCost, itemName;
+
 @end

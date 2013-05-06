@@ -10,7 +10,7 @@
 
 @implementation LogFoodViewController
 
-@synthesize segmentedControl, nameField, costField, ingredients, dbManager, label, foodVC;
+@synthesize segmentedControl, nameField, costField, ingredients, dbManager, label, foodVC, addItemCommand;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,8 +40,8 @@
 
 #pragma mark add Item
 
-- (BOOL)addItem:(NSString *)itemName withType:(int)itemType withIngredients:(NSArray *)_ingredients withCost:(double)itemCost {
-    [dbManager addItem:itemName withType:itemType withIngredients:_ingredients withCost:itemCost];
+- (BOOL)addItem:(NSString *)itemName withType:(int)itemType withIngredients:(NSMutableArray *)_ingredients withCost:(double)itemCost {
+    [addItemCommand execute:itemName withType:itemType withIngredients:_ingredients withCost:itemCost];
     [self refreshTable];
     return true;
 }
@@ -51,6 +51,7 @@
 
 - (IBAction)addButtonClicked:(id)sender {
     [self addItem:nameField.text withType:segmentedControl.selectedSegmentIndex withIngredients:ingredients withCost:[costField.text doubleValue]];
+    [self refreshTable];
 }
 
 - (void) refreshTable {

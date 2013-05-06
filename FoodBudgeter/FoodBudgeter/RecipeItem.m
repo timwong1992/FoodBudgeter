@@ -10,4 +10,6 @@
 
 @implementation RecipeItem
 
+@synthesize itemName, itemIngredients;
+
 @end

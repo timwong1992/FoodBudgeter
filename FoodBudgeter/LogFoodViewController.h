@@ -11,6 +11,7 @@
 #import "sqlite3.h"
 #import "DBManager.h"
 #import "FoodTableViewController.h"
+#import "AddItemCommand.h"
 
 @interface LogFoodViewController : UIViewController <DBDelegate, UIGestureRecognizerDelegate>
 
@@ -25,6 +26,8 @@
 @property(nonatomic, strong) IBOutlet UITextField *itemNameField;
 @property(nonatomic, strong) IBOutlet UITextField *portionField;
 @property(nonatomic, strong) IBOutlet UITextField *unitField;
+
+@property(nonatomic, strong) AddItemCommand *addItemCommand;
 
 // temp reference to food table vc
 @property(nonatomic, strong) FoodTableViewController *foodVC;

@@ -43,7 +43,7 @@ withErrorMessage:(char *)errMsg;
  */
 - (BOOL)addItem:(NSString*)itemName
        withType:(int)itemType
-withIngredients:(NSArray*)ingredients
+withIngredients:(NSMutableArray*)ingredients
        withCost:(double)itemCost;
 
 /*

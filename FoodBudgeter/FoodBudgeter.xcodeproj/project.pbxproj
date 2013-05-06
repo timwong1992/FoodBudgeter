@@ -37,6 +37,8 @@
 		3FE218431730C14B00CDF44B /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE218421730C14B00CDF44B /* first@2x.png */; };
 		3FE218481730C14B00CDF44B /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE218471730C14B00CDF44B /* second.png */; };
 		3FE2184A1730C14B00CDF44B /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE218491730C14B00CDF44B /* second@2x.png */; };
+		3FEFCBE91737FFB8005B0DA5 /* QueryCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFCBE81737FFB8005B0DA5 /* QueryCommand.m */; };
+		3FEFCBEC17380122005B0DA5 /* AddItemCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFCBEB17380122005B0DA5 /* AddItemCommand.m */; };
 		9C56A6BB17311E550028C1C4 /* LogFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C56A6B817311E550028C1C4 /* LogFoodViewController.m */; };
 		9C56A6BC17311E550028C1C4 /* LogFoodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C56A6B917311E550028C1C4 /* LogFoodViewController.xib */; };
 /* End PBXBuildFile section */
@@ -95,6 +97,10 @@
 		3FE218421730C14B00CDF44B /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
 		3FE218471730C14B00CDF44B /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		3FE218491730C14B00CDF44B /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		3FEFCBE71737FFB8005B0DA5 /* QueryCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCommand.h; sourceTree = "<group>"; };
+		3FEFCBE81737FFB8005B0DA5 /* QueryCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryCommand.m; sourceTree = "<group>"; };
+		3FEFCBEA17380122005B0DA5 /* AddItemCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddItemCommand.h; sourceTree = "<group>"; };
+		3FEFCBEB17380122005B0DA5 /* AddItemCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddItemCommand.m; sourceTree = "<group>"; };
 		9C56A6B617311E550028C1C4 /* AddRecipe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AddRecipe.png; path = ../AddRecipe.png; sourceTree = "<group>"; };
 		9C56A6B717311E550028C1C4 /* LogFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogFoodViewController.h; path = ../LogFoodViewController.h; sourceTree = "<group>"; };
 		9C56A6B817311E550028C1C4 /* LogFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogFoodViewController.m; path = ../LogFoodViewController.m; sourceTree = "<group>"; };
@@ -193,8 +199,9 @@
 		3FE2182B1730C14A00CDF44B /* FoodBudgeter */ = {
 			isa = PBXGroup;
 			children = (
-				3FE218591730C18800CDF44B /* view */,
 				3FE218571730C18000CDF44B /* delegate */,
+				3FEFCBE61737FD84005B0DA5 /* model */,
+				3FE218591730C18800CDF44B /* view */,
 				3FE218561730C17800CDF44B /* controller */,
 				3F24B4281732C4FB00A8068D /* img */,
 				3FE2182C1730C14A00CDF44B /* Supporting Files */,
@@ -227,6 +234,10 @@
 				3F24B42E1732D2EA00A8068D /* FoodTableViewController.m */,
 				3F24B4321732D30100A8068D /* FoodDetailTableViewController.h */,
 				3F24B4331732D30100A8068D /* FoodDetailTableViewController.m */,
+				3FEFCBE71737FFB8005B0DA5 /* QueryCommand.h */,
+				3FEFCBE81737FFB8005B0DA5 /* QueryCommand.m */,
+				3FEFCBEA17380122005B0DA5 /* AddItemCommand.h */,
+				3FEFCBEB17380122005B0DA5 /* AddItemCommand.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -238,14 +249,6 @@
 				3FE218351730C14A00CDF44B /* AppDelegate.m */,
 				3F82146E173468DA00D1E292 /* DBManager.h */,
 				3F82146F173468DA00D1E292 /* DBManager.m */,
-				3F6A58B91735E44B00B80F09 /* RecipeItem.h */,
-				3F6A58BA1735E44B00B80F09 /* RecipeItem.m */,
-				3F6A58BC1735E45B00B80F09 /* PurchasedItem.h */,
-				3F6A58BD1735E45B00B80F09 /* PurchasedItem.m */,
-				3F6A58B31735DFA100B80F09 /* GroceryItem.h */,
-				3F6A58B41735DFA100B80F09 /* GroceryItem.m */,
-				3F6A58B61735E20B00B80F09 /* Ingredient.h */,
-				3F6A58B71735E20B00B80F09 /* Ingredient.m */,
 			);
 			name = delegate;
 			sourceTree = "<group>";
@@ -258,6 +261,21 @@
 				3F24B4341732D30100A8068D /* FoodDetailTableViewController.xib */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		3FEFCBE61737FD84005B0DA5 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				3F6A58B91735E44B00B80F09 /* RecipeItem.h */,
+				3F6A58BA1735E44B00B80F09 /* RecipeItem.m */,
+				3F6A58BC1735E45B00B80F09 /* PurchasedItem.h */,
+				3F6A58BD1735E45B00B80F09 /* PurchasedItem.m */,
+				3F6A58B31735DFA100B80F09 /* GroceryItem.h */,
+				3F6A58B41735DFA100B80F09 /* GroceryItem.m */,
+				3F6A58B61735E20B00B80F09 /* Ingredient.h */,
+				3F6A58B71735E20B00B80F09 /* Ingredient.m */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,6 +413,8 @@
 				3F6A58B81735E20B00B80F09 /* Ingredient.m in Sources */,
 				3F6A58BB1735E44B00B80F09 /* RecipeItem.m in Sources */,
 				3F6A58BE1735E45B00B80F09 /* PurchasedItem.m in Sources */,
+				3FEFCBE91737FFB8005B0DA5 /* QueryCommand.m in Sources */,
+				3FEFCBEC17380122005B0DA5 /* AddItemCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

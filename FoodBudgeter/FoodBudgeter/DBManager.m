@@ -24,11 +24,10 @@
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     docsDir = [dirPaths objectAtIndex: 0];
     
-    //build path to the datbase file
+    //build path to the database file
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"items.db"]];
     NSFileManager *filemgr = [NSFileManager defaultManager];
     if ([filemgr fileExistsAtPath:databasePath] == NO) {
-        NSLog(@"Database being created");
         [self runQuery:"CREATE TABLE IF NOT EXISTS item (itemID INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemType TEXT)"
             onDatabase:itemDB
       withErrorMessage:"Table creation failed!"];
@@ -72,7 +71,7 @@
 
 #pragma mark add Item
 
-- (BOOL)addItem:(NSString *)itemName withType:(int)itemType withIngredients:(NSArray *)ingredients withCost:(double)itemCost {
+- (BOOL)addItem:(NSString *)itemName withType:(int)itemType withIngredients:(NSMutableArray *)ingredients withCost:(double)itemCost {
     if ([self itemID:itemName] == -1) {
         NSString *insertQuery;
         

@@ -10,6 +10,15 @@
 
 @implementation Item
 
-@synthesize itemCost, itemId, itemName;
+@synthesize itemId, itemName;
+
+- (id)initWithID:(int)_itemId withName:(NSString*)_itemName {
+    self = [super init];
+    if (self) {
+        self.itemId = _itemId;
+        self.itemName = _itemName;
+    }
+    return self;
+}
 
 @end

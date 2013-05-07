@@ -10,6 +10,16 @@
 
 @implementation GroceryItem
 
-@synthesize itemCost, itemId, itemName, unitAmount, unitType;
+@synthesize itemCost, unitAmount, unitType;
+
+- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withCost:(double)_cost unitAmount:(double)amount unitType:(NSString *)type {
+    self = [super initWithID:_itemId withName:_itemName];
+    if (self) {
+        self.itemCost = _cost;
+        self.unitAmount = amount;
+        self.unitType = type;
+    }
+    return self;
+}
 
 @end

@@ -23,6 +23,8 @@
 		3F6A58B81735E20B00B80F09 /* Ingredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6A58B71735E20B00B80F09 /* Ingredient.m */; };
 		3F6A58BB1735E44B00B80F09 /* RecipeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6A58BA1735E44B00B80F09 /* RecipeItem.m */; };
 		3F6A58BE1735E45B00B80F09 /* PurchasedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6A58BD1735E45B00B80F09 /* PurchasedItem.m */; };
+		3F787DE0173963D40073E0C0 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F787DDF173963D40073E0C0 /* Item.m */; };
+		3F787DE3173964130073E0C0 /* RemoveItemCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F787DE2173964120073E0C0 /* RemoveItemCommand.m */; };
 		3F821470173468DA00D1E292 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F82146F173468DA00D1E292 /* DBManager.m */; };
 		3FE218261730C14A00CDF44B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218251730C14A00CDF44B /* UIKit.framework */; };
 		3FE218281730C14A00CDF44B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218271730C14A00CDF44B /* Foundation.framework */; };
@@ -78,6 +80,10 @@
 		3F6A58BA1735E44B00B80F09 /* RecipeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeItem.m; sourceTree = "<group>"; };
 		3F6A58BC1735E45B00B80F09 /* PurchasedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchasedItem.h; sourceTree = "<group>"; };
 		3F6A58BD1735E45B00B80F09 /* PurchasedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchasedItem.m; sourceTree = "<group>"; };
+		3F787DDE173963D40073E0C0 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		3F787DDF173963D40073E0C0 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		3F787DE1173964120073E0C0 /* RemoveItemCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoveItemCommand.h; sourceTree = "<group>"; };
+		3F787DE2173964120073E0C0 /* RemoveItemCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoveItemCommand.m; sourceTree = "<group>"; };
 		3F82146E173468DA00D1E292 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		3F82146F173468DA00D1E292 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		3FE218221730C14A00CDF44B /* FoodBudgeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodBudgeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -238,6 +244,8 @@
 				3FEFCBE81737FFB8005B0DA5 /* QueryCommand.m */,
 				3FEFCBEA17380122005B0DA5 /* AddItemCommand.h */,
 				3FEFCBEB17380122005B0DA5 /* AddItemCommand.m */,
+				3F787DE1173964120073E0C0 /* RemoveItemCommand.h */,
+				3F787DE2173964120073E0C0 /* RemoveItemCommand.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -266,6 +274,8 @@
 		3FEFCBE61737FD84005B0DA5 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				3F787DDE173963D40073E0C0 /* Item.h */,
+				3F787DDF173963D40073E0C0 /* Item.m */,
 				3F6A58B91735E44B00B80F09 /* RecipeItem.h */,
 				3F6A58BA1735E44B00B80F09 /* RecipeItem.m */,
 				3F6A58BC1735E45B00B80F09 /* PurchasedItem.h */,
@@ -415,6 +425,8 @@
 				3F6A58BE1735E45B00B80F09 /* PurchasedItem.m in Sources */,
 				3FEFCBE91737FFB8005B0DA5 /* QueryCommand.m in Sources */,
 				3FEFCBEC17380122005B0DA5 /* AddItemCommand.m in Sources */,
+				3F787DE0173963D40073E0C0 /* Item.m in Sources */,
+				3F787DE3173964130073E0C0 /* RemoveItemCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

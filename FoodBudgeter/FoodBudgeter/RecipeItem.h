@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RecipeItem : NSObject
+@interface RecipeItem : Item
 
-@property (nonatomic, strong) NSString *itemName;
 @property (nonatomic, strong) NSMutableArray *itemIngredients;
 
 @end

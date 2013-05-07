@@ -10,7 +10,7 @@
 
 @implementation LogFoodViewController
 
-@synthesize segmentedControl, nameField, costField, ingredients, dbManager, label, foodVC, addItemCommand, removeItemCommand;
+@synthesize segmentedControl, nameField, costField, ingredients, dbManager, label, foodVC, addItemCommand;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

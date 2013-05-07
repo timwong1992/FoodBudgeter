@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
 #import "sqlite3.h"
+#import "Item.h"
+#import "RecipeItem.h"
+#import "PurchasedItem.h"
+#import "GroceryItem.h"
 
 @class DBManager;
 

@@ -12,6 +12,7 @@
 #import "DBManager.h"
 #import "FoodTableViewController.h"
 #import "AddItemCommand.h"
+#import "RemoveItemCommand.h"
 
 @interface LogFoodViewController : UIViewController <DBDelegate, UIGestureRecognizerDelegate>
 
@@ -28,6 +29,7 @@
 @property(nonatomic, strong) IBOutlet UITextField *unitField;
 
 @property(nonatomic, strong) AddItemCommand *addItemCommand;
+@property(nonatomic, strong) RemoveItemCommand *removeItemCommand;
 
 // temp reference to food table vc
 @property(nonatomic, strong) FoodTableViewController *foodVC;

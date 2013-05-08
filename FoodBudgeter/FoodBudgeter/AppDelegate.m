@@ -34,6 +34,8 @@
     foodTableVC.tabBarItem = listItem;
     logFoodVC.tabBarItem = logItem;
     
+    foodTableVC.viewDelegate = logFoodVC;
+    
     self.window.rootViewController = self.tabBarController;
         
     [self.window makeKeyAndVisible];

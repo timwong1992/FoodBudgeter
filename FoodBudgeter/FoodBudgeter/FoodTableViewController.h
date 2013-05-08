@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "DBManager.h"
+#import "ItemManager.h"
 
 @interface FoodTableViewController : UITableViewController
 
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *items;
+@property (nonatomic, assign)id <ViewItemsProtocol>viewDelegate;
 
 @end

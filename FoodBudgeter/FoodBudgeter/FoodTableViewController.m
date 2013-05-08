@@ -10,7 +10,7 @@
 
 @implementation FoodTableViewController
 
-@synthesize dbManager, items;
+@synthesize dbManager, items, viewDelegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

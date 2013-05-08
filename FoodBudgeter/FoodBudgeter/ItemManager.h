@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "DBManager.h"
 #import "Item.h"
+@protocol ViewItemsProtocol <NSObject>
+@required
+- (void)updateItemInView:(id)item;
 
-@interface ItemManager : NSObject
+@end
+
+@interface ItemManager : NSObject <ViewItemsProtocol>
 
 @property (nonatomic,strong) DBManager *dbManager;
 @property (nonatomic,strong) NSMutableArray *items;

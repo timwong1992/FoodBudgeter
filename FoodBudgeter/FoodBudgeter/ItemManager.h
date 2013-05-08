@@ -12,6 +12,7 @@
 @interface ItemManager : NSObject
 
 @property (nonatomic,strong) DBManager *dbManager;
+@property (nonatomic,strong) NSMutableArray *items;
 
 /*
  Reads all items from the database and creates its object representation

@@ -16,7 +16,7 @@
     return itemDB;
 }
 
-- (BOOL)buildItems {
+- (NSMutableArray *)buildItems {
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
         NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[self numItemsInDatabase]];
@@ -29,35 +29,36 @@
         // run query
         sqlite3_prepare(itemDB, "SELECT * FROM item", -1, &statement, NULL);
         
-        // if it finds a row, clean up and return the ID for that row
+        // for each found row, create the appropriate object based upon its type
         while(sqlite3_step(statement) == SQLITE_ROW) {
             itemId = sqlite3_column_int(statement, 0);
             itemName = [NSString stringWithUTF8String:sqlite3_column_text16(statement, 1)];
+            Item *item;
             const char *itemType = sqlite3_column_text16(statement, 2);
+            
             // if type is recipe
             if (strcmp(itemType, "recipe")) {
-                RecipeItem *recipeItem = [[RecipeItem alloc] initWithID:itemId withName:itemName];
-                [items addObject:recipeItem];
+                item = [[RecipeItem alloc] initWithID:itemId withName:itemName];
             }
             // else if type is purchase
             else if (strcmp(itemType, "purchase")) {
-                PurchasedItem *purchasedItem = [[PurchasedItem alloc] initWithID:itemId withName:itemName withCost:0];
+                item = [[PurchasedItem alloc] initWithID:itemId withName:itemName withCost:[self itemCost:itemId]];
             }
             // else if type is grocery
+#warning grocery item creation incomplete
             else if (strcmp(itemType, "grocery")) {
-                
+                item = [[GroceryItem alloc] initWithID:itemId withName:itemName withCost:[self itemCost:itemId] unitAmount:0 unitType:0];
             }
-            Item *item = [[Item alloc] initWithID:itemId withName:itemName];
-            
+            [items addObject:item];
         }
         
         // database cleanup
         sqlite3_finalize(statement);
         sqlite3_close(itemDB);
-        return true;
+        return items;
     }
     
-    return false;
+    return nil;
 }
 
 - (BOOL)createDatabase {
@@ -105,10 +106,6 @@
         status = sqlite3_exec(database, query, NULL, NULL, &errMsg);
         if (status != SQLITE_OK ) {
             NSLog(@"Error: %s", errMsg);
-        }
-        // for retrievals
-        if (status == SQLITE_ROW) {
-            NSLog(@"Found!");
         }
         sqlite3_close(database);
     }

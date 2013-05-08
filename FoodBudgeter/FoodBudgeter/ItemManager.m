@@ -10,6 +10,8 @@
 
 @implementation ItemManager
 
-@synthesize dbManager;
+@synthesize dbManager, items;
+
+
 
 @end

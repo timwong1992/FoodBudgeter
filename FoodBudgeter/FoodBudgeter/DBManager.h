@@ -31,7 +31,7 @@
 @property (nonatomic, assign) id<DBDelegate> logDelegate;
 @property (nonatomic, assign) id<DBDelegate> viewDelegate;
 
--(BOOL)buildItems;
+- (NSMutableArray *)buildItems;
 
 - (BOOL)createDatabase;
 

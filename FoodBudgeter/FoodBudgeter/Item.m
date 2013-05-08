@@ -12,6 +12,14 @@
 
 @synthesize itemId, itemName;
 
+- (id)initWithName:(NSString *)_itemName {
+    self = [super init];
+    if (self) {
+        self.itemName = _itemName;
+        self.itemId = 0;
+    }
+}
+
 - (id)initWithID:(int)_itemId withName:(NSString*)_itemName {
     self = [super init];
     if (self) {

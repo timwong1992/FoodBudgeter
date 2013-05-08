@@ -25,16 +25,17 @@
 }
 
 - (IBAction)segmentChanged:(id)sender {
-    NSLog(@"Label is %@", label.text );
+    NSLog(@"herp derp Label is %@", label.text );
 }
 
 - (IBAction)segmentController{
-    NSLog(@"Label is %@", label.text );
-    if( segmentedControl.selectedSegmentIndex == 0 ) {
-        label.text = @"one";
-        NSLog(@"Label is %@", label.text );
+    NSLog(@"derpy Label is %@", [segmentedControl titleForSegmentAtIndex:[segmentedControl selectedSegmentIndex]]);
+          
+    //if( segmentedControl.selectedSegmentIndex == 0 ) {
+    //    label.text = @"one";
+    //    NSLog(@"Label is %@", label.text );
         
-    }
+    //}
     
 }
 

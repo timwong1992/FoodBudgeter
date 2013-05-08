@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DBManager.h"
+#import "Item.h"
 
 @interface ItemManager : NSObject
 
@@ -19,5 +20,23 @@
  To be run at start.
  */
 - (BOOL)buildItems;
+
+/*
+ Creates and adds an Item object to the array and writes this change to the database.
+ */
+- (BOOL)addItem:(NSString*)itemName
+       withType:(int)itemType
+withIngredients:(NSMutableArray*)ingredients
+       withCost:(double)itemCost;
+
+/*
+ Retrieves an item from the array by its name.
+ */
+- (Item*)getItemByName:(NSString*)itemName;
+
+/*
+ Given an item, remove the item from the array and from the database.
+ */
+- (BOOL)removeItem:(Item *)item;
 
 @end

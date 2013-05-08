@@ -17,4 +17,31 @@
     return true;
 }
 
+- (BOOL)addItem:(NSString*)itemName withType:(int)itemType withIngredients:(NSMutableArray*)ingredients withCost:(double)itemCost {
+    if (![self getItemByName:itemName]) {
+        Item *item = [[Item alloc] initWithName:itemName];
+        [items addObject:item];
+#warning need to hook up to GUI
+        [dbManager addItem:itemName withType:0 withIngredients:nil withCost:0];
+        return true;
+    }
+    return false;
+}
+
+- (Item*)getItemByName:(NSString*)itemName {
+    for (Item *item in items) {
+        if ([[item itemName] isEqualToString:itemName]) {
+            return item;
+        }
+    }
+    return nil;
+}
+
+- (BOOL)removeItem:(Item *)item {
+    if ([self.items indexOfObject:item] != -1) {
+        [items removeObject:item];
+        return true;
+    }
+}
+
 @end

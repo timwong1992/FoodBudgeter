@@ -16,6 +16,50 @@
     return itemDB;
 }
 
+- (BOOL)buildItems {
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
+        NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[self numItemsInDatabase]];
+        NSString *itemName;
+        int itemId;
+        
+        // prepare query
+        sqlite3_stmt *statement;
+        
+        // run query
+        sqlite3_prepare(itemDB, "SELECT * FROM item", -1, &statement, NULL);
+        
+        // if it finds a row, clean up and return the ID for that row
+        while(sqlite3_step(statement) == SQLITE_ROW) {
+            itemId = sqlite3_column_int(statement, 0);
+            itemName = [NSString stringWithUTF8String:sqlite3_column_text16(statement, 1)];
+            const char *itemType = sqlite3_column_text16(statement, 2);
+            // if type is recipe
+            if (strcmp(itemType, "recipe")) {
+                RecipeItem *recipeItem = [[RecipeItem alloc] initWithID:itemId withName:itemName];
+                [items addObject:recipeItem];
+            }
+            // else if type is purchase
+            else if (strcmp(itemType, "purchase")) {
+                PurchasedItem *purchasedItem = [[PurchasedItem alloc] initWithID:itemId withName:itemName withCost:0];
+            }
+            // else if type is grocery
+            else if (strcmp(itemType, "grocery")) {
+                
+            }
+            Item *item = [[Item alloc] initWithID:itemId withName:itemName];
+            
+        }
+        
+        // database cleanup
+        sqlite3_finalize(statement);
+        sqlite3_close(itemDB);
+        return true;
+    }
+    
+    return false;
+}
+
 - (BOOL)createDatabase {
     NSString *docsDir;
     NSArray *dirPaths;
@@ -30,23 +74,25 @@
     if ([filemgr fileExistsAtPath:databasePath] == NO) {
         [self runQuery:"CREATE TABLE IF NOT EXISTS item (itemID INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemType TEXT)"
             onDatabase:itemDB
-      withErrorMessage:"Table creation failed!"];
+      withErrorMessage:"Item table creation failed!"];
         
         [self runQuery:"CREATE TABLE IF NOT EXISTS recipe (recipeID INTEGER PRIMARY KEY, FOREIGN KEY(recipeID) REFERENCES item(itemID))"
             onDatabase:itemDB
-      withErrorMessage:"Table creation failed!"];
+      withErrorMessage:"Recipe table creation failed!"];
         
-        [self runQuery:"CREATE TABLE IF NOT EXISTS purchase (purchaseID INTEGER PRIMARY KEY, itemCost TEXT, FOREIGN KEY(purchaseID) REFERENCES item(itemID))"
+        [self runQuery:"CREATE TABLE IF NOT EXISTS purchase (purchaseID INTEGER PRIMARY KEY, itemCost DOUBLE, FOREIGN KEY(purchaseID) REFERENCES item(itemID))"
             onDatabase:itemDB
-      withErrorMessage:"Table creation failed!"];
+      withErrorMessage:"Purchase table creation failed!"];
+        
+        [self runQuery:"CREATE TABLE IF NOT EXISTS grocery (groceryID INTEGER PRIMARY KEY, itemCost DOUBLE, unitAmount DOUBLE, unitType TEXT, FOREIGN KEY(groceryID) REFERENCES item(itemID))" onDatabase:itemDB withErrorMessage:"Grocery table creation failed!"];
         
         [self runQuery:"CREATE TABLE IF NOT EXISTS ingredient (ingredientID INTEGER PRIMARY KEY AUTOINCREMENT, ingredientName TEXT, ingredientCost DOUBLE)"
             onDatabase:itemDB
-      withErrorMessage:"Table creation failed!"];
+      withErrorMessage:"Ingredient table creation failed!"];
         
         [self runQuery:"CREATE TABLE IF NOT EXISTS recipe_ingredient (recipeID INTEGER, ingredientID INTEGER, ingredientServings DOUBLE, PRIMARY KEY(recipeID, ingredientID), FOREIGN KEY(recipeID) REFERENCES recipe(recipeID), FOREIGN KEY(ingredientID) REFERENCES ingredient(ingredientID))"
             onDatabase:itemDB
-      withErrorMessage:"Table creation failed!"];
+      withErrorMessage:"Recipe_Ingredient table creation failed!"];
         
         return true;
     }
@@ -98,7 +144,7 @@
                 // for each ingredient in item data
                 for (int i = 0; i < [self numIngredientsInRecipe:recipeID]; i++) {
                     if ([self ingredientID:itemName] != -1)
-                    insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe_ingredient (recipeID, ingredientID) VALUES (\"%d\", \"%d\")", recipeID, [self ingredientID:itemName]];
+                        insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe_ingredient (recipeID, ingredientID) VALUES (\"%d\", \"%d\")", recipeID, [self ingredientID:itemName]];
                     [self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Join table insert failed!"];
                 }
                 // check ingredient table for the ingredient
@@ -252,6 +298,67 @@
         sqlite3_close(itemDB);
     }
     return result;
+}
+
+- (NSString *)itemType:(int)itemID {
+    NSString *type;
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
+        // prepare query
+        sqlite3_stmt *statement;
+        
+        NSString *query = [NSString stringWithFormat:@"SELECT itemType FROM items WHERE itemID = \"%d\"", itemID];
+        
+        // run query
+        sqlite3_prepare(itemDB, [query UTF8String], -1, &statement, NULL);
+        
+        // increment result for each entry
+        if (sqlite3_step(statement) == SQLITE_ROW) {
+            type = [NSString stringWithUTF8String:sqlite3_column_text16(statement, 0)];
+        }
+        
+        // database cleanup
+        sqlite3_finalize(statement);
+        sqlite3_close(itemDB);
+    }
+    return type;
+}
+
+- (double)itemCost:(int)itemID {
+    double cost = 0;
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
+        // prepare query
+        sqlite3_stmt *statement;
+        NSString *query;
+        
+        // get item type from database
+        NSString *itemType = [self itemType:itemID];
+        
+        if ([itemType isEqualToString:@"purchase"]) {
+            query = [NSString stringWithFormat:@"SELECT itemCost FROM recipe_ingredients WHERE recipeID = \"%d\"", itemID];
+        }
+        else if ([itemType isEqualToString:@"recipe"]) {
+            
+        }
+        else if ([itemType isEqualToString:@"grocery"]) {
+            
+        }
+        
+        // run query
+        sqlite3_prepare(itemDB, [query UTF8String], -1, &statement, NULL);
+        
+        // increment result for each entry
+        if (sqlite3_step(statement) == SQLITE_ROW) {
+            cost = sqlite3_column_double(statement, 0);
+        }
+        
+        // database cleanup
+        sqlite3_finalize(statement);
+        sqlite3_close(itemDB);
+    }
+    return cost;
+    
 }
 
 #pragma mark -

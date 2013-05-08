@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F09CC3B1739CBB200DA9AC3 /* ItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F09CC3A1739CBB100DA9AC3 /* ItemManager.m */; };
 		3F24B42B1732C5DA00A8068D /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F24B4291732C5DA00A8068D /* libsqlite3.0.dylib */; };
 		3F24B42C1732C5DA00A8068D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F24B42A1732C5DA00A8068D /* libsqlite3.dylib */; };
 		3F24B4301732D2EA00A8068D /* FoodTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F24B42E1732D2EA00A8068D /* FoodTableViewController.m */; };
@@ -56,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F09CC391739CBB100DA9AC3 /* ItemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemManager.h; sourceTree = "<group>"; };
+		3F09CC3A1739CBB100DA9AC3 /* ItemManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemManager.m; sourceTree = "<group>"; };
 		3F24B4291732C5DA00A8068D /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		3F24B42A1732C5DA00A8068D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3F24B42D1732D2EA00A8068D /* FoodTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableViewController.h; sourceTree = "<group>"; };
@@ -257,6 +260,8 @@
 				3FE218351730C14A00CDF44B /* AppDelegate.m */,
 				3F82146E173468DA00D1E292 /* DBManager.h */,
 				3F82146F173468DA00D1E292 /* DBManager.m */,
+				3F09CC391739CBB100DA9AC3 /* ItemManager.h */,
+				3F09CC3A1739CBB100DA9AC3 /* ItemManager.m */,
 			);
 			name = delegate;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 				3FEFCBEC17380122005B0DA5 /* AddItemCommand.m in Sources */,
 				3F787DE0173963D40073E0C0 /* Item.m in Sources */,
 				3F787DE3173964130073E0C0 /* RemoveItemCommand.m in Sources */,
+				3F09CC3B1739CBB200DA9AC3 /* ItemManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

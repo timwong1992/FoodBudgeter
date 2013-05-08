@@ -15,4 +15,6 @@
 @property(nonatomic, assign) NSInteger unitAmount;  // Amount of units ex. 24 slices, 6 chicken breasts
 @property(nonatomic, strong) NSString *unitType;    // ex. lbs, slices, (vegetable)heads, chicken breasts
 
+- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withCost:(double)_cost unitAmount:(double)amount unitType:(NSString *)type;
+
 @end

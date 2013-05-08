@@ -31,7 +31,9 @@
 @property (nonatomic, assign) id<DBDelegate> logDelegate;
 @property (nonatomic, assign) id<DBDelegate> viewDelegate;
 
--(BOOL)createDatabase;
+-(BOOL)buildItems;
+
+- (BOOL)createDatabase;
 
 - (sqlite3*)itemDB;
 

@@ -12,6 +12,9 @@
 
 @synthesize dbManager, items;
 
-
+- (BOOL)buildItems {
+    [self setItems:[dbManager buildItems]];
+    return true;
+}
 
 @end

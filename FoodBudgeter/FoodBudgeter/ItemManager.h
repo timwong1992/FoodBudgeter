@@ -18,6 +18,6 @@
  Reads all items from the database and creates its object representation
  To be run at start.
  */
-- (BOOL)buildObjectDataStructure;
+- (BOOL)buildItems;
 
 @end

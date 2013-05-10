@@ -48,7 +48,7 @@ withErrorMessage:(char *)errMsg;
  Given item data, adds it to the database. Returns false if the item is a duplicate or the database is not changed.
  */
 - (BOOL)addItem:(NSString*)itemName
-       withType:(int)itemType
+       withType:(NSString*)itemType
 withIngredients:(NSMutableArray*)ingredients
        withCost:(double)itemCost;
 

@@ -20,14 +20,15 @@
 @property(nonatomic, strong) IBOutlet UILabel *label;
 @property(nonatomic, strong) IBOutlet UITextField *nameField;
 @property(nonatomic, strong) IBOutlet UITextField *costField;
-@property(nonatomic, strong) NSArray *ingredients;
-@property(nonatomic, strong) DBManager *dbManager;
 @property(nonatomic, strong) IBOutlet UIButton *exampleBtn;
 @property(nonatomic, strong) IBOutlet UIButton *addIngredientBtn;
 @property(nonatomic, strong) IBOutlet UITextField *itemNameField;
 @property(nonatomic, strong) IBOutlet UITextField *portionField;
 @property(nonatomic, strong) IBOutlet UITextField *unitField;
+@property(nonatomic, strong) IBOutlet UILabel *status;
 
+@property(nonatomic, strong) NSArray *ingredients;
+@property(nonatomic, strong) DBManager *dbManager;
 @property(nonatomic, strong) AddItemCommand *addItemCommand;
 @property(nonatomic, strong) RemoveItemCommand *removeItemCommand;
 
@@ -35,15 +36,14 @@
 @property(nonatomic, strong) FoodTableViewController *foodVC;
 
 - (IBAction)addButtonClicked:(id)sender;
-- (IBAction)segmentChanged:(id)sender;
-- (IBAction)segmentController;
+- (IBAction)segmentController:(id)sender;
 - (IBAction)anAction;
 
 /*
  Given item data, adds it to the database. Returns false if the item is a duplicate or the database is not changed.
  */
 - (BOOL)addItem:(NSString*)itemName
-       withType:(int)itemType
+       withType:(NSString*)itemType
 withIngredients:(NSArray*)ingredients
        withCost:(double)itemCost;
 

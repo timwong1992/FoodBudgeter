@@ -14,6 +14,6 @@
 /*
  override
  */
-- (void)execute:(NSString*)itemName withType:(int)itemType withIngredients:(NSMutableArray*)_ingredients withCost:(double)itemCost;
+- (BOOL)execute:(NSString*)itemName withType:(NSString*)itemType withIngredients:(NSMutableArray*)_ingredients withCost:(double)itemCost;
 
 @end

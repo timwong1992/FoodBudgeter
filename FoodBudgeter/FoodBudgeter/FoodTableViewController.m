@@ -50,7 +50,6 @@
 {
     // Return the number of rows in the section.
     return [dbManager numItemsInDatabase];
-    //return 100000;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -58,11 +57,12 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
     cell.textLabel.text = (NSString *)[items objectAtIndex:indexPath.row];
+//    cell.detailTextLabel = (NSString *)[items objectAtIndex:indexPath.row];
     
     //NSLog(@"Made it here");
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

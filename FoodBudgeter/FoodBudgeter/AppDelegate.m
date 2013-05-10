@@ -26,6 +26,9 @@
     [logFoodVC setDbManager:dbManager];
     logFoodVC.foodVC = foodTableVC;
     
+    logFoodVC.addItemCommand = [[AddItemCommand alloc] init];
+    logFoodVC.addItemCommand.dbManager = dbManager;
+    
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[foodTableVC, logFoodVC];
    
@@ -34,7 +37,7 @@
     foodTableVC.tabBarItem = listItem;
     logFoodVC.tabBarItem = logItem;
     
-    foodTableVC.viewDelegate = logFoodVC;
+    //foodTableVC.viewDelegate = logFoodVC;
     
     self.window.rootViewController = self.tabBarController;
         

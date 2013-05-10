@@ -114,16 +114,17 @@
 
 #pragma mark add Item
 
-- (BOOL)addItem:(NSString *)itemName withType:(int)itemType withIngredients:(NSMutableArray *)ingredients withCost:(double)itemCost {
+- (BOOL)addItem:(NSString *)itemName withType:(NSString*)itemType withIngredients:(NSMutableArray *)ingredients withCost:(double)itemCost {
     if ([self itemID:itemName] == -1) {
         NSString *insertQuery;
-        
+        NSLog(@"Makes it here");
         // check what type of item and write appropriate query
-        if (itemType == 0) {
-            insertQuery = [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"%@\")", itemName, @"recipe"];
+        if ([itemType isEqualToString:@"Recipe"]) {
+            insertQuery = [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"%@\")", itemName, itemType];
         }
-        else if (itemType == 1) {
-            insertQuery = [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"%@\")", itemName, @"purchase"];
+        else if ([itemType isEqualToString:@"Purchase"]) {
+            NSLog(@"Cooked item detected");
+            insertQuery = [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"%@\")", itemName, itemType];
         }
         else {
             NSLog(@"Item type not valid");
@@ -133,7 +134,7 @@
         if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Insert into item failed!"] == SQLITE_OK) {
             NSLog(@"Insert into item success");
             // add item data to other tables, depending on item type
-            if (itemType == 0) {
+            if ([itemType isEqualToString:@"Recipe"]) {
                 insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe (recipeID) VALUES (\"%d\")", [self itemID:itemName]];
                 [self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Recipe insert failed!"];
                 

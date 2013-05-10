@@ -11,7 +11,7 @@
 
 @interface QueryCommand : NSObject
 
-@property (nonatomic, readonly) DBManager *dbManager;
+@property (nonatomic, strong) DBManager *dbManager;
 
 /*
  Abstract execute method for Concrete Commands

@@ -10,7 +10,7 @@
 
 @implementation LogFoodViewController
 
-@synthesize segmentedControl, nameField, costField, ingredients, dbManager, label, foodVC, addItemCommand;
+@synthesize segmentedControl, nameField, costField, ingredients, dbManager, label, foodVC, addItemCommand, status;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,34 +24,27 @@
     return self;
 }
 
-- (IBAction)segmentChanged:(id)sender {
-    NSLog(@"herp derp Label is %@", label.text );
-}
-
-- (IBAction)segmentController{
-    NSLog(@"derpy Label is %@", [segmentedControl titleForSegmentAtIndex:[segmentedControl selectedSegmentIndex]]);
-          
-    //if( segmentedControl.selectedSegmentIndex == 0 ) {
-    //    label.text = @"one";
-    //    NSLog(@"Label is %@", label.text );
-        
-    //}
-    
+- (IBAction)segmentController:(id)sender {
+    NSLog(@"Label is %@", [segmentedControl titleForSegmentAtIndex:[segmentedControl selectedSegmentIndex]]);
 }
 
 #pragma mark add Item
 
-- (BOOL)addItem:(NSString *)itemName withType:(int)itemType withIngredients:(NSMutableArray *)_ingredients withCost:(double)itemCost {
-    [addItemCommand execute:itemName withType:itemType withIngredients:_ingredients withCost:itemCost];
-    [self refreshTable];
-    return true;
+- (BOOL)addItem:(NSString *)itemName withType:(NSString*)itemType withIngredients:(NSMutableArray *)_ingredients withCost:(double)itemCost {
+    if ([addItemCommand execute:itemName withType:itemType withIngredients:_ingredients withCost:itemCost]) {
+        [self refreshTable];
+        status.text = @"Successfully added!";
+        return true;
+    }
+    status.text = @"Error adding item!";
+    return false;
 }
 
 #pragma mark -
 
 
 - (IBAction)addButtonClicked:(id)sender {
-    [self addItem:nameField.text withType:segmentedControl.selectedSegmentIndex withIngredients:ingredients withCost:[costField.text doubleValue]];
+    [self addItem:nameField.text withType:[segmentedControl titleForSegmentAtIndex:[segmentedControl selectedSegmentIndex]] withIngredients:ingredients withCost:[costField.text doubleValue]];
     [self refreshTable];
 }
 

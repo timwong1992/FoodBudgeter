@@ -11,7 +11,7 @@
 @implementation RecipeItem
 
 @synthesize itemIngredients;
-
+    
 - (id)initWithID:(int)_itemId withName:(NSString*)_itemName withIngredients:(NSMutableArray*)_ingredients{
     self = [super initWithID:_itemId withName:_itemName];
     if (self) {
@@ -19,5 +19,6 @@
     }
     return self;
 }
+
 
 @end

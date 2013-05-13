@@ -12,7 +12,9 @@
 @interface RecipeItem : Item
 
 @property (nonatomic, strong) NSMutableArray *itemIngredients;
+@property(nonatomic, assign) NSInteger itemId;      // The identification
+@property(nonatomic, strong) NSString *itemName;    // American Cheese
 
-- (id)itemWithID:(int)_itemId withName:(NSString*)_itemName withIngredients:(NSMutableArray*)_ingredients;
+- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withIngredients:(NSMutableArray*)_ingredients;
 
 @end

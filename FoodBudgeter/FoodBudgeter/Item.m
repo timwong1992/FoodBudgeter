@@ -18,6 +18,7 @@
         self.itemName = _itemName;
         self.itemId = 0;
     }
+    return self;
 }
 
 - (id)initWithID:(int)_itemId withName:(NSString*)_itemName {

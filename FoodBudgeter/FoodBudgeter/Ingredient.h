@@ -14,4 +14,6 @@
 @property(nonatomic, assign) NSString *unitType;    // oz, lbs, slices
 @property(nonatomic, strong) NSString *ingredientName; // ex. chicken breast
 
+- (id)initWithIgrdName:(NSString*)_ingrdName withType:(NSString*)_unitType withPortion:(double)_portion;
+    
 @end

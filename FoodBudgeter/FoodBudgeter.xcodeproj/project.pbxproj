@@ -26,6 +26,7 @@
 		3F6A58BE1735E45B00B80F09 /* PurchasedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6A58BD1735E45B00B80F09 /* PurchasedItem.m */; };
 		3F787DE0173963D40073E0C0 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F787DDF173963D40073E0C0 /* Item.m */; };
 		3F787DE3173964130073E0C0 /* RemoveItemCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F787DE2173964120073E0C0 /* RemoveItemCommand.m */; };
+		3F806E9C17419DF900FF71F3 /* ItemModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F806E9B17419DF900FF71F3 /* ItemModelTest.m */; };
 		3F821470173468DA00D1E292 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F82146F173468DA00D1E292 /* DBManager.m */; };
 		3FE218261730C14A00CDF44B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218251730C14A00CDF44B /* UIKit.framework */; };
 		3FE218281730C14A00CDF44B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218271730C14A00CDF44B /* Foundation.framework */; };
@@ -87,6 +88,8 @@
 		3F787DDF173963D40073E0C0 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		3F787DE1173964120073E0C0 /* RemoveItemCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoveItemCommand.h; sourceTree = "<group>"; };
 		3F787DE2173964120073E0C0 /* RemoveItemCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoveItemCommand.m; sourceTree = "<group>"; };
+		3F806E9A17419DF900FF71F3 /* ItemModelTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemModelTest.h; sourceTree = "<group>"; };
+		3F806E9B17419DF900FF71F3 /* ItemModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemModelTest.m; sourceTree = "<group>"; };
 		3F82146E173468DA00D1E292 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		3F82146F173468DA00D1E292 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		3FE218221730C14A00CDF44B /* FoodBudgeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodBudgeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +162,8 @@
 			children = (
 				3F24B4521732D77F00A8068D /* DatabaseTest.h */,
 				3F24B4531732D77F00A8068D /* DatabaseTest.m */,
+				3F806E9A17419DF900FF71F3 /* ItemModelTest.h */,
+				3F806E9B17419DF900FF71F3 /* ItemModelTest.m */,
 				3F24B44D1732D77F00A8068D /* Supporting Files */,
 			);
 			path = DatabaseTest;
@@ -411,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F24B4541732D77F00A8068D /* DatabaseTest.m in Sources */,
+				3F806E9C17419DF900FF71F3 /* ItemModelTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

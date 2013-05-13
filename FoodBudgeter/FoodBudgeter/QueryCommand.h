@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "DBManager.h"
+#import "ItemManager.h"
 
 @interface QueryCommand : NSObject
 
 @property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) ItemManager *itemManager;
 
 /*
  Abstract execute method for Concrete Commands

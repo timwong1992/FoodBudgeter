@@ -30,7 +30,7 @@
  Creates and adds an Item object to the array and writes this change to the database.
  */
 - (BOOL)addItem:(NSString*)itemName
-       withType:(int)itemType
+       withType:(NSString*)itemType
 withIngredients:(NSMutableArray*)ingredients
        withCost:(double)itemCost;
 
@@ -43,5 +43,7 @@ withIngredients:(NSMutableArray*)ingredients
  Given an item, remove the item from the array and from the database.
  */
 - (BOOL)removeItem:(Item *)item;
+
+- (BOOL)removeItemByName:(NSString *)name;
 
 @end

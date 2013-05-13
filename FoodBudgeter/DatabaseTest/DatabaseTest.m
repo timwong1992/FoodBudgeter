@@ -44,7 +44,7 @@
     STAssertTrue([self.dbManager itemID:@"Test Food"] != -1, @"Retrieving existing item should succeed");
     STAssertFalse([self.dbManager itemID:@"Not food"] != -1, @"Retrieving nonexistent item should fail");
     
-    // dbManagereting
+    // removing
     STAssertTrue([self.dbManager removeItem:@"Test Food"], @"Removing existing item should succeed");
     STAssertFalse([self.dbManager removeItem:@"Not food"], @"Removing nonexistent item should fail");
     STAssertEquals([self.dbManager numItemsInDatabase], 1, @"Only one item should be in database");

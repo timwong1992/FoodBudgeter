@@ -17,11 +17,13 @@
 @interface LogFoodViewController : UIViewController <DBDelegate, UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
-@property(nonatomic, strong) IBOutlet UILabel *label;
+@property(nonatomic, strong) IBOutlet UILabel *nameLabel;
+@property(nonatomic, strong) IBOutlet UILabel *costLabel;
 @property(nonatomic, strong) IBOutlet UITextField *nameField;
 @property(nonatomic, strong) IBOutlet UITextField *costField;
 @property(nonatomic, strong) IBOutlet UIButton *exampleBtn;
 @property(nonatomic, strong) IBOutlet UIButton *addIngredientBtn;
+@property(nonatomic, strong) IBOutlet UITextField *ingrdNameField;
 @property(nonatomic, strong) IBOutlet UITextField *itemNameField;
 @property(nonatomic, strong) IBOutlet UITextField *portionField;
 @property(nonatomic, strong) IBOutlet UITextField *unitField;
@@ -47,5 +49,6 @@
 withIngredients:(NSArray*)ingredients
        withCost:(double)itemCost;
 
-- (IBAction)showExample:(id)sender;
+//- (IBAction)showExample:(id)sender;
+//- (void) hidePurchaseView;
 @end

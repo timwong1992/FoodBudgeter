@@ -17,7 +17,7 @@
     return true;
 }
 
-- (BOOL)addItem:(NSString*)itemName withType:(int)itemType withIngredients:(NSMutableArray*)ingredients withCost:(double)itemCost {
+- (BOOL)addItem:(NSString*)itemName withType:(NSString*)itemType withIngredients:(NSMutableArray*)ingredients withCost:(double)itemCost {
     if (![self getItemByName:itemName]) {
         Item *item = [[Item alloc] initWithName:itemName];
         [items addObject:item];
@@ -42,6 +42,17 @@
         [items removeObject:item];
         return true;
     }
+    return false;
+}
+
+- (BOOL)removeItemByName:(NSString *)name {
+    for (Item *item in items) {
+        if ([[item itemName] isEqualToString:name]) {
+            [items removeObject:item];
+            return [dbManager removeItem:name];
+        }
+    }
+    return false;
 }
 
 @end

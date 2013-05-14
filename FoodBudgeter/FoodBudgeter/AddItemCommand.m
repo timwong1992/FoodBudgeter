@@ -12,7 +12,7 @@
 
 - (BOOL)execute:(NSString*)itemName withType:(NSString*)itemType withIngredients:(NSMutableArray*)_ingredients withCost:(double)itemCost {
     NSLog(@"Command executes");
-    return [[super dbManager] addItem:itemName withType:itemType withIngredients:_ingredients withCost:itemCost];
+    return [[super itemManager] addItem:itemName withType:itemType withIngredients:_ingredients withCost:itemCost];
 }
 
 @end

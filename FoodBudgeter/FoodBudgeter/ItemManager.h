@@ -46,4 +46,6 @@ withIngredients:(NSMutableArray*)ingredients
 
 - (BOOL)removeItemByName:(NSString *)name;
 
+- (int)numOfItems;
+
 @end

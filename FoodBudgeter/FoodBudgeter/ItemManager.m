@@ -22,8 +22,7 @@
         Item *item = [[Item alloc] initWithName:itemName];
         [items addObject:item];
 #warning need to hook up to GUI
-        [dbManager addItem:itemName withType:0 withIngredients:nil withCost:0];
-        return true;
+        return [dbManager addItem:itemName withType:itemType withIngredients:ingredients withCost:itemCost];
     }
     return false;
 }
@@ -53,6 +52,10 @@
         }
     }
     return false;
+}
+
+- (int)numOfItems {
+    return items.count;
 }
 
 @end

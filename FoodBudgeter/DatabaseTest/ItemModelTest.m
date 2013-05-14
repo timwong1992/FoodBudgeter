@@ -19,6 +19,7 @@
     // Set-up code here.
     itemManager = [[ItemManager alloc] init];
     itemManager.dbManager = [[DBManager alloc] init];
+    [itemManager.dbManager createDatabase];
     
 }
 
@@ -34,15 +35,16 @@
 - (void)testPurchase {
     // adding
     STAssertTrue([itemManager addItem:@"Test Food" withType:@"Purchase" withIngredients:nil withCost:10.00], @"Adding item should succeed");
-    STAssertEquals([[itemManager items]count], 1, @"Only one item should be in mutable array");
+    STAssertEquals([itemManager numOfItems], 1, @"Only one item should be in mutable array");
+    
     STAssertEquals([itemManager.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
     
     STAssertFalse([itemManager addItem:@"Test Food" withType:@"Purchase" withIngredients:nil withCost:10.00], @"Adding duplicate item should fail");
-    STAssertEquals([[itemManager items]count], 1, @"Only one item should be in mutable array");
+    STAssertEquals([itemManager numOfItems], 1, @"Only one item should be in mutable array");
     STAssertEquals([itemManager.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
     
     STAssertTrue([itemManager addItem:@"Another test" withType:@"Purchase" withIngredients:nil withCost:20.00], @"Adding second item should succeed");
-    STAssertEquals([[itemManager items]count], 2, @"Only two items should be in mutable array");
+    STAssertEquals([itemManager numOfItems], 2, @"Only two items should be in mutable array");
     STAssertEquals([self.dbManager numItemsInDatabase], 2, @"Only two items should be in database");
     
     // retrieving
@@ -55,13 +57,14 @@
     STAssertTrue([itemManager removeItemByName:@"Test Food"], @"Removing existing item should succeed");
     STAssertFalse([itemManager removeItemByName:@"Not Food"], @"Removing existing item should succeed");
 
-    STAssertEquals([[itemManager items]count], 1, @"Only one item should be in mutable array");
+    STAssertEquals([itemManager numOfItems], 1, @"Only one item should be in mutable array");
     STAssertEquals([self.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
     
     STAssertTrue([itemManager removeItemByName:@"Another test"], @"Removing existing item should succeed");
     
-    STAssertEquals([[itemManager items]count], 0, @"No item should be in mutable array");
+    STAssertEquals([itemManager numOfItems], 0, @"No item should be in mutable array");
     STAssertEquals([self.dbManager numItemsInDatabase], 0, @"No item should be in database");
+     
 }
 
 @end

@@ -117,13 +117,11 @@
 - (BOOL)addItem:(NSString *)itemName withType:(NSString*)itemType withIngredients:(NSMutableArray *)ingredients withCost:(double)itemCost {
     if ([self itemID:itemName] == -1) {
         NSString *insertQuery;
-        NSLog(@"Makes it here");
         // check what type of item and write appropriate query
         if ([itemType isEqualToString:@"Recipe"]) {
             insertQuery = [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"%@\")", itemName, itemType];
         }
         else if ([itemType isEqualToString:@"Purchase"]) {
-            NSLog(@"Cooked item detected");
             insertQuery = [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"%@\")", itemName, itemType];
         }
         else {
@@ -151,8 +149,9 @@
                 
                 //insertQuery = [NSString stringWithFormat:@""];
             }
-            // if itemtype is not 0 then it must be 1
+            // if not recipe, must be purchase
             else {
+                NSLog(@"Purchase being added to purchase table");
                 insertQuery = [NSString stringWithFormat:@"INSERT INTO purchase (purchaseID, itemCost) VALUES (%d, \"%.2f\")", [self itemID:itemName], itemCost];
                 if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Purchase insert failed!"] != SQLITE_OK) {
                     return false;

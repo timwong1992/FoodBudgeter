@@ -20,6 +20,8 @@
 @property (nonatomic,strong) DBManager *dbManager;
 @property (nonatomic,strong) NSMutableArray *items;
 
++ (id)createItemManager;
+
 /*
  Reads all items from the database and creates its object representation
  To be run at start.

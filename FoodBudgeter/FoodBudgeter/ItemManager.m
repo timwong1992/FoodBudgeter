@@ -12,15 +12,24 @@
 
 @synthesize dbManager, items;
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.items = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 - (BOOL)buildItems {
     [self setItems:[dbManager buildItems]];
     return true;
 }
 
 - (BOOL)addItem:(NSString*)itemName withType:(NSString*)itemType withIngredients:(NSMutableArray*)ingredients withCost:(double)itemCost {
-    if (![self getItemByName:itemName]) {
+    if ([self getItemByName:itemName] == nil) {
         Item *item = [[Item alloc] initWithName:itemName];
         [items addObject:item];
+        NSLog(@"num of items %lu", (unsigned long)[items count]);
 #warning need to hook up to GUI
         return [dbManager addItem:itemName withType:itemType withIngredients:ingredients withCost:itemCost];
     }
@@ -55,7 +64,7 @@
 }
 
 - (int)numOfItems {
-    return items.count;
+    return [items count];
 }
 
 @end

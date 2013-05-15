@@ -28,5 +28,9 @@
 - (id)initWithName:(NSString *)_itemName;
 - (id)initWithID:(int)_itemId withName:(NSString*)_itemName;
 - (id)initWithID:(int)_itemId withName:(NSString *)_itemName withDate:(NSDate*)date;
+/*
+ Number of properties the item has. Used to determine how many sections the detail table view has
+ */
+- (int)numOfProperties;
 
 @end

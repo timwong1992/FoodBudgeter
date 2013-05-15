@@ -28,4 +28,8 @@
     return [NSString stringWithFormat:@"INSERT INTO purchase (purchaseID, itemCost) VALUES (%d, \"%.2f\")", self.itemId, self.itemCost];
 }
 
+- (int)numOfProperties {
+    return 4;
+}
+
 @end

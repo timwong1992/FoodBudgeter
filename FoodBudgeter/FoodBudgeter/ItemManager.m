@@ -42,6 +42,7 @@
     else
         return false;
     [items addObject:item];
+    NSLog(@"Size now: %d", [items count]);
     return [dbManager addItem:item];
 }
 

@@ -10,7 +10,7 @@
 
 @implementation LogFoodViewController
 
-@synthesize segmentedControl, nameField, costField, ingredients, dbManager, nameLabel, foodVC, addItemCommand, ingrdNameField, itemNameField, portionField, unitField, exampleBtn, status,
+@synthesize segmentedControl, nameField, costField, ingredients, nameLabel, foodVC, addItemCommand, ingrdNameField, itemNameField, portionField, unitField, exampleBtn, status,
     ingredientBtn, costLabel, itemManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -63,8 +63,7 @@
 }
 
 - (void) refreshTable {
-    foodVC.items = [itemManager items];
-    [foodVC.tableView reloadData];
+    [foodVC reloadItems];
 }
 
 - (IBAction)anAction {

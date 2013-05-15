@@ -20,18 +20,22 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
     DBManager *dbManager = [[DBManager alloc] init];
     ItemManager *itemManager = [[ItemManager alloc] init];
     itemManager.dbManager = dbManager;
     [dbManager createDatabase];
+    [itemManager buildItems];
+    
     FoodTableViewController *foodTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodTableViewController" bundle:nil];
-    [foodTableVC setDbManager:dbManager];
+    foodTableVC.itemManager = itemManager;
+    [foodTableVC reloadItems];
+    
     LogFoodViewController *logFoodVC = [[LogFoodViewController alloc] initWithNibName:@"LogFoodViewController" bundle:nil];
-    [logFoodVC setDbManager:dbManager];
     logFoodVC.foodVC = foodTableVC;
+    logFoodVC.itemManager = itemManager;
     
     AddItemCommand *addItemCommand = [[AddItemCommand alloc] init];
-    addItemCommand.dbManager = dbManager;
     addItemCommand.itemManager = itemManager;
     
     logFoodVC.addItemCommand = addItemCommand;

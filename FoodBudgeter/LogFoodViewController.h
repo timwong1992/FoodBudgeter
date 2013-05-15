@@ -31,7 +31,6 @@
 @property(nonatomic, strong) IBOutlet UILabel *status;
 
 @property(nonatomic, strong) NSArray *ingredients;
-@property(nonatomic, strong) DBManager *dbManager;
 @property(nonatomic, strong) ItemManager *itemManager;
 @property(nonatomic, strong) AddItemCommand *addItemCommand;
 @property(nonatomic, strong) RemoveItemCommand *removeItemCommand;

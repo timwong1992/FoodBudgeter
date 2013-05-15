@@ -11,7 +11,7 @@
 @implementation RemoveItemCommand
 
 - (void)execute:(NSString*)itemName {
-    [[super dbManager] removeItem:itemName];
+    [[super itemManager] removeItemByName:itemName];
 }
 
 @end

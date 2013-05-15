@@ -10,7 +10,7 @@
 
 @implementation FoodTableViewController
 
-@synthesize dbManager, items, viewDelegate;
+@synthesize itemManager, items, viewDelegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -38,6 +38,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) reloadItems {
+    items = [itemManager items];
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -49,7 +54,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [dbManager numItemsInDatabase];
+    return [[itemManager items]count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -61,7 +66,7 @@
     }
     
     // Configure the cell...
-    NSLog(@"%@",[items objectAtIndex:indexPath.row]);
+    //NSLog(@"%@",[items objectAtIndex:indexPath.row]);
     cell.textLabel.text = [[items objectAtIndex:indexPath.row]itemName];
 //    cell.detailTextLabel = (NSString *)[items objectAtIndex:indexPath.row];
     

@@ -28,7 +28,7 @@
         
         NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[self numItemsInDatabase]];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];        
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
         // for each found row, create the appropriate object based upon its type
         
         while(sqlite3_step(statement) == SQLITE_ROW) {
@@ -120,7 +120,8 @@
 
 - (BOOL)addItem:(Item*)item {
     if ([self itemID:item.itemName] != -1) {
-        NSLog(@"item was found in db");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"The item already exists in the database." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
         return false;
     }
     NSString *insertQuery;
@@ -129,6 +130,8 @@
     NSLog(@"first query: %@", insertQuery);
     
     if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Insert into item failed!"] != SQLITE_OK) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Item could not be added into the database." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
         return false;
     }
     
@@ -155,14 +158,15 @@
     // if not recipe, must be purchase
     //   else {
     
-    NSLog(@"Purchase being added to purchase table");
     // set item ID of item object based on what id DB assigned
     item.itemId = [self itemID:item.itemName];
     
     // run subquery based on item type
     insertQuery = [item createAddSubtableQuery];
     
-    if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Purchase insert failed!"] != SQLITE_OK) {
+    if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Subtable insert failed!"] != SQLITE_OK) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Item could not be added into the database." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
         return false;
     }
     return true;
@@ -170,13 +174,18 @@
 
 - (BOOL)addIngredient:(NSString *)ingredientName
              withCost:(double)ingredientCost {
-    if ([self ingredientID:ingredientName] != -1) {
-        NSString *insertQuery = [NSString stringWithFormat:@"INSERT INTO ingredient (ingredientName, ingredientCost) VALUES (\"%@\", \"%.2f\")", ingredientName, ingredientCost];
-        if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Ingredient insert failed!"] == SQLITE_OK) {
-            return true;
-        }
+    if ([self ingredientID:ingredientName] == -1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Ingredient already exists in the database." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return false;
     }
-    return false;
+    NSString *insertQuery = [NSString stringWithFormat:@"INSERT INTO ingredient (ingredientName, ingredientCost) VALUES (\"%@\", \"%.2f\")", ingredientName, ingredientCost];
+    if (![self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Ingredient insert failed!"] == SQLITE_OK) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Ingredient could not be added into the database." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return false;
+    }
+    return true;
 }
 
 #pragma mark -
@@ -206,30 +215,30 @@
 }
 
 /*
-- (NSMutableArray*)itemsInDatabase {
-    const char *dbpath = [databasePath UTF8String];
-    if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
-        NSMutableArray *items = [[NSMutableArray alloc]init];
-        
-        // prepare query
-        sqlite3_stmt *statement;
-        
-        // run query
-        sqlite3_prepare(itemDB, "SELECT itemName FROM item", -1, &statement, NULL);
-        
-        // if it finds a row, clean up and return the ID f
-        while (sqlite3_step(statement) == SQLITE_ROW) {
-            NSString *result = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 0)];
-            [items addObject:result];
-        }
-        
-        // database cleanup
-        sqlite3_finalize(statement);
-        sqlite3_close(itemDB);
-        return items;
-    }
-    return nil;
-}
+ - (NSMutableArray*)itemsInDatabase {
+ const char *dbpath = [databasePath UTF8String];
+ if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
+ NSMutableArray *items = [[NSMutableArray alloc]init];
+ 
+ // prepare query
+ sqlite3_stmt *statement;
+ 
+ // run query
+ sqlite3_prepare(itemDB, "SELECT itemName FROM item", -1, &statement, NULL);
+ 
+ // if it finds a row, clean up and return the ID f
+ while (sqlite3_step(statement) == SQLITE_ROW) {
+ NSString *result = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 0)];
+ [items addObject:result];
+ }
+ 
+ // database cleanup
+ sqlite3_finalize(statement);
+ sqlite3_close(itemDB);
+ return items;
+ }
+ return nil;
+ }
  */
 
 - (int)itemID:(NSString *)itemName {
@@ -391,16 +400,21 @@
 - (BOOL)removeIngredient:(NSString *)ingredientName {
     // get ingredient ID to check if it exists
     int ingredientID = [self ingredientID:ingredientName];
-    if (ingredientID != -1) {
-        // delete the ingredient
-        NSString *query = [NSString stringWithFormat:@"DELETE FROM ingredients WHERE ingredientName = \"%@\"", ingredientName];
-        
-        if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Item table failed"] != SQLITE_OK) {
-            return false;
-        }
+    if (ingredientID == -1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Ingredient does not exist in the database." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return false;
     }
-    // item does not exist, so do nothing
-    return false;
+    // delete the ingredient
+    NSString *query = [NSString stringWithFormat:@"DELETE FROM ingredients WHERE ingredientName = \"%@\"", ingredientName];
+    
+    if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Item table failed"] != SQLITE_OK) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Database deletion error!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return false;
+    }
+    
+    return true;
 }
 
 @end

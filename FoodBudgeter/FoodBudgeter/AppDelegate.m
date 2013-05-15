@@ -29,6 +29,7 @@
     
     FoodTableViewController *foodTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodTableViewController" bundle:nil];
     foodTableVC.itemManager = itemManager;
+    foodTableVC.title = @"Items";
     [foodTableVC reloadItems];
     
     LogFoodViewController *logFoodVC = [[LogFoodViewController alloc] initWithNibName:@"LogFoodViewController" bundle:nil];
@@ -40,8 +41,9 @@
     
     logFoodVC.addItemCommand = addItemCommand;
     
-    UINavigationController *foodNav = [[UINavigationController alloc] initWithRootViewController:foodTableVC];
     
+    UINavigationController *foodNav = [[UINavigationController alloc] initWithRootViewController:foodTableVC];
+
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[foodNav, logFoodVC];
    

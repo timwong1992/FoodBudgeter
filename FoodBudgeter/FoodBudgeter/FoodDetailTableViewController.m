@@ -10,13 +10,11 @@
 #import "GroceryItem.h"
 #import "RecipeItem.h"
 
-#define ITEM_NAME 0
-#define ITEM_TYPE 1
-#define ITEM_COST 2
-#define GROCERY_UNIT_TYPE 3
+#define ITEM_TYPE 0
+#define ITEM_COST 1
+#define ITEM_DATE 2
+#define OTHER_DATA 3
 #define GROCERY_UNIT_AMOUNT 4
-#define GROCERY_UNIT_TYPE 3
-#define RECIPE_INGREDIENTS 5
 
 @interface FoodDetailTableViewController ()
 
@@ -63,6 +61,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    if (section == OTHER_DATA)
+        return 2;
     return 1;
 }
 
@@ -75,13 +75,7 @@
     }
     
     // Configure the cell...
-    switch  (indexPath.section ) {
-        case   ITEM_NAME :
-        {
-            cell.textLabel.text = item.itemName;
-        }
-            break;
-            
+    switch  (indexPath.section ) {           
         case   ITEM_TYPE :
         {
             cell.textLabel.text = [item itemType];
@@ -93,20 +87,21 @@
             cell.textLabel.text = [NSString stringWithFormat:@"%.2f",[item itemCost]];
         }
             break ;
-        case GROCERY_UNIT_AMOUNT:
+        case ITEM_DATE:
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"%.2f",[(GroceryItem*)item unitAmount]];
+            cell.textLabel.text = [[item dateLogged]description];
+        }
+        case OTHER_DATA:
+        {
+            if ([[item itemType] isEqualToString:@"Grocery"]) {
+                cell.textLabel.text = [NSString stringWithFormat:@"%.2f",[(GroceryItem*)item unitAmount]];
+            }
+            else if ([[item itemType] isEqualToString:@"Recipe"]) {
+                cell.textLabel.text = @"Ingredients";
+            }
             //cell.textLabel.textAlignment = UITextAlignmentCenter;
-        }
-            break;
-        case GROCERY_UNIT_TYPE:
-        {
-            cell.textLabel.text = [NSString stringWithFormat:@"%@",[(GroceryItem*)item unitType]];
-        }
-            break;
-        case RECIPE_INGREDIENTS:
-        {
-            cell.textLabel.text = @"Ingredients";
+            //cell.textLabel.text = [NSString stringWithFormat:@"%@",[(GroceryItem*)item unitType]];
+
         }
             break;
     }  // end switch
@@ -158,6 +153,7 @@
 {
     // Navigation logic may go here. Create and push another view controller.
     /*
+     if (
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
      // ...
      // Pass the selected object to the new view controller.

@@ -31,7 +31,7 @@
 }
 
 - (int)numOfProperties {
-    return 7;
+    return 6;
 }
 
 - (NSString*)itemType {

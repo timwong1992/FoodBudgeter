@@ -39,15 +39,17 @@
             NSDate *itemDate = [formatter dateFromString:[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 3)]];
             NSLog(@"recorded date: %@",[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 3)]);
             NSLog(@"id %d name %@ type %s date %@",itemId, itemName, itemType, itemDate);
+            NSString *type = [NSString stringWithUTF8String:itemType];
 #warning recipe item creation incomplete
             // if type is recipe
-            if (strcmp(itemType, "Recipe")) {
+            if ([type isEqualToString:@"Recipe"]) {
                 NSLog(@"Recipe being built");
                 item = [[RecipeItem alloc] initWithID:itemId withName:itemName withDate:itemDate];
             }
             // else if type is purchase
-            else if (strcmp(itemType, "Purchase")) {
+            else if ([type isEqualToString:@"Purchase"]) {
                 NSLog(@"Purchased item being created from db");
+                NSLog(@"Purchase price: %.2f", [self itemCost:itemId]);
                 item = [[PurchasedItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId]];
             }
             // else if type is grocery

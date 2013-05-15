@@ -25,11 +25,15 @@
 }
 
 - (int)numOfProperties {
-    return 4;
+    return 3;
 }
 
 - (NSString*)itemType {
     return @"Recipe";
+}
+
+- (double)itemCost {
+    return 0;
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "DBManager.h"
 #import "ItemManager.h"
 
-@interface QueryCommand : NSInvocation
+@interface QueryCommand : NSObject
 
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) ItemManager *itemManager;

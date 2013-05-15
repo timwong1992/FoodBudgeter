@@ -119,11 +119,13 @@
 
 - (BOOL)addItem:(Item*)item {
     if ([self itemID:item.itemName] != -1) {
+        NSLog(@"item was found in db");
         return false;
     }
     NSString *insertQuery;
     //create add query
     insertQuery = [item createAddDBQuery];
+    NSLog(@"first query: %@", insertQuery);
     
     if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Insert into item failed!"] != SQLITE_OK) {
         return false;
@@ -156,6 +158,7 @@
     // set item ID of item object based on what id DB assigned
     item.itemId = [self itemID:item.itemName];
     insertQuery = [item createAddSubtableQuery];
+    NSLog(@"query: %@", insertQuery);
     if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Purchase insert failed!"] != SQLITE_OK) {
         return false;
     }

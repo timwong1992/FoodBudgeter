@@ -36,7 +36,7 @@
 }
 
 - (NSString *)createAddSubtableQuery {
-    NSLog(@"this is why it aint working");
+    NSLog(@"it aint working");
     return nil;
 }
 

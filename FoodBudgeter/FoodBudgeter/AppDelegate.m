@@ -11,6 +11,8 @@
 #import "FoodTableViewController.h"
 #import "FoodDetailTableViewController.h"
 #import "LogFoodViewController.h"
+#import "AddItemCommand.h"
+#import "QueryCommand.h"
 
 @implementation AppDelegate
 
@@ -19,6 +21,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     DBManager *dbManager = [[DBManager alloc] init];
+    ItemManager *itemManager = [[ItemManager alloc] init];
+    itemManager.dbManager = dbManager;
     [dbManager createDatabase];
     FoodTableViewController *foodTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodTableViewController" bundle:nil];
     [foodTableVC setDbManager:dbManager];
@@ -26,8 +30,12 @@
     [logFoodVC setDbManager:dbManager];
     logFoodVC.foodVC = foodTableVC;
     
-    logFoodVC.addItemCommand = [[AddItemCommand alloc] init];
-    logFoodVC.addItemCommand.dbManager = dbManager;
+    AddItemCommand *addItemCommand = [[AddItemCommand alloc] init];
+    addItemCommand.dbManager = dbManager;
+    addItemCommand.itemManager = itemManager;
+    
+    logFoodVC.addItemCommand = addItemCommand;
+
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[foodTableVC, logFoodVC];

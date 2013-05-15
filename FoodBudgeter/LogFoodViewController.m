@@ -11,7 +11,7 @@
 @implementation LogFoodViewController
 
 @synthesize segmentedControl, nameField, costField, ingredients, dbManager, nameLabel, foodVC, addItemCommand, ingrdNameField, itemNameField, portionField, unitField, exampleBtn, status,
-    ingredientBtn, costLabel;
+    ingredientBtn, costLabel, itemManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,18 +58,18 @@
 
 
 - (IBAction)addButtonClicked:(id)sender {
+    NSLog(@"Button clicked");
     [self addItem:nameField.text withType:[segmentedControl titleForSegmentAtIndex:[segmentedControl selectedSegmentIndex]] withIngredients:ingredients withCost:[costField.text doubleValue]];
-    [self refreshTable];
 }
 
 - (void) refreshTable {
-    //foodVC.items = [dbManager itemsInDatabase];
+    foodVC.items = [itemManager items];
     [foodVC.tableView reloadData];
 }
 
 - (IBAction)anAction {
     NSLog(@"HI!");
-    nameField.hidden = true;
+    //nameField.hidden = true;
 }
 
 - (void)viewDidLoad

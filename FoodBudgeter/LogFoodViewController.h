@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "sqlite3.h"
 #import "DBManager.h"
+#import "ItemManager.h"
 #import "FoodTableViewController.h"
 #import "AddItemCommand.h"
 #import "RemoveItemCommand.h"
@@ -31,6 +32,7 @@
 
 @property(nonatomic, strong) NSArray *ingredients;
 @property(nonatomic, strong) DBManager *dbManager;
+@property(nonatomic, strong) ItemManager *itemManager;
 @property(nonatomic, strong) AddItemCommand *addItemCommand;
 @property(nonatomic, strong) RemoveItemCommand *removeItemCommand;
 

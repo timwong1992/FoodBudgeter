@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBManager.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 

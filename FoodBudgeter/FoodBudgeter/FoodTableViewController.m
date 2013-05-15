@@ -61,7 +61,8 @@
     }
     
     // Configure the cell...
-    cell.textLabel.text = (NSString *)[items objectAtIndex:indexPath.row];
+    NSLog(@"%@",[items objectAtIndex:indexPath.row]);
+    cell.textLabel.text = [[items objectAtIndex:indexPath.row]itemName];
 //    cell.detailTextLabel = (NSString *)[items objectAtIndex:indexPath.row];
     
     //NSLog(@"Made it here");

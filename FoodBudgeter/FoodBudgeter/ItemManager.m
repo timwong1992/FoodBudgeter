@@ -32,8 +32,9 @@
         return false;
     }
     Item *item;
-    if ([itemType isEqualToString:@"Purchase"])
-        item = [[PurchasedItem alloc] initWithName:itemName];
+    if ([itemType isEqualToString:@"Purchase"]) {
+        item = [[PurchasedItem alloc] initWithID:0 withName:itemName withCost:itemCost];
+    }
     else if ([itemType isEqualToString:@"Recipe"])
         item = [[RecipeItem alloc] initWithName:itemName];
     else if ([itemType isEqualToString:@"Grocery"])

@@ -12,8 +12,8 @@
 
 @synthesize itemCost, unitAmount, unitType;
 
-- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withCost:(double)_cost unitAmount:(double)amount unitType:(NSString *)type {
-    self = [super initWithID:_itemId withName:_itemName];
+- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withDate:(NSDate*)date withCost:(double)_cost unitAmount:(double)amount unitType:(NSString *)type {
+    self = [super initWithID:_itemId withName:_itemName withDate:date];
     if (self) {
         self.itemCost = _cost;
         self.unitAmount = amount;
@@ -23,7 +23,11 @@
 }
 
 - (NSString*)createAddDBQuery {
-    return [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"Purchase\")", self.itemName];
+    return [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType, date) VALUES (\"%@\", \"Grocery\", \"%@\")", self.itemName, [self.dateLogged description]];
+}
+
+- (NSString*)createAddSubtableQuery {
+    return [NSString stringWithFormat:@"INSERT INTO grocery (groceryID, itemCost, unitAmount, unitType) VALUES (%d, \"%.2f\", \"%.2f\", \"%@\")", self.itemId, self.itemCost, self.unitAmount, self.unitType];
 }
 
 @end

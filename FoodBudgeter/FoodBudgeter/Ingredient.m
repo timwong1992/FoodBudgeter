@@ -10,7 +10,7 @@
 
 @implementation Ingredient
 
-@synthesize ingredientName, unitType, portion;
+@synthesize ingredientName, unitType, portion, grocery;
 
 - (id)initWithIgrdName:(NSString*)_ingrdName withType:(NSString*)_unitType withPortion:(double)_portion {
     self = [super init];

@@ -27,7 +27,8 @@
         sqlite3_prepare_v2(itemDB, "SELECT * FROM item", -1, &statement, NULL);
         
         NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[self numItemsInDatabase]];
-        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];        
         // for each found row, create the appropriate object based upon its type
         
         while(sqlite3_step(statement) == SQLITE_ROW) {
@@ -35,21 +36,24 @@
             NSString *itemName = [NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 1)];
             Item *item;
             const char *itemType = (char*)sqlite3_column_text(statement, 2);
-            NSLog(@"id %d name %@ type %s",itemId, itemName, itemType);
+            NSDate *itemDate = [formatter dateFromString:[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 3)]];
+            NSLog(@"recorded date: %@",[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 3)]);
+            NSLog(@"id %d name %@ type %s date %@",itemId, itemName, itemType, itemDate);
 #warning recipe item creation incomplete
             // if type is recipe
             if (strcmp(itemType, "Recipe")) {
-                item = [[RecipeItem alloc] initWithID:itemId withName:itemName];
+                NSLog(@"Recipe being built");
+                item = [[RecipeItem alloc] initWithID:itemId withName:itemName withDate:itemDate];
             }
             // else if type is purchase
             else if (strcmp(itemType, "Purchase")) {
-                NSLog(@"Purchased item being created form db");
-                item = [[PurchasedItem alloc] initWithID:itemId withName:itemName withCost:[self itemCost:itemId]];
+                NSLog(@"Purchased item being created from db");
+                item = [[PurchasedItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId]];
             }
             // else if type is grocery
 #warning grocery item creation incomplete
             else if (strcmp(itemType, "Grocery")) {
-                item = [[GroceryItem alloc] initWithID:itemId withName:itemName withCost:[self itemCost:itemId] unitAmount:0 unitType:0];
+                item = [[GroceryItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId] unitAmount:0 unitType:0];
             }
             if (item != nil)
                 [items addObject:item];
@@ -76,7 +80,7 @@
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"items.db"]];
     NSFileManager *filemgr = [NSFileManager defaultManager];
     if ([filemgr fileExistsAtPath:databasePath] == NO) {
-        [self runQuery:"CREATE TABLE IF NOT EXISTS item (itemID INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemType TEXT)"
+        [self runQuery:"CREATE TABLE IF NOT EXISTS item (itemID INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemType TEXT, date DATETIME)"
             onDatabase:itemDB
       withErrorMessage:"Item table creation failed!"];
         
@@ -157,8 +161,10 @@
     NSLog(@"Purchase being added to purchase table");
     // set item ID of item object based on what id DB assigned
     item.itemId = [self itemID:item.itemName];
+    
+    // run subquery based on item type
     insertQuery = [item createAddSubtableQuery];
-    NSLog(@"query: %@", insertQuery);
+    
     if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Purchase insert failed!"] != SQLITE_OK) {
         return false;
     }

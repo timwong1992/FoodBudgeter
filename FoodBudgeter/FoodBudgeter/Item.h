@@ -23,9 +23,10 @@
 
 @property(nonatomic, assign) NSInteger itemId;      // The identification
 @property(nonatomic, strong) NSString *itemName;    // American Cheese
-@property(nonatomic, readonly) NSDate *dateLogged;  // the date logged
+@property(nonatomic, strong) NSDate *dateLogged;  // the date logged, in string format
 
 - (id)initWithName:(NSString *)_itemName;
 - (id)initWithID:(int)_itemId withName:(NSString*)_itemName;
+- (id)initWithID:(int)_itemId withName:(NSString *)_itemName withDate:(NSDate*)date;
 
 @end

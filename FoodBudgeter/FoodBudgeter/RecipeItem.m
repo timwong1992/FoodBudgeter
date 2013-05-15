@@ -12,8 +12,8 @@
 
 @synthesize itemIngredients;
     
-- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withIngredients:(NSMutableArray*)_ingredients{
-    self = [super initWithID:_itemId withName:_itemName];
+- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withDate:(NSString*)date withIngredients:(NSMutableArray*)_ingredients{
+    self = [super initWithID:_itemId withName:_itemName withDate:date];
     if (self) {
         self.itemIngredients = _ingredients;
     }
@@ -21,13 +21,7 @@
 }
 
 - (NSString*)createAddDBQuery {
-    return [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"Recipe\")", self.itemName];
+    return [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType, date) VALUES (\"%@\", \"Recipe\", \"%@\")", self.itemName, [self.dateLogged description]];
 }
 
-- (double) getCost {
-    for (int i = 0; i < [itemIngredients count]; i++) {
-        itemIngredients[i].
-    }
-    return 0.0;
-}
 @end

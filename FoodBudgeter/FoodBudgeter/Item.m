@@ -17,26 +17,36 @@
     if (self) {
         self.itemName = _itemName;
         self.itemId = 0;
+        self.dateLogged = [NSDate date];
     }
     return self;
 }
 
-- (id)initWithID:(int)_itemId withName:(NSString*)_itemName {
+- (id)initWithID:(int)_itemId withName:(NSString*)_itemName{
     self = [super init];
     if (self) {
         self.itemId = _itemId;
         self.itemName = _itemName;
+        self.dateLogged = [NSDate date];
+    }
+    return self;
+}
+
+- (id)initWithID:(int)_itemId withName:(NSString *)_itemName withDate:(NSDate*)date {
+    self = [super init];
+    if (self) {
+        self.itemId = _itemId;
+        self.itemName = _itemName;
+        self.dateLogged = date;
     }
     return self;
 }
 
 - (NSString *)createAddDBQuery {
-    NSLog(@"this is why it aint working");
     return nil;
 }
 
 - (NSString *)createAddSubtableQuery {
-    NSLog(@"it aint working");
     return nil;
 }
 

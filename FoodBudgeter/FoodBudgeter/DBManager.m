@@ -28,7 +28,7 @@
         
         NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[self numItemsInDatabase]];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss +zzzz"];        
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];        
         // for each found row, create the appropriate object based upon its type
         
         while(sqlite3_step(statement) == SQLITE_ROW) {
@@ -37,13 +37,11 @@
             Item *item;
             const char *itemType = (char*)sqlite3_column_text(statement, 2);
             NSDate *itemDate = [formatter dateFromString:[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 3)]];
-            NSLog(@"recorded date: %@",[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 3)]);
-            NSLog(@"id %d name %@ type %s date %@",itemId, itemName, itemType, itemDate);
+            NSLog(@"recorded date: %@ %@",[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 3)], itemDate);
             NSString *type = [NSString stringWithUTF8String:itemType];
 #warning recipe item creation incomplete
             // if type is recipe
             if ([type isEqualToString:@"Recipe"]) {
-                NSLog(@"Recipe being built");
                 item = [[RecipeItem alloc] initWithID:itemId withName:itemName withDate:itemDate];
             }
             // else if type is purchase
@@ -341,7 +339,6 @@
             query = [NSString stringWithFormat:@"SELECT itemCost FROM recipe_ingredients WHERE recipeID = \"%d\"", itemID];
         }
         else if ([itemType isEqualToString:@"Purchase"]) {
-            NSLog(@"itemtype match");
             query = [NSString stringWithFormat:@"SELECT itemCost FROM purchase WHERE purchaseID = \"%d\"", itemID];
         }
         else if ([itemType isEqualToString:@"Grocery"]) {
@@ -353,7 +350,6 @@
         
         // increment result for each entry
         if (sqlite3_step(statement) == SQLITE_ROW) {
-            NSLog(@"Cost found!");
             cost = sqlite3_column_double(statement, 0);
         }
         

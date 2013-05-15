@@ -33,9 +33,8 @@
     return 3;
 }
 
-- (double)getCost {
+- (double)itemCost {
     double cost = 0.0;
-    
     for( int i = 0; i < [itemIngredients count]; i++) {
         //cost += itemIngredients[i].itemCost * itemIngredients[i].portion / itemIngredients[i].amount;
         cost += [[itemIngredients objectAtIndex:i]itemCost] * [(Ingredient*)[itemIngredients objectAtIndex:i]portion] / [[(Ingredient*)[itemIngredients objectAtIndex:i]grocery]unitAmount];

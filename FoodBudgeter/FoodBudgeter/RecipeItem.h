@@ -16,5 +16,5 @@
 
 - (id)initWithID:(int)_itemId withName:(NSString*)_itemName withDate:(NSString*)itemDate withIngredients:(NSMutableArray*)_ingredients;
 
-- (double) getCost;
+- (double) itemCost;
 @end

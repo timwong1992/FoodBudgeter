@@ -76,7 +76,7 @@
     }
     
     // Configure the cell...
-    switch  (indexPath.section ) {           
+    switch  (indexPath.section ) {
         case   ITEM_TYPE :
         {
             cell.textLabel.text = [item itemType];
@@ -102,7 +102,7 @@
             }
             //cell.textLabel.textAlignment = UITextAlignmentCenter;
             //cell.textLabel.text = [NSString stringWithFormat:@"%@",[(GroceryItem*)item unitType]];
-
+            
         }
             break;
     }  // end switch

@@ -34,9 +34,10 @@
         item = [[PurchasedItem alloc] initWithID:0 withName:itemName withDate:[NSDate date] withCost:itemCost];
     }
     else if ([itemType isEqualToString:@"Recipe"])
-        item = [[RecipeItem alloc] initWithName:itemName];
+        item = [[RecipeItem alloc] initWithID:0 withName:itemName withDate:[NSDate date] withIngredients:ingredients];
     else if ([itemType isEqualToString:@"Grocery"])
-        item = [[GroceryItem alloc] initWithName:itemName];
+        NSLog(@"derp");
+       //item = [[GroceryItem alloc] initWithID:0 withName:itemName withDate:[NSDate date] withCost:itemCost unitAmount: unitType:<#(NSString *)#>];
     else
         return false;
     [items addObject:item];

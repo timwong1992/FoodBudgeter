@@ -32,5 +32,7 @@
  Number of properties the item has. Used to determine how many sections the detail table view has
  */
 - (int)numOfProperties;
+- (NSString*)itemType;
+- (double)itemCost;
 
 @end

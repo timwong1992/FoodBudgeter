@@ -24,5 +24,10 @@
     return [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"Recipe\")", self.itemName];
 }
 
-
+- (double) getCost {
+    for (int i = 0; i < [itemIngredients count]; i++) {
+        itemIngredients[i].
+    }
+    return 0.0;
+}
 @end

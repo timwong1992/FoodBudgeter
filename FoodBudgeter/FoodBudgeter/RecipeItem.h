@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Item.h"
+#import "GroceryItem.h"
 
 @interface RecipeItem : Item <ItemProtocol>
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Item.h"
+#import "GroceryItem.h"
 
 @interface RecipeItem : Item <ItemProtocol>
 
@@ -15,4 +16,5 @@
 
 - (id)initWithID:(int)_itemId withName:(NSString*)_itemName withDate:(NSString*)itemDate withIngredients:(NSMutableArray*)_ingredients;
 
+- (double) getCost;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "RecipeItem.h"
+#import "Ingredient.h"
 
 @implementation RecipeItem
 
@@ -28,12 +29,16 @@
     return 3;
 }
 
+- (double)getCost {
+    double cost = 0.0;
+    
+    for( int i = 0; i < [itemIngredients count]; i++) {
+        //cost += itemIngredients[i].itemCost * itemIngredients[i].portion / itemIngredients[i].amount;
+        cost += [[itemIngredients objectAtIndex:i]itemCost] * [(Ingredient*)[itemIngredients objectAtIndex:i]portion] / [[(Ingredient*)[itemIngredients objectAtIndex:i]grocery]unitAmount];
+    }
+}
 - (NSString*)itemType {
     return @"Recipe";
-}
-
-- (double)itemCost {
-    return 0;
 }
 
 @end

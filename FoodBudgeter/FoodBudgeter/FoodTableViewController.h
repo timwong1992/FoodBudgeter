@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ItemManager.h"
+#import "FoodDetailTableViewController.h"
 
 @interface FoodTableViewController : UITableViewController
 

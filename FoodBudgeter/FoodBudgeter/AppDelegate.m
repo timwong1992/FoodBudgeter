@@ -39,14 +39,15 @@
     addItemCommand.itemManager = itemManager;
     
     logFoodVC.addItemCommand = addItemCommand;
-
+    
+    UINavigationController *foodNav = [[UINavigationController alloc] initWithRootViewController:foodTableVC];
     
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[foodTableVC, logFoodVC];
+    self.tabBarController.viewControllers = @[foodNav, logFoodVC];
    
-    UITabBarItem *listItem = [[UITabBarItem alloc] initWithTitle:@"Items" image:nil tag:0];
+    UITabBarItem *listItem = [[UITabBarItem alloc] initWithTitle:@"Items" image:[UIImage imageNamed:@"eye.png"] tag:0];
     UITabBarItem *logItem = [[UITabBarItem alloc] initWithTitle:@"Log Item" image:[UIImage imageNamed:@"AddRecipe.png"] tag:1];
-    foodTableVC.tabBarItem = listItem;
+    foodNav.tabBarItem = listItem;
     logFoodVC.tabBarItem = logItem;
     
     //foodTableVC.viewDelegate = logFoodVC;

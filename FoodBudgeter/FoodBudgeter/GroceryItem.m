@@ -34,4 +34,12 @@
     return 7;
 }
 
+- (NSString*)itemType {
+    return @"Recipe";
+}
+
+- (double)itemCost {
+    return itemCost;
+}
+
 @end

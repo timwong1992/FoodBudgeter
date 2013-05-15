@@ -28,4 +28,8 @@
     return 4;
 }
 
+- (NSString*)itemType {
+    return @"Recipe";
+}
+
 @end

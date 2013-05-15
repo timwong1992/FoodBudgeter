@@ -22,7 +22,7 @@
 @property(nonatomic, strong) IBOutlet UITextField *nameField;
 @property(nonatomic, strong) IBOutlet UITextField *costField;
 @property(nonatomic, strong) IBOutlet UIButton *exampleBtn;
-@property(nonatomic, strong) IBOutlet UIButton *addIngredientBtn;
+@property(nonatomic, strong) IBOutlet UIButton *ingredientBtn;
 @property(nonatomic, strong) IBOutlet UITextField *ingrdNameField;
 @property(nonatomic, strong) IBOutlet UITextField *itemNameField;
 @property(nonatomic, strong) IBOutlet UITextField *portionField;

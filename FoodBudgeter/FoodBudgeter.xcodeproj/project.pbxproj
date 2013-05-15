@@ -31,6 +31,8 @@
 		3FBA03F417430CDB00EFD4E4 /* IngredientsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FBA03F217430CDB00EFD4E4 /* IngredientsTableViewController.xib */; };
 		3FBA03F817430D9700EFD4E4 /* GroceryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA03F617430D9700EFD4E4 /* GroceryTableViewController.m */; };
 		3FBA03F917430D9700EFD4E4 /* GroceryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FBA03F717430D9700EFD4E4 /* GroceryTableViewController.xib */; };
+		3FBA04001743135700EFD4E4 /* IngredientDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA03FE1743135700EFD4E4 /* IngredientDetailViewController.m */; };
+		3FBA04011743135700EFD4E4 /* IngredientDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FBA03FF1743135700EFD4E4 /* IngredientDetailViewController.xib */; };
 		3FE218261730C14A00CDF44B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218251730C14A00CDF44B /* UIKit.framework */; };
 		3FE218281730C14A00CDF44B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218271730C14A00CDF44B /* Foundation.framework */; };
 		3FE2182A1730C14A00CDF44B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218291730C14A00CDF44B /* CoreGraphics.framework */; };
@@ -101,6 +103,9 @@
 		3FBA03F517430D9700EFD4E4 /* GroceryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroceryTableViewController.h; sourceTree = "<group>"; };
 		3FBA03F617430D9700EFD4E4 /* GroceryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroceryTableViewController.m; sourceTree = "<group>"; };
 		3FBA03F717430D9700EFD4E4 /* GroceryTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroceryTableViewController.xib; sourceTree = "<group>"; };
+		3FBA03FD1743135700EFD4E4 /* IngredientDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IngredientDetailViewController.h; path = ../IngredientDetailViewController.h; sourceTree = "<group>"; };
+		3FBA03FE1743135700EFD4E4 /* IngredientDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IngredientDetailViewController.m; path = ../IngredientDetailViewController.m; sourceTree = "<group>"; };
+		3FBA03FF1743135700EFD4E4 /* IngredientDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IngredientDetailViewController.xib; path = ../IngredientDetailViewController.xib; sourceTree = "<group>"; };
 		3FE218221730C14A00CDF44B /* FoodBudgeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodBudgeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE218251730C14A00CDF44B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3FE218271730C14A00CDF44B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -251,12 +256,14 @@
 		3FE218561730C17800CDF44B /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				3FBA03FD1743135700EFD4E4 /* IngredientDetailViewController.h */,
+				3FBA03FE1743135700EFD4E4 /* IngredientDetailViewController.m */,
 				9C56A6B717311E550028C1C4 /* LogFoodViewController.h */,
+				9C56A6B817311E550028C1C4 /* LogFoodViewController.m */,
 				3FBA03F517430D9700EFD4E4 /* GroceryTableViewController.h */,
 				3FBA03F617430D9700EFD4E4 /* GroceryTableViewController.m */,
 				3FBA03F017430CDB00EFD4E4 /* IngredientsTableViewController.h */,
 				3FBA03F117430CDB00EFD4E4 /* IngredientsTableViewController.m */,
-				9C56A6B817311E550028C1C4 /* LogFoodViewController.m */,
 				3F24B42D1732D2EA00A8068D /* FoodTableViewController.h */,
 				3F24B42E1732D2EA00A8068D /* FoodTableViewController.m */,
 				3F24B4321732D30100A8068D /* FoodDetailTableViewController.h */,
@@ -292,6 +299,7 @@
 				3FBA03F217430CDB00EFD4E4 /* IngredientsTableViewController.xib */,
 				3F24B4341732D30100A8068D /* FoodDetailTableViewController.xib */,
 				3FBA03F717430D9700EFD4E4 /* GroceryTableViewController.xib */,
+				3FBA03FF1743135700EFD4E4 /* IngredientDetailViewController.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -406,6 +414,7 @@
 				3F24B4361732D30100A8068D /* FoodDetailTableViewController.xib in Resources */,
 				3FBA03F417430CDB00EFD4E4 /* IngredientsTableViewController.xib in Resources */,
 				3FBA03F917430D9700EFD4E4 /* GroceryTableViewController.xib in Resources */,
+				3FBA04011743135700EFD4E4 /* IngredientDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +466,7 @@
 				3F09CC3B1739CBB200DA9AC3 /* ItemManager.m in Sources */,
 				3FBA03F317430CDB00EFD4E4 /* IngredientsTableViewController.m in Sources */,
 				3FBA03F817430D9700EFD4E4 /* GroceryTableViewController.m in Sources */,
+				3FBA04001743135700EFD4E4 /* IngredientDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

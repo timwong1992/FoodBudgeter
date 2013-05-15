@@ -11,7 +11,7 @@
 @implementation LogFoodViewController
 
 @synthesize segmentedControl, nameField, costField, ingredients, dbManager, nameLabel, foodVC, addItemCommand, ingrdNameField, itemNameField, portionField, unitField, exampleBtn, status,
-    addIngredientBtn, costLabel;
+    ingredientBtn, costLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,21 +28,13 @@
 - (IBAction)segmentController:(id)sender {
     // If Recipe
     if( segmentedControl.selectedSegmentIndex == 0 ) {
-        [ingrdNameField setHidden: NO];
-        [portionField setHidden: NO];
-        [unitField setHidden: NO];
-        [exampleBtn setHidden: NO];
-        [addIngredientBtn setHidden: NO];
+        [ingredientBtn setHidden: NO];
         [costLabel setHidden: YES];
         [costField setHidden: YES];
     }
     // If Purchased
     else if( segmentedControl.selectedSegmentIndex == 1 ) {
-        [ingrdNameField setHidden: YES];
-        [portionField setHidden: YES];
-        [unitField setHidden: YES];
-        [exampleBtn setHidden: YES];
-        [addIngredientBtn setHidden: YES];
+        [ingredientBtn setHidden: YES];
         [costLabel setHidden: NO];
         [costField setHidden: NO];
     
@@ -95,11 +87,8 @@
         button.frame = CGRectMake(120, 210.0, 160.0, 40.0);
         //[self.view addSubview:button];
         
-        [ingrdNameField setHidden:NO];
-        [portionField setHidden:NO];
-        [unitField setHidden: NO];
         [exampleBtn setHidden: NO];
-        [addIngredientBtn setHidden: NO];
+        [ingredientBtn setHidden: NO];
         [costLabel setHidden: YES];
         [costField setHidden: YES];
         

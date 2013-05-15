@@ -68,8 +68,6 @@ ingredientBtn, costLabel, itemManager;
 #pragma mark add Item
 
 - (BOOL)addPurchaseItem:(NSString *)itemName withCost:(double)itemCost {
-    if (itemCost <= 0.00)
-        return false;
     return [itemManager addPurchaseItem:itemName withCost:itemCost];
 }
 
@@ -78,8 +76,6 @@ ingredientBtn, costLabel, itemManager;
 }
 
 - (BOOL)addGroceryItem:(NSString *)itemName withCost:(double)itemCost withUnitAmount:(double)unitAmount withUnitType:(NSString *)unitType {
-    if (itemCost <= 0.00)
-        return false;
     return [itemManager addGroceryItem:itemName withCost:itemCost withUnitAmount:unitAmount withUnitType:unitType];
 }
 

@@ -35,16 +35,16 @@
 
 - (void)testPurchase {
     // adding
-    STAssertTrue([itemManager addItem:@"Test Food" withType:@"Purchase" withIngredients:nil withCost:10.00], @"Adding item should succeed");
+    STAssertTrue([itemManager addPurchaseItem:@"Test Food" withCost:10.00], @"Adding item should succeed");
     STAssertEquals([itemManager numOfItems], 1, @"Only one item should be in mutable array");
     
     STAssertEquals([itemManager.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
     
-    STAssertFalse([itemManager addItem:@"Test Food" withType:@"Purchase" withIngredients:nil withCost:10.00], @"Adding duplicate item should fail");
+    STAssertFalse([itemManager addPurchaseItem:@"Test Food" withCost:10.00], @"Adding duplicate item should fail");
     STAssertEquals([itemManager numOfItems], 1, @"Only one item should be in mutable array");
     STAssertEquals([itemManager.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
     
-    STAssertTrue([itemManager addItem:@"Another test" withType:@"Purchase" withIngredients:nil withCost:20.00], @"Adding second item should succeed");
+    STAssertTrue([itemManager addPurchaseItem:@"Another Food" withCost:10.00], @"Adding item should succeed");
     STAssertEquals([itemManager numOfItems], 2, @"Only two items should be in mutable array");
     STAssertEquals([itemManager.dbManager numItemsInDatabase], 2, @"Only two items should be in database");
     
@@ -61,7 +61,7 @@
     STAssertEquals([itemManager numOfItems], 1, @"Only one item should be in mutable array");
     STAssertEquals([itemManager.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
     
-    STAssertTrue([itemManager removeItemByName:@"Another test"], @"Removing existing item should succeed");
+    STAssertTrue([itemManager removeItemByName:@"Another Food"], @"Removing existing item should succeed");
     
     STAssertEquals([itemManager numOfItems], 0, @"No item should be in mutable array");
     STAssertEquals([itemManager.dbManager numItemsInDatabase], 0, @"No item should be in database");

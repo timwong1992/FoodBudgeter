@@ -376,25 +376,23 @@
 - (BOOL)removeItem:(NSString *)itemName {
     // get item ID in order to find it in other tables
     int itemID = [self itemID:itemName];
-    if (itemID != -1) {
-        // delete the item
-        NSString *query = [NSString stringWithFormat:@"DELETE FROM item WHERE item.itemName = \"%@\"", itemName];
-        
-        if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Item table failed"] != SQLITE_OK) {
-            return false;
-        }
-#warning only works for purchase at the moment, must add in support for recipe
-        NSLog(@"Deleting from item table success");
-        
-        query = [NSString stringWithFormat:@"DELETE FROM purchase WHERE purchaseID = %d", itemID];
-        if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Purchase table failed"] == SQLITE_OK) {
-            NSLog(@"Deleting from purchase table success");
-            return true;
-        }
-        
+    if (itemID == -1) {
+        return false;
     }
-    // item does not exist, so do nothing
-    return false;
+    // delete the item
+    NSString *query = [NSString stringWithFormat:@"DELETE FROM item WHERE item.itemName = \"%@\"", itemName];
+    
+    if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Item table failed"] != SQLITE_OK) {
+        return false;
+    }
+#warning only works for purchase at the moment, must add in support for recipe
+    NSLog(@"Deleting from item table success");
+    
+    query = [NSString stringWithFormat:@"DELETE FROM purchase WHERE purchaseID = %d", itemID];
+    if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Purchase table failed"] != SQLITE_OK) {
+        return false;
+    }
+    return true;
 }
 
 - (BOOL)removeIngredient:(NSString *)ingredientName {

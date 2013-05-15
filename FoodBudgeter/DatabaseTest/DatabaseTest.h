@@ -8,6 +8,7 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 #import "AppDelegate.h"
+#import "DBManager.h"
 
 @interface DatabaseTest : SenTestCase
 @property(nonatomic, strong) DBManager *dbManager;

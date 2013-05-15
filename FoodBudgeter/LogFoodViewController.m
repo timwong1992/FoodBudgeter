@@ -118,6 +118,7 @@ ingredientBtn, costLabel, itemManager;
     IngredientsTableViewController *ingrdTableViewController = [[IngredientsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     ingrdTableViewController.title = @"Ingredients";
     [self.navigationController pushViewController:ingrdTableViewController animated:YES];
+    [self.navigationController setNavigationBarHidden:NO];
     //nameField.hidden = true;
 }
 
@@ -154,6 +155,18 @@ ingredientBtn, costLabel, itemManager;
      UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
      segmentedControl.frame = CGRectContainsPoint(<#CGRect rect#>, <#CGPoint point#>)
      */
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [super viewWillAppear:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [super viewWillDisappear:YES];
 }
 
 - (void)didReceiveMemoryWarning

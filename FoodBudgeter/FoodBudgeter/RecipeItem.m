@@ -13,7 +13,7 @@
 
 @synthesize itemIngredients;
     
-- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withDate:(NSString*)date withIngredients:(NSMutableArray*)_ingredients{
+- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withDate:(NSDate*)date withIngredients:(NSMutableArray*)_ingredients{
     self = [super initWithID:_itemId withName:_itemName withDate:date];
     if (self) {
         self.itemIngredients = _ingredients;
@@ -36,6 +36,7 @@
         //cost += itemIngredients[i].itemCost * itemIngredients[i].portion / itemIngredients[i].amount;
         cost += [[itemIngredients objectAtIndex:i]itemCost] * [(Ingredient*)[itemIngredients objectAtIndex:i]portion] / [[(Ingredient*)[itemIngredients objectAtIndex:i]grocery]unitAmount];
     }
+    return cost;
 }
 - (NSString*)itemType {
     return @"Recipe";

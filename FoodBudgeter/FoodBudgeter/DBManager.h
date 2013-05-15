@@ -47,10 +47,7 @@ withErrorMessage:(char *)errMsg;
 /*
  Given item data, adds it to the database. Returns false if the item is a duplicate or the database is not changed.
  */
-- (BOOL)addItem:(NSString*)itemName
-       withType:(NSString*)itemType
-withIngredients:(NSMutableArray*)ingredients
-       withCost:(double)itemCost;
+- (BOOL)addItem:(Item*)item;
 
 /*
  Given ingredient data, adds it to the database. Returns false if the ingredient is a duplicate or the database is not changed.

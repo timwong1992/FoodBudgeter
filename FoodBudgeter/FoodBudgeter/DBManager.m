@@ -37,16 +37,16 @@
             const char *itemType = sqlite3_column_text16(statement, 2);
             
             // if type is recipe
-            if (strcmp(itemType, "recipe")) {
+            if (strcmp(itemType, "Recipe")) {
                 item = [[RecipeItem alloc] initWithID:itemId withName:itemName];
             }
             // else if type is purchase
-            else if (strcmp(itemType, "purchase")) {
+            else if (strcmp(itemType, "Purchase")) {
                 item = [[PurchasedItem alloc] initWithID:itemId withName:itemName withCost:[self itemCost:itemId]];
             }
             // else if type is grocery
 #warning grocery item creation incomplete
-            else if (strcmp(itemType, "grocery")) {
+            else if (strcmp(itemType, "Grocery")) {
                 item = [[GroceryItem alloc] initWithID:itemId withName:itemName withCost:[self itemCost:itemId] unitAmount:0 unitType:0];
             }
             [items addObject:item];
@@ -114,55 +114,48 @@
 
 #pragma mark add Item
 
-- (BOOL)addItem:(NSString *)itemName withType:(NSString*)itemType withIngredients:(NSMutableArray *)ingredients withCost:(double)itemCost {
-    if ([self itemID:itemName] == -1) {
-        NSString *insertQuery;
-        // check what type of item and write appropriate query
-        if ([itemType isEqualToString:@"Recipe"]) {
-            insertQuery = [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"%@\")", itemName, itemType];
-        }
-        else if ([itemType isEqualToString:@"Purchase"]) {
-            insertQuery = [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"%@\")", itemName, itemType];
-        }
-        else {
-            NSLog(@"Item type not valid");
-            return false;
-        }
-        
-        if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Insert into item failed!"] == SQLITE_OK) {
-            NSLog(@"Insert into item success");
-            // add item data to other tables, depending on item type
-            if ([itemType isEqualToString:@"Recipe"]) {
-                insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe (recipeID) VALUES (\"%d\")", [self itemID:itemName]];
-                [self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Recipe insert failed!"];
-                
-                int recipeID = [self itemID:itemName];
-                // for each ingredient in item data
-                for (int i = 0; i < [self numIngredientsInRecipe:recipeID]; i++) {
-                    if ([self ingredientID:itemName] != -1)
-                        insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe_ingredient (recipeID, ingredientID) VALUES (\"%d\", \"%d\")", recipeID, [self ingredientID:itemName]];
-                    [self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Join table insert failed!"];
-                }
-                // check ingredient table for the ingredient
-                // if not found, add ingredient into table
-                // add join table entry by getting id's from recipe and ingredient tables
-                
-                //insertQuery = [NSString stringWithFormat:@""];
-            }
-            // if not recipe, must be purchase
-            else {
-                NSLog(@"Purchase being added to purchase table");
-                insertQuery = [NSString stringWithFormat:@"INSERT INTO purchase (purchaseID, itemCost) VALUES (%d, \"%.2f\")", [self itemID:itemName], itemCost];
-                if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Purchase insert failed!"] != SQLITE_OK) {
-                    return false;
-                }
-            }
-            return true;
-        }
+- (BOOL)addItem:(Item*)item {
+    if (![self itemID:item.itemName] == -1) {
         return false;
     }
-    NSLog(@"Item was found");
-    return false;
+    NSString *insertQuery;
+    //create add query
+    insertQuery = item.createAddDBQuery;
+    
+    if (![self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Insert into item failed!"] == SQLITE_OK) {
+        return false;
+    }
+    NSLog(@"Insert into item success");
+    
+    // add item data to other tables, depending on item type
+    /*
+     if ([itemType isEqualToString:@"Recipe"]) {
+     insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe (recipeID) VALUES (\"%d\")", [self itemID:itemName]];
+     [self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Recipe insert failed!"];
+     
+     int recipeID = [self itemID:itemName];
+     // for each ingredient in item data
+     for (int i = 0; i < [self numIngredientsInRecipe:recipeID]; i++) {
+     if ([self ingredientID:itemName] != -1)
+     insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe_ingredient (recipeID, ingredientID) VALUES (\"%d\", \"%d\")", recipeID, [self ingredientID:itemName]];
+     [self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Join table insert failed!"];
+     }
+     // check ingredient table for the ingredient
+     // if not found, add ingredient into table
+     // add join table entry by getting id's from recipe and ingredient tables
+     
+     //insertQuery = [NSString stringWithFormat:@""];
+     }
+     */
+    // if not recipe, must be purchase
+    //   else {
+    
+    NSLog(@"Purchase being added to purchase table");
+    insertQuery = [item createAddSubtableQuery];
+    if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Purchase insert failed!"] != SQLITE_OK) {
+        return false;
+    }
+    return true;
 }
 
 - (BOOL)addIngredient:(NSString *)ingredientName

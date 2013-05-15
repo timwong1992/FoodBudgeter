@@ -22,4 +22,8 @@
     return self;
 }
 
+- (NSString*)createAddDBQuery {
+    return [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"Purchase\")", self.itemName];
+}
+
 @end

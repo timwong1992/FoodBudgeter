@@ -30,8 +30,7 @@
         Item *item = [[Item alloc] initWithName:itemName];
         [items addObject:item];
         NSLog(@"num of items %lu", (unsigned long)[items count]);
-#warning need to hook up to GUI
-        return [dbManager addItem:itemName withType:itemType withIngredients:ingredients withCost:itemCost];
+        return [dbManager addItem:item];
     }
     return false;
 }

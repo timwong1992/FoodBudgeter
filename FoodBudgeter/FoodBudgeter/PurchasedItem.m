@@ -20,4 +20,12 @@
     return self;
 }
 
+- (NSString*)createAddDBQuery {
+    return [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType) VALUES (\"%@\", \"Purchase\")", self.itemName];
+}
+
+- (NSString*)createAddSubtableQuery {
+    return [NSString stringWithFormat:@"INSERT INTO purchase (purchaseID, itemCost) VALUES (%d, \"%.2f\")", self.itemId, self.itemCost];
+}
+
 @end

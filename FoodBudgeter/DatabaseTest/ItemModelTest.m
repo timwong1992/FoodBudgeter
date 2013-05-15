@@ -67,4 +67,17 @@
      
 }
 
+- (void)testBuildingFromDB {
+    PurchasedItem *item = [[PurchasedItem alloc] initWithName:@"test food"];
+    PurchasedItem *item2 = [[PurchasedItem alloc] initWithName:@"another food"];
+    [itemManager.dbManager addItem:item];
+    [itemManager.dbManager addItem:item2];
+    STAssertEquals([itemManager.dbManager numItemsInDatabase], 2, @"2 items should be in database");
+    STAssertEquals([itemManager numOfItems], 0, @"No items should exist in object based model");
+    [itemManager buildItems];
+    STAssertEquals([itemManager numOfItems], 2, @"Items should now be in db");
+    STAssertEqualObjects([[itemManager items]objectAtIndex:0], item, @"Values should be same");
+    STAssertEquals([[[itemManager items]objectAtIndex:0]itemName], @"test food", @"names should be the same");
+}
+
 @end

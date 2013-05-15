@@ -29,7 +29,6 @@
     return 4;
 }
 
-<<<<<<< HEAD
 - (double)getCost {
     double cost = 0.0;
     
@@ -37,11 +36,9 @@
         //cost += itemIngredients[i].itemCost * itemIngredients[i].portion / itemIngredients[i].amount;
         cost += [[itemIngredients objectAtIndex:i]itemCost] * [(Ingredient*)[itemIngredients objectAtIndex:i]portion] / [[(Ingredient*)[itemIngredients objectAtIndex:i]grocery]unitAmount];
     }
+    return cost;
 }
-=======
 - (NSString*)itemType {
     return @"Recipe";
 }
-
->>>>>>> c4a69d5c9be7f06c6830b5b60113b104ed078c70
 @end

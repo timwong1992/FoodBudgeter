@@ -7,6 +7,7 @@
 //
 
 #import "LogFoodViewController.h"
+#import "IngredientsTableViewController.h"
 
 @implementation LogFoodViewController
 
@@ -68,6 +69,8 @@
 
 - (IBAction)anAction {
     NSLog(@"HI!");
+    IngredientsTableViewController *ingrdTableViewController = [[IngredientsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    [self.navigationController pushViewController:ingrdTableViewController animated:YES];
     //nameField.hidden = true;
 }
 
@@ -90,6 +93,8 @@
         [ingredientBtn setHidden: NO];
         [costLabel setHidden: YES];
         [costField setHidden: YES];
+        
+        
         
     }
     // If on the add bought item screen, create the appropriate view

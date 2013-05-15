@@ -26,6 +26,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
+    style = UITableViewStyleGrouped;
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization

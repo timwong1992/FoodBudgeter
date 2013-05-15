@@ -30,4 +30,8 @@
     return [NSString stringWithFormat:@"INSERT INTO grocery (groceryID, itemCost, unitAmount, unitType) VALUES (%d, \"%.2f\", \"%.2f\", \"%@\")", self.itemId, self.itemCost, self.unitAmount, self.unitType];
 }
 
+- (int)numOfProperties {
+    return 7;
+}
+
 @end

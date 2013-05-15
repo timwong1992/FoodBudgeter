@@ -24,4 +24,8 @@
     return [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType, date) VALUES (\"%@\", \"Recipe\", \"%@\")", self.itemName, [self.dateLogged description]];
 }
 
+- (int)numOfProperties {
+    return 4;
+}
+
 @end

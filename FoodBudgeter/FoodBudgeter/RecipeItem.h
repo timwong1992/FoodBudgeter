@@ -13,6 +13,6 @@
 
 @property (nonatomic, strong) NSMutableArray *itemIngredients;
 
-- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withIngredients:(NSMutableArray*)_ingredients;
+- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withDate:(NSString*)itemDate withIngredients:(NSMutableArray*)_ingredients;
 
 @end

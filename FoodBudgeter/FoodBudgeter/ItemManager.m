@@ -21,8 +21,6 @@
 }
 
 - (BOOL)buildItems {
-    NSMutableArray *arr = [dbManager buildItems];
-    NSLog(@"%d",arr.count);
     [self setItems:[dbManager buildItems]];
     return true;
 }
@@ -33,7 +31,7 @@
     }
     Item *item;
     if ([itemType isEqualToString:@"Purchase"]) {
-        item = [[PurchasedItem alloc] initWithID:0 withName:itemName withCost:itemCost];
+        item = [[PurchasedItem alloc] initWithID:0 withName:itemName withDate:[NSDate date] withCost:itemCost];
     }
     else if ([itemType isEqualToString:@"Recipe"])
         item = [[RecipeItem alloc] initWithName:itemName];
@@ -42,7 +40,6 @@
     else
         return false;
     [items addObject:item];
-    NSLog(@"Size now: %d", [items count]);
     return [dbManager addItem:item];
 }
 

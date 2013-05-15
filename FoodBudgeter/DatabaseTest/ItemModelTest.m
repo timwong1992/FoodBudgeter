@@ -32,7 +32,7 @@
     itemManager = nil;
 }
 
-/*
+
 - (void)testPurchase {
     // adding
     STAssertTrue([itemManager addItem:@"Test Food" withType:@"Purchase" withIngredients:nil withCost:10.00], @"Adding item should succeed");
@@ -67,7 +67,6 @@
     STAssertEquals([itemManager.dbManager numItemsInDatabase], 0, @"No item should be in database");
      
 }
- */
 
 - (void)testBuildingFromDB {
     PurchasedItem *item = [[PurchasedItem alloc] initWithName:@"test food"];

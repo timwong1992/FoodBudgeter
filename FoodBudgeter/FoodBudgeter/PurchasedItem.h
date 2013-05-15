@@ -13,6 +13,6 @@
 
 @property(nonatomic, assign) double itemCost;       // Cost of the item, $2.30
 
-- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withCost:(double)cost;
+- (id)initWithID:(int)_itemId withName:(NSString*)_itemName withDate:(NSString*)date withCost:(double)cost;
 
 @end

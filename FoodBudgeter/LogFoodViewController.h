@@ -18,17 +18,9 @@
 @interface LogFoodViewController : UIViewController <DBDelegate, UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
-@property(nonatomic, strong) IBOutlet UILabel *nameLabel;
-@property(nonatomic, strong) IBOutlet UILabel *costLabel;
-@property(nonatomic, strong) IBOutlet UITextField *nameField;
-@property(nonatomic, strong) IBOutlet UITextField *costField;
-@property(nonatomic, strong) IBOutlet UIButton *exampleBtn;
-@property(nonatomic, strong) IBOutlet UIButton *ingredientBtn;
-@property(nonatomic, strong) IBOutlet UITextField *ingrdNameField;
-@property(nonatomic, strong) IBOutlet UITextField *itemNameField;
-@property(nonatomic, strong) IBOutlet UITextField *portionField;
-@property(nonatomic, strong) IBOutlet UITextField *unitField;
-@property(nonatomic, strong) IBOutlet UILabel *status;
+@property(nonatomic, strong) IBOutlet UILabel *nameLabel, *costLabel, *portionLabel, *unitLabel, *status;
+@property(nonatomic, strong) IBOutlet UITextField *nameField, *costField, *ingrdNameField, *itemNameField, *portionField, *unitField;
+@property(nonatomic, strong) IBOutlet UIButton *exampleBtn, *ingredientBtn;
 
 @property(nonatomic, strong) NSArray *ingredients;
 @property(nonatomic, strong) ItemManager *itemManager;

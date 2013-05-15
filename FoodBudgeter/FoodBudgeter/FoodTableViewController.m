@@ -10,7 +10,7 @@
 
 @implementation FoodTableViewController
 
-@synthesize itemManager, items, viewDelegate;
+@synthesize itemManager, items, viewDelegate, removeItemCommand;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -93,7 +93,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [itemManager removeItem:[itemManager.items objectAtIndex:indexPath.row]];
+        [removeItemCommand execute:[itemManager.items objectAtIndex:indexPath.row]];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
@@ -126,6 +126,7 @@
     // Navigation logic may go here. Create and push another view controller.
     
     FoodDetailTableViewController *detailViewController = [[FoodDetailTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    NSLog(@"style! %d", [detailViewController.tableView style]);
     detailViewController.item = [items objectAtIndex:indexPath.row];
     detailViewController.title = detailViewController.item.itemName;
     // ...

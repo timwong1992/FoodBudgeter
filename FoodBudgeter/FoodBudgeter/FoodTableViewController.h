@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "ItemManager.h"
 #import "FoodDetailTableViewController.h"
+#import "RemoveItemCommand.h"
 
 @interface FoodTableViewController : UITableViewController
 
 @property (nonatomic, strong) ItemManager *itemManager;
 @property (nonatomic, strong) NSMutableArray *items;
+@property (nonatomic, strong) RemoveItemCommand *removeItemCommand;
 @property (nonatomic, assign)id <ViewItemsProtocol>viewDelegate;
 
 - (void)reloadItems;

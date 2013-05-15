@@ -39,7 +39,11 @@
     AddItemCommand *addItemCommand = [[AddItemCommand alloc] init];
     addItemCommand.itemManager = itemManager;
     
+    RemoveItemCommand *removeItemCommand = [[RemoveItemCommand alloc] init];
+    removeItemCommand.itemManager = itemManager;
+    
     logFoodVC.addItemCommand = addItemCommand;
+    foodTableVC.removeItemCommand = removeItemCommand;
     
     UINavigationController *foodNav = [[UINavigationController alloc] initWithRootViewController:foodTableVC];
     UINavigationController *logFoodNav = [[UINavigationController alloc] initWithRootViewController:logFoodVC];

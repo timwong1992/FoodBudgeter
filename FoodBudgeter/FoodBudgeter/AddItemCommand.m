@@ -11,7 +11,6 @@
 @implementation AddItemCommand
 
 - (BOOL)execute:(NSString*)itemName withType:(NSString*)itemType withIngredients:(NSMutableArray*)_ingredients withCost:(double)itemCost {
-    NSLog(@"address of itemmanager: %@", [super itemManager]);
     return [[super itemManager] addItem:itemName
                                withType:itemType
                         withIngredients:_ingredients

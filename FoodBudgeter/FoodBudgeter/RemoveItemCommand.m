@@ -10,8 +10,8 @@
 
 @implementation RemoveItemCommand
 
-- (void)execute:(NSString*)itemName {
-    [[super itemManager] removeItemByName:itemName];
+- (void)execute:(Item*)item {
+    [[super itemManager] removeItem:item];
 }
 
 @end

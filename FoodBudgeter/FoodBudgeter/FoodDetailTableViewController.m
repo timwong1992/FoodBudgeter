@@ -16,17 +16,12 @@
 #define OTHER_DATA 3
 #define GROCERY_UNIT_AMOUNT 4
 
-@interface FoodDetailTableViewController ()
-
-@end
-
 @implementation FoodDetailTableViewController
 
 @synthesize item;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    style = UITableViewStyleGrouped;
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -66,6 +61,41 @@
         return 2;
     return 1;
 }
+
+// This delegate method is called once for each section
+- ( NSString  *)tableView:( UITableView  *)tableView titleForHeaderInSection:( NSInteger )section{
+    
+    NSString  *title;
+    switch  (section ) {
+        case   ITEM_TYPE :
+        {
+            title = @"Type";
+        }
+            break ;
+            
+        case   ITEM_COST :
+        {
+            title = @"Cost";
+        }
+            break ;
+        case ITEM_DATE:
+        {
+            title = @"Date Logged";
+        }
+        case OTHER_DATA:
+        {
+            if ([[item itemType] isEqualToString:@"Grocery"]) {
+                title = @"Unit Amount and Type (servings)";
+            }
+            //cell.textLabel.textAlignment = UITextAlignmentCenter;
+            //cell.textLabel.text = [NSString stringWithFormat:@"%@",[(GroceryItem*)item unitType]];
+            
+        }
+            break;
+    }  // end switch
+    return  title;
+    
+}  // end titleForHeaderInSection
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

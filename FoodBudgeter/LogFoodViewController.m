@@ -9,10 +9,14 @@
 #import "LogFoodViewController.h"
 #import "IngredientsTableViewController.h"
 
+#define RECIPE 0
+#define PURCHASE 1
+#define GROCERY 2
+
 @implementation LogFoodViewController
 
-@synthesize segmentedControl, nameField, costField, ingredients, nameLabel, foodVC, addItemCommand, ingrdNameField, itemNameField, portionField, unitField, exampleBtn, status,
-    ingredientBtn, costLabel, itemManager;
+@synthesize segmentedControl, nameField, costField, portionLabel, unitLabel, ingredients, nameLabel, foodVC, addItemCommand, ingrdNameField, itemNameField, portionField, unitField, exampleBtn, status,
+ingredientBtn, costLabel, itemManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,19 +32,37 @@
 
 - (IBAction)segmentController:(id)sender {
     // If Recipe
-    if( segmentedControl.selectedSegmentIndex == 0 ) {
+    if( segmentedControl.selectedSegmentIndex == RECIPE ) {
         [ingredientBtn setHidden: NO];
         [costLabel setHidden: YES];
         [costField setHidden: YES];
+        [portionField setHidden:YES];
+        [portionLabel setHidden:YES];
+        [unitField setHidden:YES];
+        [unitLabel setHidden:YES];
     }
     // If Purchased
-    else if( segmentedControl.selectedSegmentIndex == 1 ) {
+    else if( segmentedControl.selectedSegmentIndex == PURCHASE ) {
         [ingredientBtn setHidden: YES];
         [costLabel setHidden: NO];
         [costField setHidden: NO];
-    
+        [portionField setHidden:YES];
+        [portionLabel setHidden:YES];
+        [unitField setHidden:YES];
+        [unitLabel setHidden:YES];
+        
     }
-    NSLog(@"Label is %@", [segmentedControl titleForSegmentAtIndex:[segmentedControl selectedSegmentIndex]]);
+    // If Grocery
+    else if ( segmentedControl.selectedSegmentIndex == GROCERY ) {
+        [ingredientBtn setHidden: YES];
+        [costLabel setHidden: NO];
+        [costField setHidden: NO];
+        [portionField setHidden:NO];
+        [portionLabel setHidden:NO];
+        [unitField setHidden:NO];
+        [unitLabel setHidden:NO];
+        
+    }
 }
 
 #pragma mark add Item
@@ -59,7 +81,6 @@
 
 
 - (IBAction)addButtonClicked:(id)sender {
-    NSLog(@"Button clicked");
     [self addItem:nameField.text withType:[segmentedControl titleForSegmentAtIndex:[segmentedControl selectedSegmentIndex]] withIngredients:ingredients withCost:[costField.text doubleValue]];
 }
 
@@ -68,8 +89,8 @@
 }
 
 - (IBAction)anAction {
-    NSLog(@"HI!");
     IngredientsTableViewController *ingrdTableViewController = [[IngredientsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    ingrdTableViewController.title = @"Ingredients";
     [self.navigationController pushViewController:ingrdTableViewController animated:YES];
     //nameField.hidden = true;
 }
@@ -93,26 +114,20 @@
         [ingredientBtn setHidden: NO];
         [costLabel setHidden: YES];
         [costField setHidden: YES];
-        
-        
-        
     }
     // If on the add bought item screen, create the appropriate view
     else if( segmentedControl.selectedSegmentIndex == 1 ) {
         
     }
     /*
-    label = [[UILabel alloc] init];
-    label.frame = CGRectMake(10, 10, 300, 40);
-    [self.view addSubview:label];
-    
-    NSArray *itemArray = [NSArray arrayWithObjects: @"One", @"Two", @"Three", nil];
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
-    segmentedControl.frame = CGRectContainsPoint(<#CGRect rect#>, <#CGPoint point#>)
-                          */
-    
-	// Do any additional setup after loading the view, typically from a nib.
-    NSLog(@"View loaded");
+     label = [[UILabel alloc] init];
+     label.frame = CGRectMake(10, 10, 300, 40);
+     [self.view addSubview:label];
+     
+     NSArray *itemArray = [NSArray arrayWithObjects: @"One", @"Two", @"Three", nil];
+     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
+     segmentedControl.frame = CGRectContainsPoint(<#CGRect rect#>, <#CGPoint point#>)
+     */
 }
 
 - (void)didReceiveMemoryWarning

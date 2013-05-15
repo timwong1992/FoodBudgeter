@@ -93,13 +93,9 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-                NSLog(@"item count: %d",itemManager.items.count);
-                NSLog(@"db count: %d",[itemManager.dbManager numItemsInDatabase]);
         [itemManager removeItem:[itemManager.items objectAtIndex:indexPath.row]];
-
+        
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        NSLog(@"item count: %d",itemManager.items.count);
-        NSLog(@"db count: %d",[itemManager.dbManager numItemsInDatabase]);
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

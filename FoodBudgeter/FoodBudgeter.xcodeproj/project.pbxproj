@@ -13,7 +13,6 @@
 		3F24B4301732D2EA00A8068D /* FoodTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F24B42E1732D2EA00A8068D /* FoodTableViewController.m */; };
 		3F24B4311732D2EA00A8068D /* FoodTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F24B42F1732D2EA00A8068D /* FoodTableViewController.xib */; };
 		3F24B4351732D30100A8068D /* FoodDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F24B4331732D30100A8068D /* FoodDetailTableViewController.m */; };
-		3F24B4361732D30100A8068D /* FoodDetailTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F24B4341732D30100A8068D /* FoodDetailTableViewController.xib */; };
 		3F24B43E1732D62F00A8068D /* AddRecipe.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C56A6B617311E550028C1C4 /* AddRecipe.png */; };
 		3F24B4491732D77F00A8068D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F24B43A1732D45900A8068D /* SenTestingKit.framework */; };
 		3F24B44A1732D77F00A8068D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE218251730C14A00CDF44B /* UIKit.framework */; };
@@ -73,7 +72,6 @@
 		3F24B42F1732D2EA00A8068D /* FoodTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoodTableViewController.xib; sourceTree = "<group>"; };
 		3F24B4321732D30100A8068D /* FoodDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodDetailTableViewController.h; sourceTree = "<group>"; };
 		3F24B4331732D30100A8068D /* FoodDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodDetailTableViewController.m; sourceTree = "<group>"; };
-		3F24B4341732D30100A8068D /* FoodDetailTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoodDetailTableViewController.xib; sourceTree = "<group>"; };
 		3F24B43A1732D45900A8068D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3F24B4411732D70800A8068D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3F24B4481732D77F00A8068D /* DatabaseTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DatabaseTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -300,7 +298,6 @@
 				9C56A6B917311E550028C1C4 /* LogFoodViewController.xib */,
 				3F24B42F1732D2EA00A8068D /* FoodTableViewController.xib */,
 				3FBA03F217430CDB00EFD4E4 /* IngredientsTableViewController.xib */,
-				3F24B4341732D30100A8068D /* FoodDetailTableViewController.xib */,
 				3FBA03F717430D9700EFD4E4 /* GroceryTableViewController.xib */,
 				3FBA03FF1743135700EFD4E4 /* IngredientDetailViewController.xib */,
 			);
@@ -414,7 +411,6 @@
 				3F24B43E1732D62F00A8068D /* AddRecipe.png in Resources */,
 				9C56A6BC17311E550028C1C4 /* LogFoodViewController.xib in Resources */,
 				3F24B4311732D2EA00A8068D /* FoodTableViewController.xib in Resources */,
-				3F24B4361732D30100A8068D /* FoodDetailTableViewController.xib in Resources */,
 				3FBA03F417430CDB00EFD4E4 /* IngredientsTableViewController.xib in Resources */,
 				3FBA03F917430D9700EFD4E4 /* GroceryTableViewController.xib in Resources */,
 				3FBA04011743135700EFD4E4 /* IngredientDetailViewController.xib in Resources */,

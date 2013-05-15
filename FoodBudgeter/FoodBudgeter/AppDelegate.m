@@ -29,6 +29,7 @@
     
     FoodTableViewController *foodTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodTableViewController" bundle:nil];
     foodTableVC.itemManager = itemManager;
+    foodTableVC.title = @"Items";
     [foodTableVC reloadItems];
     
     LogFoodViewController *logFoodVC = [[LogFoodViewController alloc] initWithNibName:@"LogFoodViewController" bundle:nil];

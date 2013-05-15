@@ -123,7 +123,8 @@
 {
     // Navigation logic may go here. Create and push another view controller.
     
-    FoodDetailTableViewController *detailViewController = [[FoodDetailTableViewController alloc] initWithNibName:@"FoodDetailTableViewController" bundle:nil];
+    FoodDetailTableViewController *detailViewController = [[FoodDetailTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    detailViewController.title = [[items objectAtIndex:indexPath.row]itemName];
     detailViewController.item = [items objectAtIndex:indexPath.row];
     // ...
     // Pass the selected object to the new view controller.

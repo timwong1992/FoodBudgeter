@@ -30,4 +30,14 @@
     return self;
 }
 
+- (NSString *)createAddDBQuery {
+    NSLog(@"this is why it aint working");
+    return nil;
+}
+
+- (NSString *)createAddSubtableQuery {
+    NSLog(@"this is why it aint working");
+    return nil;
+}
+
 @end

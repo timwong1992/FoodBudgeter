@@ -9,18 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "DBManager.h"
 #import "Item.h"
+#import "PurchasedItem.h"
 @protocol ViewItemsProtocol <NSObject>
 @required
 - (void)updateItemInView:(id)item;
 
 @end
 
-@interface ItemManager : NSObject <ViewItemsProtocol>
+@interface ItemManager : NSObject
 
 @property (nonatomic,strong) DBManager *dbManager;
 @property (nonatomic,strong) NSMutableArray *items;
 
-+ (id)createItemManager;
 
 /*
  Reads all items from the database and creates its object representation

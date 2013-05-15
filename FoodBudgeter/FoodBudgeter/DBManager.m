@@ -19,29 +19,31 @@
 - (NSMutableArray *)buildItems {
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
-        NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[self numItemsInDatabase]];
-        NSString *itemName;
-        int itemId;
         
         // prepare query
         sqlite3_stmt *statement;
         
         // run query
-        sqlite3_prepare(itemDB, "SELECT * FROM item", -1, &statement, NULL);
+        sqlite3_prepare_v2(itemDB, "SELECT * FROM item", -1, &statement, NULL);
+        
+        NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[self numItemsInDatabase]];
         
         // for each found row, create the appropriate object based upon its type
+        
         while(sqlite3_step(statement) == SQLITE_ROW) {
-            itemId = sqlite3_column_int(statement, 0);
-            itemName = [NSString stringWithUTF8String:sqlite3_column_text16(statement, 1)];
+            int itemId = sqlite3_column_int(statement, 0);
+            NSString *itemName = [NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 1)];
             Item *item;
-            const char *itemType = sqlite3_column_text16(statement, 2);
-            
+            const char *itemType = (char*)sqlite3_column_text(statement, 2);
+            NSLog(@"id %d name %@ type %s",itemId, itemName, itemType);
+#warning recipe item creation incomplete
             // if type is recipe
             if (strcmp(itemType, "Recipe")) {
                 item = [[RecipeItem alloc] initWithID:itemId withName:itemName];
             }
             // else if type is purchase
             else if (strcmp(itemType, "Purchase")) {
+                NSLog(@"Purchased item being created form db");
                 item = [[PurchasedItem alloc] initWithID:itemId withName:itemName withCost:[self itemCost:itemId]];
             }
             // else if type is grocery
@@ -49,7 +51,8 @@
             else if (strcmp(itemType, "Grocery")) {
                 item = [[GroceryItem alloc] initWithID:itemId withName:itemName withCost:[self itemCost:itemId] unitAmount:0 unitType:0];
             }
-            [items addObject:item];
+            if (item != nil)
+                [items addObject:item];
         }
         
         // database cleanup
@@ -115,17 +118,16 @@
 #pragma mark add Item
 
 - (BOOL)addItem:(Item*)item {
-    if (![self itemID:item.itemName] == -1) {
+    if ([self itemID:item.itemName] != -1) {
         return false;
     }
     NSString *insertQuery;
     //create add query
-    insertQuery = item.createAddDBQuery;
+    insertQuery = [item createAddDBQuery];
     
-    if (![self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Insert into item failed!"] == SQLITE_OK) {
+    if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Insert into item failed!"] != SQLITE_OK) {
         return false;
     }
-    NSLog(@"Insert into item success");
     
     // add item data to other tables, depending on item type
     /*
@@ -151,6 +153,8 @@
     //   else {
     
     NSLog(@"Purchase being added to purchase table");
+    // set item ID of item object based on what id DB assigned
+    item.itemId = [self itemID:item.itemName];
     insertQuery = [item createAddSubtableQuery];
     if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Purchase insert failed!"] != SQLITE_OK) {
         return false;
@@ -195,6 +199,7 @@
     return count;
 }
 
+/*
 - (NSMutableArray*)itemsInDatabase {
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
@@ -219,6 +224,7 @@
     }
     return nil;
 }
+ */
 
 - (int)itemID:(NSString *)itemName {
     int result = -1;

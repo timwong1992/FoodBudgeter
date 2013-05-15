@@ -63,7 +63,7 @@
 }
 
 - (void) refreshTable {
-    foodVC.items = [dbManager itemsInDatabase];
+    //foodVC.items = [dbManager itemsInDatabase];
     [foodVC.tableView reloadData];
 }
 

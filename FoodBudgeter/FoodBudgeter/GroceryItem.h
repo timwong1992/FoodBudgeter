@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Item.h"
 
-@interface GroceryItem : Item
+@interface GroceryItem : Item <ItemProtocol>
 
 @property(nonatomic, assign) double itemCost;       // Cost of the item, $2.30
 @property(nonatomic, assign) NSInteger unitAmount;  // Amount of units ex. 24 slices, 6 chicken breasts

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Item.h"
 
-@interface RecipeItem : Item
+@interface RecipeItem : Item <ItemProtocol>
 
 @property (nonatomic, strong) NSMutableArray *itemIngredients;
 

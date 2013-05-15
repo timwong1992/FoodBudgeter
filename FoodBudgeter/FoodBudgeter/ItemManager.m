@@ -21,18 +21,27 @@
 }
 
 - (BOOL)buildItems {
+    NSMutableArray *arr = [dbManager buildItems];
+    NSLog(@"%d",arr.count);
     [self setItems:[dbManager buildItems]];
     return true;
 }
 
 - (BOOL)addItem:(NSString*)itemName withType:(NSString*)itemType withIngredients:(NSMutableArray*)ingredients withCost:(double)itemCost {
-    if ([self getItemByName:itemName] == nil) {
-        Item *item = [[Item alloc] initWithName:itemName];
-        [items addObject:item];
-        NSLog(@"num of items %lu", (unsigned long)[items count]);
-        return [dbManager addItem:item];
+    if ([self getItemByName:itemName] != nil) {
+        return false;
     }
-    return false;
+    Item *item;
+    if ([itemType isEqualToString:@"Purchase"])
+        item = [[PurchasedItem alloc] initWithName:itemName];
+    else if ([itemType isEqualToString:@"Recipe"])
+        item = [[RecipeItem alloc] initWithName:itemName];
+    else if ([itemType isEqualToString:@"Grocery"])
+        item = [[GroceryItem alloc] initWithName:itemName];
+    else
+        return false;
+    [items addObject:item];
+    return [dbManager addItem:item];
 }
 
 - (Item*)getItemByName:(NSString*)itemName {

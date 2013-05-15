@@ -28,7 +28,7 @@
         
         NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[self numItemsInDatabase]];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];        
+        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss +zzzz"];        
         // for each found row, create the appropriate object based upon its type
         
         while(sqlite3_step(statement) == SQLITE_ROW) {
@@ -49,13 +49,13 @@
             // else if type is purchase
             else if ([type isEqualToString:@"Purchase"]) {
                 NSLog(@"Purchased item being created from db");
-                NSLog(@"Purchase price: %.2f", [self itemCost:itemId]);
-                item = [[PurchasedItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId]];
+                NSLog(@"Purchase price: %.2f", [self itemCost:itemId withType:type]);
+                item = [[PurchasedItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId withType:type]];
             }
             // else if type is grocery
 #warning grocery item creation incomplete
             else if (strcmp(itemType, "Grocery")) {
-                item = [[GroceryItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId] unitAmount:0 unitType:0];
+                //item = [[GroceryItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId] unitAmount:0 unitType:0];
             }
             if (item != nil)
                 [items addObject:item];
@@ -331,7 +331,7 @@
     return type;
 }
 
-- (double)itemCost:(int)itemID {
+- (double)itemCost:(int)itemID withType:(NSString*)itemType{
     double cost = 0;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
@@ -339,17 +339,15 @@
         sqlite3_stmt *statement;
         NSString *query;
         
-        // get item type from database
-        NSString *itemType = [self itemType:itemID];
-        
-        if ([itemType isEqualToString:@"purchase"]) {
+        if ([itemType isEqualToString:@"Recipe"]) {
             query = [NSString stringWithFormat:@"SELECT itemCost FROM recipe_ingredients WHERE recipeID = \"%d\"", itemID];
         }
-        else if ([itemType isEqualToString:@"recipe"]) {
-            
+        else if ([itemType isEqualToString:@"Purchase"]) {
+            NSLog(@"itemtype match");
+            query = [NSString stringWithFormat:@"SELECT itemCost FROM purchase WHERE purchaseID = \"%d\"", itemID];
         }
-        else if ([itemType isEqualToString:@"grocery"]) {
-            
+        else if ([itemType isEqualToString:@"Grocery"]) {
+            query = [NSString stringWithFormat:@"SELECT itemCost FROM grocery WHERE groceryID = \"%d\"", itemID];
         }
         
         // run query
@@ -357,6 +355,7 @@
         
         // increment result for each entry
         if (sqlite3_step(statement) == SQLITE_ROW) {
+            NSLog(@"Cost found!");
             cost = sqlite3_column_double(statement, 0);
         }
         

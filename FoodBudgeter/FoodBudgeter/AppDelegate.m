@@ -43,6 +43,7 @@
     
     UINavigationController *foodNav = [[UINavigationController alloc] initWithRootViewController:foodTableVC];
     UINavigationController *logFoodNav = [[UINavigationController alloc] initWithRootViewController:logFoodVC];
+    [logFoodNav setNavigationBarHidden:YES];
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[foodNav, logFoodNav];

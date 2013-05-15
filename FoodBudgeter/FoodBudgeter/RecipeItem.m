@@ -25,6 +25,10 @@
     return [NSString stringWithFormat:@"INSERT INTO item (itemName, itemType, date) VALUES (\"%@\", \"Recipe\", \"%@\")", self.itemName, [self.dateLogged description]];
 }
 
+- (NSString*)createAddSubtableQuery {
+    return [NSString stringWithFormat:@"INSERT INTO recipe VALUES \"%d\"", self.itemId];
+}
+
 - (int)numOfProperties {
     return 3;
 }

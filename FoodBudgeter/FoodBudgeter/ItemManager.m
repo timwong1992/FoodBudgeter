@@ -55,7 +55,7 @@
 - (BOOL)removeItem:(Item *)item {
     if ([self.items indexOfObject:item] != -1) {
         [items removeObject:item];
-        return true;
+        return [dbManager removeItem:item.itemName];
     }
     return false;
 }

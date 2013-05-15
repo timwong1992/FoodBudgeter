@@ -29,7 +29,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,19 +87,25 @@
  }
  */
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+                NSLog(@"item count: %d",itemManager.items.count);
+                NSLog(@"db count: %d",[itemManager.dbManager numItemsInDatabase]);
+        [itemManager removeItem:[itemManager.items objectAtIndex:indexPath.row]];
+
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        NSLog(@"item count: %d",itemManager.items.count);
+        NSLog(@"db count: %d",[itemManager.dbManager numItemsInDatabase]);
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
+}
+
 
 /*
  // Override to support rearranging the table view.
@@ -124,8 +130,8 @@
     // Navigation logic may go here. Create and push another view controller.
     
     FoodDetailTableViewController *detailViewController = [[FoodDetailTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    detailViewController.title = [[items objectAtIndex:indexPath.row]itemName];
     detailViewController.item = [items objectAtIndex:indexPath.row];
+    detailViewController.title = detailViewController.item.itemName;
     // ...
     // Pass the selected object to the new view controller.
     [self.navigationController pushViewController:detailViewController animated:YES];

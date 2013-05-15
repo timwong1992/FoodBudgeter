@@ -48,8 +48,6 @@
             }
             // else if type is purchase
             else if ([type isEqualToString:@"Purchase"]) {
-                NSLog(@"Purchased item being created from db");
-                NSLog(@"Purchase price: %.2f", [self itemCost:itemId withType:type]);
                 item = [[PurchasedItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId withType:type]];
             }
             // else if type is grocery

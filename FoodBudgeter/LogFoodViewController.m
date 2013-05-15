@@ -15,7 +15,7 @@
 
 @implementation LogFoodViewController
 
-@synthesize segmentedControl, nameField, costField, portionLabel, unitLabel, ingredients, nameLabel, foodVC, addItemCommand, ingrdNameField, itemNameField, portionField, unitField, exampleBtn, status,
+@synthesize segmentedControl, nameField, costField, portionLabel, unitLabel, ingredients, nameLabel, foodVC, ingrdNameField, itemNameField, portionField, unitField, exampleBtn, status,
 ingredientBtn, costLabel, itemManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -67,21 +67,51 @@ ingredientBtn, costLabel, itemManager;
 
 #pragma mark add Item
 
-- (BOOL)addItem:(NSString *)itemName withType:(NSString*)itemType withIngredients:(NSMutableArray *)_ingredients withCost:(double)itemCost {
-    if ([addItemCommand execute:itemName withType:itemType withIngredients:_ingredients withCost:itemCost]) {
-        [self refreshTable];
-        status.text = @"Successfully added!";
-        return true;
-    }
-    status.text = @"Error adding item!";
-    return false;
+- (BOOL)addPurchaseItem:(NSString *)itemName withCost:(double)itemCost {
+    if (itemCost <= 0.00)
+        return false;
+    return [itemManager addPurchaseItem:itemName withCost:itemCost];
+}
+
+- (BOOL)addRecipeItem:(NSString *)itemName withIngredients:(NSMutableArray *)itemIngredients {
+    return [itemManager addRecipeItem:itemName withIngredients:itemIngredients];
+}
+
+- (BOOL)addGroceryItem:(NSString *)itemName withCost:(double)itemCost withUnitAmount:(double)unitAmount withUnitType:(NSString *)unitType {
+    if (itemCost <= 0.00)
+        return false;
+    return [itemManager addGroceryItem:itemName withCost:itemCost withUnitAmount:unitAmount withUnitType:unitType];
 }
 
 #pragma mark -
 
 
 - (IBAction)addButtonClicked:(id)sender {
-    [self addItem:nameField.text withType:[segmentedControl titleForSegmentAtIndex:[segmentedControl selectedSegmentIndex]] withIngredients:ingredients withCost:[costField.text doubleValue]];
+    BOOL result;
+    switch ([segmentedControl selectedSegmentIndex]) {
+        case RECIPE:
+        {
+            result = [self addRecipeItem:itemNameField.text withIngredients:ingredients];
+        }
+            break;
+        case PURCHASE:
+        {
+            result = [self addPurchaseItem:itemNameField.text withCost:[costField.text doubleValue]];
+        }
+            break;
+        case GROCERY:
+        {
+            result = [self addGroceryItem:itemNameField.text withCost:[costField.text doubleValue] withUnitAmount:[portionField.text doubleValue] withUnitType:unitField.text];
+        }
+            
+    }
+    if (result) {
+        [self refreshTable];
+        status.text = @"Successfully added!";
+    }
+    else {
+        status.text = @"Error adding item!";
+    }
 }
 
 - (void) refreshTable {
@@ -98,8 +128,8 @@ ingredientBtn, costLabel, itemManager;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // If on the add cooked item screen, create the appropriate view
-    if( segmentedControl.selectedSegmentIndex == 0 ) {
+    // If on the add recipe item screen, create the appropriate view
+    if( segmentedControl.selectedSegmentIndex == RECIPE ) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [button addTarget:self
                    action: @selector(anAction)

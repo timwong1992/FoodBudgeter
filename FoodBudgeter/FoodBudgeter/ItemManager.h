@@ -29,12 +29,23 @@
 - (BOOL)buildItems;
 
 /*
- Creates and adds an Item object to the array and writes this change to the database.
+ Creates and adds a RecipeItem object to the array and writes this change to the database.
  */
-- (BOOL)addItem:(NSString*)itemName
-       withType:(NSString*)itemType
-withIngredients:(NSMutableArray*)ingredients
-       withCost:(double)itemCost;
+- (BOOL)addRecipeItem:(NSString*)itemName
+      withIngredients:(NSMutableArray*)ingredients;
+/*
+ Creates and adds a GroceryItem object to the array and writes this change to the database.
+ */
+- (BOOL)addGroceryItem:(NSString*)itemName
+              withCost:(double)itemCost
+        withUnitAmount:(double)unitAmount
+          withUnitType:(NSString*)unitType;
+
+/*
+ Creates and adds a PurchaseItem object to the array and writes this change to the database.
+ */
+- (BOOL)addPurchaseItem:(NSString*)itemName
+               withCost:(double)itemCost;
 
 /*
  Retrieves an item from the array by its name.

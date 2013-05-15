@@ -37,7 +37,6 @@
             Item *item;
             const char *itemType = (char*)sqlite3_column_text(statement, 2);
             NSDate *itemDate = [formatter dateFromString:[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 3)]];
-            NSLog(@"recorded date: %@ %@",[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 3)], itemDate);
             NSString *type = [NSString stringWithUTF8String:itemType];
 #warning recipe item creation incomplete
             // if type is recipe
@@ -50,7 +49,7 @@
             }
             // else if type is grocery
 #warning grocery item creation incomplete
-            else if (strcmp(itemType, "Grocery")) {
+            else if ([type isEqualToString:@"Grocery"]) {
                 //item = [[GroceryItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId] unitAmount:0 unitType:0];
             }
             if (item != nil)

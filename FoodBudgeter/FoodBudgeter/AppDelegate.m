@@ -11,7 +11,6 @@
 #import "FoodTableViewController.h"
 #import "FoodDetailTableViewController.h"
 #import "LogFoodViewController.h"
-#import "AddItemCommand.h"
 #import "QueryCommand.h"
 
 @implementation AppDelegate
@@ -36,13 +35,9 @@
     logFoodVC.foodVC = foodTableVC;
     logFoodVC.itemManager = itemManager;
     
-    AddItemCommand *addItemCommand = [[AddItemCommand alloc] init];
-    addItemCommand.itemManager = itemManager;
-    
     RemoveItemCommand *removeItemCommand = [[RemoveItemCommand alloc] init];
     removeItemCommand.itemManager = itemManager;
     
-    logFoodVC.addItemCommand = addItemCommand;
     foodTableVC.removeItemCommand = removeItemCommand;
     
     UINavigationController *foodNav = [[UINavigationController alloc] initWithRootViewController:foodTableVC];

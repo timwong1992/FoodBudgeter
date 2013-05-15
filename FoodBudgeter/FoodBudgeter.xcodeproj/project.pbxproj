@@ -47,7 +47,6 @@
 		3FE218481730C14B00CDF44B /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE218471730C14B00CDF44B /* second.png */; };
 		3FE2184A1730C14B00CDF44B /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE218491730C14B00CDF44B /* second@2x.png */; };
 		3FEFCBE91737FFB8005B0DA5 /* QueryCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFCBE81737FFB8005B0DA5 /* QueryCommand.m */; };
-		3FEFCBEC17380122005B0DA5 /* AddItemCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFCBEB17380122005B0DA5 /* AddItemCommand.m */; };
 		9C56A6BB17311E550028C1C4 /* LogFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C56A6B817311E550028C1C4 /* LogFoodViewController.m */; };
 		9C56A6BC17311E550028C1C4 /* LogFoodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C56A6B917311E550028C1C4 /* LogFoodViewController.xib */; };
 /* End PBXBuildFile section */
@@ -125,8 +124,6 @@
 		3FE218491730C14B00CDF44B /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		3FEFCBE71737FFB8005B0DA5 /* QueryCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCommand.h; sourceTree = "<group>"; };
 		3FEFCBE81737FFB8005B0DA5 /* QueryCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryCommand.m; sourceTree = "<group>"; };
-		3FEFCBEA17380122005B0DA5 /* AddItemCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddItemCommand.h; sourceTree = "<group>"; };
-		3FEFCBEB17380122005B0DA5 /* AddItemCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddItemCommand.m; sourceTree = "<group>"; };
 		9C56A6B617311E550028C1C4 /* AddRecipe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AddRecipe.png; path = ../AddRecipe.png; sourceTree = "<group>"; };
 		9C56A6B717311E550028C1C4 /* LogFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogFoodViewController.h; path = ../LogFoodViewController.h; sourceTree = "<group>"; };
 		9C56A6B817311E550028C1C4 /* LogFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogFoodViewController.m; path = ../LogFoodViewController.m; sourceTree = "<group>"; };
@@ -271,8 +268,6 @@
 				3F24B4331732D30100A8068D /* FoodDetailTableViewController.m */,
 				3FEFCBE71737FFB8005B0DA5 /* QueryCommand.h */,
 				3FEFCBE81737FFB8005B0DA5 /* QueryCommand.m */,
-				3FEFCBEA17380122005B0DA5 /* AddItemCommand.h */,
-				3FEFCBEB17380122005B0DA5 /* AddItemCommand.m */,
 				3F787DE1173964120073E0C0 /* RemoveItemCommand.h */,
 				3F787DE2173964120073E0C0 /* RemoveItemCommand.m */,
 			);
@@ -460,7 +455,6 @@
 				3F6A58BB1735E44B00B80F09 /* RecipeItem.m in Sources */,
 				3F6A58BE1735E45B00B80F09 /* PurchasedItem.m in Sources */,
 				3FEFCBE91737FFB8005B0DA5 /* QueryCommand.m in Sources */,
-				3FEFCBEC17380122005B0DA5 /* AddItemCommand.m in Sources */,
 				3F787DE0173963D40073E0C0 /* Item.m in Sources */,
 				3F787DE3173964130073E0C0 /* RemoveItemCommand.m in Sources */,
 				3F09CC3B1739CBB200DA9AC3 /* ItemManager.m in Sources */,

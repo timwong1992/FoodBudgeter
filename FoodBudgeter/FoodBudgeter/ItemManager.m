@@ -25,6 +25,24 @@
     return true;
 }
 
+- (BOOL)addPurchaseItem:(NSString *)itemName withCost:(double)itemCost {
+    Item *item = [[PurchasedItem alloc] initWithID:0 withName:itemName withDate:[NSDate date] withCost:itemCost];
+    [items addObject:item];
+    return [dbManager addItem:item];
+}
+
+- (BOOL)addRecipeItem:(NSString *)itemName withIngredients:(NSMutableArray *)ingredients {
+    Item *item = [[RecipeItem alloc] initWithID:0 withName:itemName withDate:[NSDate date] withIngredients:ingredients];
+    [items addObject:item];
+    return [dbManager addItem:item];
+}
+
+- (BOOL)addGroceryItem:(NSString *)itemName withCost:(double)itemCost withUnitAmount:(double)unitAmount withUnitType:(NSString *)unitType {
+    Item *item = [[GroceryItem alloc] initWithID:0 withName:itemName withDate:[NSDate date] withCost:itemCost unitAmount:unitAmount unitType:unitType];
+    [items addObject:item];
+    return [dbManager addItem:item];
+}
+
 - (BOOL)addItem:(NSString*)itemName withType:(NSString*)itemType withIngredients:(NSMutableArray*)ingredients withCost:(double)itemCost {
     if ([self getItemByName:itemName] != nil) {
         return false;
@@ -37,7 +55,6 @@
         item = [[RecipeItem alloc] initWithID:0 withName:itemName withDate:[NSDate date] withIngredients:ingredients];
     else if ([itemType isEqualToString:@"Grocery"])
         NSLog(@"derp");
-       //item = [[GroceryItem alloc] initWithID:0 withName:itemName withDate:[NSDate date] withCost:itemCost unitAmount: unitType:<#(NSString *)#>];
     else
         return false;
     [items addObject:item];

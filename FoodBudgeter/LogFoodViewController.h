@@ -12,7 +12,6 @@
 #import "DBManager.h"
 #import "ItemManager.h"
 #import "FoodTableViewController.h"
-#import "AddItemCommand.h"
 #import "RemoveItemCommand.h"
 
 @interface LogFoodViewController : UIViewController <DBDelegate, UIGestureRecognizerDelegate>
@@ -24,7 +23,6 @@
 
 @property(nonatomic, strong) NSArray *ingredients;
 @property(nonatomic, strong) ItemManager *itemManager;
-@property(nonatomic, strong) AddItemCommand *addItemCommand;
 @property(nonatomic, strong) RemoveItemCommand *removeItemCommand;
 
 // temp reference to food table vc
@@ -35,12 +33,23 @@
 - (IBAction)anAction;
 
 /*
- Given item data, adds it to the database. Returns false if the item is a duplicate or the database is not changed.
+ Creates and adds a RecipeItem object
  */
-- (BOOL)addItem:(NSString*)itemName
-       withType:(NSString*)itemType
-withIngredients:(NSArray*)ingredients
-       withCost:(double)itemCost;
+- (BOOL)addRecipeItem:(NSString*)itemName
+      withIngredients:(NSMutableArray*)ingredients;
+/*
+ Creates and adds a GroceryItem object
+ */
+- (BOOL)addGroceryItem:(NSString*)itemName
+              withCost:(double)itemCost
+        withUnitAmount:(double)unitAmount
+          withUnitType:(NSString*)unitType;
+
+/*
+ Creates and adds a PurchaseItem object
+ */
+- (BOOL)addPurchaseItem:(NSString*)itemName
+               withCost:(double)itemCost;
 
 //- (IBAction)showExample:(id)sender;
 //- (void) hidePurchaseView;

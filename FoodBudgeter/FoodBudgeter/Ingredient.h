@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GroceryItem.h"
 
 @interface Ingredient : NSObject
 
+@property(nonatomic, strong) GroceryItem *grocery;  // where the ingredient came from
 @property(nonatomic, assign) double portion;        // Amount of the item used, 4/16 of a 16oz can
 @property(nonatomic, assign) NSString *unitType;    // oz, lbs, slices
 @property(nonatomic, strong) NSString *ingredientName; // ex. chicken breast

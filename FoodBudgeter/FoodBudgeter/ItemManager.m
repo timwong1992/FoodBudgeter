@@ -68,12 +68,14 @@
 }
 
 - (BOOL)removeItemByName:(NSString *)name {
-    for (Item *item in items) {
+    Item *item;
+    for (item in items) {
         if ([[item itemName] isEqualToString:name]) {
-            [items removeObject:item];
-            return [dbManager removeItem:name];
+            break;
         }
     }
+    if (item != nil)
+        return [self removeItem:item];
     return false;
 }
 

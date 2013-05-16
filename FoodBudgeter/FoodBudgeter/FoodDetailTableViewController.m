@@ -57,8 +57,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (section == OTHER_DATA)
-        return 2;
     return 1;
 }
 
@@ -82,6 +80,7 @@
         {
             title = @"Date Logged";
         }
+            break;
         case OTHER_DATA:
         {
             if ([[item itemType] isEqualToString:@"Grocery"]) {
@@ -122,6 +121,7 @@
         {
             cell.textLabel.text = [[item dateLogged]description];
         }
+            break;
         case OTHER_DATA:
         {
             if ([[item itemType] isEqualToString:@"Grocery"]) {

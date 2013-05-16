@@ -35,7 +35,7 @@
 }
 
 - (NSString*)itemType {
-    return @"Recipe";
+    return @"Grocery";
 }
 
 - (double)itemCost {

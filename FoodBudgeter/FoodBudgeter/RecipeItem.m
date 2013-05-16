@@ -26,7 +26,7 @@
 }
 
 - (NSString*)createAddSubtableQuery {
-    return [NSString stringWithFormat:@"INSERT INTO recipe VALUES \"%d\"", self.itemId];
+    return [NSString stringWithFormat:@"INSERT INTO recipe VALUES (%d)", self.itemId];
 }
 
 - (int)numOfProperties {

@@ -126,7 +126,6 @@
     // Navigation logic may go here. Create and push another view controller.
     
     FoodDetailTableViewController *detailViewController = [[FoodDetailTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    NSLog(@"style! %d", [detailViewController.tableView style]);
     detailViewController.item = [items objectAtIndex:indexPath.row];
     detailViewController.title = detailViewController.item.itemName;
     // ...

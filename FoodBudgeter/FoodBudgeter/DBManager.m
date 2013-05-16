@@ -50,7 +50,8 @@
             // else if type is grocery
 #warning grocery item creation incomplete
             else if ([type isEqualToString:@"Grocery"]) {
-                //item = [[GroceryItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId] unitAmount:0 unitType:0];
+                NSMutableArray *groceryData  = [self groceryItemData:itemName];
+                item = [[GroceryItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId withType:type] unitAmount:[[groceryData objectAtIndex:0]doubleValue] unitType:[groceryData objectAtIndex:1]];
             }
             if (item != nil)
                 [items addObject:item];
@@ -137,29 +138,12 @@
         return false;
     }
     
-    // add item data to other tables, depending on item type
-    /*
-     // for each ingredient in item data
-     for (int i = 0; i < [self numIngredientsInRecipe:recipeID]; i++) {
-     if ([self ingredientID:itemName] != -1)
-     insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe_ingredient (recipeID, ingredientID) VALUES (\"%d\", \"%d\")", recipeID, [self ingredientID:itemName]];
-     [self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Join table insert failed!"];
-     }
-     // check ingredient table for the ingredient
-     // if not found, add ingredient into table
-     // add join table entry by getting id's from recipe and ingredient tables
-     
-     //insertQuery = [NSString stringWithFormat:@""];
-     }
-     */
-    // if not recipe, must be purchase
-    //   else {
-    
     // set item ID of item object based on what id DB assigned
     item.itemId = [self itemID:item.itemName];
     
     // run subquery based on item type
     insertQuery = [item createAddSubtableQuery];
+    NSLog(@"second query: %@", insertQuery);
     
     if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Subtable insert failed!"] != SQLITE_OK) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Item could not be added into the database." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -168,11 +152,13 @@
     }
     
     if ([[item itemType] isEqualToString:@"Recipe"]) {
+        NSLog(@"This runs");
         for (Ingredient *ingredient in ((RecipeItem*)item).itemIngredients) {
             insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe_ingredient VALUES \"%d\", \"%d\", \"%.2f\"", item.itemId, ingredient.ingredientID, ingredient.portion];
             if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Join table insert failed!"] != SQLITE_OK) {
                 return false;
             }
+            NSLog(@"Ingredient successfully added!");
         }
     }
     return true;
@@ -219,33 +205,6 @@
     }
     return count;
 }
-
-/*
- - (NSMutableArray*)itemsInDatabase {
- const char *dbpath = [databasePath UTF8String];
- if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
- NSMutableArray *items = [[NSMutableArray alloc]init];
- 
- // prepare query
- sqlite3_stmt *statement;
- 
- // run query
- sqlite3_prepare(itemDB, "SELECT itemName FROM item", -1, &statement, NULL);
- 
- // if it finds a row, clean up and return the ID f
- while (sqlite3_step(statement) == SQLITE_ROW) {
- NSString *result = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 0)];
- [items addObject:result];
- }
- 
- // database cleanup
- sqlite3_finalize(statement);
- sqlite3_close(itemDB);
- return items;
- }
- return nil;
- }
- */
 
 - (int)itemID:(NSString *)itemName {
     int result = -1;
@@ -349,10 +308,7 @@
         sqlite3_stmt *statement;
         NSString *query;
         
-        if ([itemType isEqualToString:@"Recipe"]) {
-            query = [NSString stringWithFormat:@"SELECT itemCost FROM recipe_ingredients WHERE recipeID = \"%d\"", itemID];
-        }
-        else if ([itemType isEqualToString:@"Purchase"]) {
+        if ([itemType isEqualToString:@"Purchase"]) {
             query = [NSString stringWithFormat:@"SELECT itemCost FROM purchase WHERE purchaseID = \"%d\"", itemID];
         }
         else if ([itemType isEqualToString:@"Grocery"]) {
@@ -373,6 +329,32 @@
     }
     return cost;
     
+}
+
+- (NSMutableArray*)groceryItemData:(NSString*)groceryItemName {
+    const char *dbpath = [databasePath UTF8String];
+    NSMutableArray *data = nil;
+    if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
+        // prepare query
+        sqlite3_stmt *statement;
+        NSString *query = [NSString stringWithFormat:@"SELECT unitAmount, unitType FROM grocery WHERE groceryID = \"%d\"", [self itemID:groceryItemName]];
+        
+        // run query
+        sqlite3_prepare(itemDB, [query UTF8String], -1, &statement, NULL);
+        
+        
+        // gather results and return if any are found
+        if (sqlite3_step(statement) == SQLITE_ROW) {
+            NSNumber *unitAmount = [NSNumber numberWithDouble:sqlite3_column_double(statement, 0)];
+            NSString *unitType = [NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 1)];
+            data = [[NSMutableArray alloc]initWithObjects:unitAmount, unitType, nil];
+        }
+        
+        // database cleanup
+        sqlite3_finalize(statement);
+        sqlite3_close(itemDB);
+    }
+    return data;
 }
 
 #pragma mark -

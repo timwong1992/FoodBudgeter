@@ -14,7 +14,7 @@
 
 @implementation IngredientDetailViewController
 
-@synthesize nameLabel, portionField, unitTypeLabel;
+@synthesize nameLabel, portionField, unitTypeLabel, grocery, itemManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,6 +29,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    nameLabel.text = grocery.itemName;
+    unitTypeLabel.text = grocery.unitType;
+    
 }
 
 - (void)didReceiveMemoryWarning

@@ -14,8 +14,10 @@
 @property(nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property(nonatomic, strong) IBOutlet UILabel *unitTypeLabel;
 @property(nonatomic, strong) IBOutlet UITextField *portionField;
+@property(nonatomic, strong) GroceryItem *grocery;
 @property(nonatomic, strong) ItemManager *itemManager;
 
 // Sets the name label and unit type label of the view
 -(void) setView:(NSString*)_name unitType:(NSString*)_unitType;
+-(IBAction)submitSelected:(id)sender;
 @end

@@ -10,7 +10,7 @@
 
 @implementation ItemManager
 
-@synthesize dbManager, items;
+@synthesize dbManager, items, ingredients;
 
 - (id)init {
     self = [super init];
@@ -81,6 +81,16 @@
 
 - (int)numOfItems {
     return [items count];
+}
+
+- (NSMutableArray*)retrieveGroceryItems {
+    NSMutableArray *groceryItems = [[NSMutableArray alloc]init];
+    for (Item *item in items) {
+        if ([[item itemType] isEqualToString:@"Grocery"]) {
+            [groceryItems addObject:item];
+        }
+    }
+    return groceryItems;
 }
 
 @end

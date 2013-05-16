@@ -20,6 +20,7 @@
 
 @property (nonatomic,strong) DBManager *dbManager;
 @property (nonatomic,strong) NSMutableArray *items;
+@property (nonatomic,strong) NSMutableString *ingredients; //ingredients to be added into a recipe
 
 
 /*
@@ -60,5 +61,7 @@
 - (BOOL)removeItemByName:(NSString *)name;
 
 - (int)numOfItems;
+
+- (NSMutableArray*)retrieveGroceryItems;
 
 @end

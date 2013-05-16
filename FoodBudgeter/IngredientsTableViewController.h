@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "RecipeItem.h"
 #import "Ingredient.h"
+#import "GroceryTableViewController.h"
+#import "ItemManager.h"
 
 @interface IngredientsTableViewController : UITableViewController
 
-@property(nonatomic, strong)RecipeItem *recipe;
+@property(nonatomic, strong)ItemManager *itemManager;
 @property(nonatomic, strong)NSMutableArray *ingredients;
 
 @end

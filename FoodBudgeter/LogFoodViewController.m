@@ -117,6 +117,7 @@ ingredientBtn, costLabel, itemManager;
 - (IBAction)anAction {
     IngredientsTableViewController *ingrdTableViewController = [[IngredientsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     ingrdTableViewController.title = @"Ingredients";
+    ingrdTableViewController.itemManager = itemManager;
     [self.navigationController pushViewController:ingrdTableViewController animated:YES];
 }
 

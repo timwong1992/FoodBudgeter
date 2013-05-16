@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ItemManager.h"
+#import "GroceryItem.h"
+#import "IngredientDetailViewController.h"
 
 @interface GroceryTableViewController : UITableViewController
+
+@property(nonatomic, strong)ItemManager *itemManager;
+@property(nonatomic, strong)NSMutableArray *groceries;
 
 @end

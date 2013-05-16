@@ -14,7 +14,7 @@
 
 @implementation IngredientsTableViewController
 
-@synthesize ingredients, recipe;
+@synthesize ingredients, itemManager;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,8 +37,16 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem: UIBarButtonSystemItemAdd
                                   target: self
-                                  action: @selector(addNewSegment)];
+                                  action: @selector(addIngredientToRecipe)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton,self.editButtonItem, nil];
+}
+
+- (void)addIngredientToRecipe {
+    GroceryTableViewController *groceryTable = [[GroceryTableViewController alloc] initWithNibName:@"GroceryTableViewController" bundle:nil];
+    groceryTable.itemManager = itemManager;
+    groceryTable.groceries = [itemManager retrieveGroceryItems];
+    groceryTable.title = @"Grocery Items";
+    [self.navigationController pushViewController:groceryTable animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

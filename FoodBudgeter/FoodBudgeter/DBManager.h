@@ -13,6 +13,7 @@
 #import "RecipeItem.h"
 #import "PurchasedItem.h"
 #import "GroceryItem.h"
+#import "Ingredient.h"
 
 @class DBManager;
 

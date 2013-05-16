@@ -89,13 +89,15 @@
             onDatabase:itemDB
       withErrorMessage:"Purchase table creation failed!"];
         
-        [self runQuery:"CREATE TABLE IF NOT EXISTS grocery (groceryID INTEGER PRIMARY KEY, itemCost DOUBLE, unitAmount DOUBLE, unitType TEXT, FOREIGN KEY(groceryID) REFERENCES item(itemID))" onDatabase:itemDB withErrorMessage:"Grocery table creation failed!"];
-        
-        [self runQuery:"CREATE TABLE IF NOT EXISTS ingredient (ingredientID INTEGER PRIMARY KEY AUTOINCREMENT, ingredientName TEXT, ingredientCost DOUBLE)"
+        [self runQuery:"CREATE TABLE IF NOT EXISTS grocery (groceryID INTEGER PRIMARY KEY, itemCost DOUBLE, unitAmount DOUBLE, unitType TEXT, FOREIGN KEY(groceryID) REFERENCES item(itemID))"
             onDatabase:itemDB
-      withErrorMessage:"Ingredient table creation failed!"];
+      withErrorMessage:"Grocery table creation failed!"];
         
-        [self runQuery:"CREATE TABLE IF NOT EXISTS recipe_ingredient (recipeID INTEGER, ingredientID INTEGER, ingredientServings DOUBLE, PRIMARY KEY(recipeID, ingredientID), FOREIGN KEY(recipeID) REFERENCES recipe(recipeID), FOREIGN KEY(ingredientID) REFERENCES ingredient(ingredientID))"
+        //[self runQuery:"CREATE TABLE IF NOT EXISTS ingredient (ingredientID INTEGER PRIMARY KEY AUTOINCREMENT, ingredientName TEXT, , FOREIGN KEY(ingredientID) REFERENCES grocery(groceryID))"
+            //onDatabase:itemDB
+//      withErrorMessage:"Ingredient table creation failed!"];
+        
+        [self runQuery:"CREATE TABLE IF NOT EXISTS recipe_ingredient (recipeID INTEGER, ingredientID INTEGER, ingredientServings DOUBLE, PRIMARY KEY(recipeID, ingredientID), FOREIGN KEY(recipeID) REFERENCES recipe(recipeID), FOREIGN KEY(ingredientID) REFERENCES grocery(groceryID))"
             onDatabase:itemDB
       withErrorMessage:"Recipe_Ingredient table creation failed!"];
         
@@ -137,11 +139,6 @@
     
     // add item data to other tables, depending on item type
     /*
-     if ([itemType isEqualToString:@"Recipe"]) {
-     insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe (recipeID) VALUES (\"%d\")", [self itemID:itemName]];
-     [self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Recipe insert failed!"];
-     
-     int recipeID = [self itemID:itemName];
      // for each ingredient in item data
      for (int i = 0; i < [self numIngredientsInRecipe:recipeID]; i++) {
      if ([self ingredientID:itemName] != -1)
@@ -168,6 +165,15 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Item could not be added into the database." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
         return false;
+    }
+    
+    if ([[item itemType] isEqualToString:@"Recipe"]) {
+        for (Ingredient *ingredient in ((RecipeItem*)item).itemIngredients) {
+            insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe_ingredient VALUES \"%d\", \"%d\", \"%.2f\"", item.itemId, ingredient.ingredientID, ingredient.portion];
+            if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Join table insert failed!"] != SQLITE_OK) {
+                return false;
+            }
+        }
     }
     return true;
 }

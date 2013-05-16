@@ -49,7 +49,8 @@
             }
             // else if type is grocery
             else if ([type isEqualToString:@"Grocery"]) {
-                NSMutableArray *groceryData  = [self groceryItemData:itemName];
+                NSMutableArray *groceryData  = [self groceryItemData:itemId];
+                //item = [[GroceryItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId withType:type] unitAmount:[self groceryUnitAmount:itemName] unitType:[self groceryUnitType:itemName]];
                 item = [[GroceryItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId withType:type] unitAmount:[[groceryData objectAtIndex:0]doubleValue] unitType:[groceryData objectAtIndex:1]];
             }
             if (item != nil)
@@ -330,14 +331,14 @@
     
 }
 
-- (NSMutableArray*)groceryItemData:(NSString*)groceryItemName {
+- (NSMutableArray*)groceryItemData:(int)groceryId {
     NSMutableArray *data = nil;
-
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
         // prepare query
         sqlite3_stmt *statement;
-        NSString *query = [NSString stringWithFormat:@"SELECT unitAmount, unitType FROM grocery WHERE groceryID = \"%d\"", [self itemID:groceryItemName]];
+        NSString *query;
+        query = [NSString stringWithFormat:@"SELECT unitAmount, unitType FROM grocery WHERE groceryID = \"%d\"", groceryId];
         
         // run query
         sqlite3_prepare(itemDB, [query UTF8String], -1, &statement, NULL);
@@ -346,7 +347,6 @@
         if (sqlite3_step(statement) == SQLITE_ROW) {
             NSNumber *unitAmount = [NSNumber numberWithDouble:sqlite3_column_double(statement, 0)];
             NSString *unitType = [NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 1)];
-                        NSLog(@"%@ %@", unitAmount, unitType);
             data = [[NSMutableArray alloc]initWithObjects:unitAmount, unitType, nil];
         }
         

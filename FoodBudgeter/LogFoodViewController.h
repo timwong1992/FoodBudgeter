@@ -25,7 +25,7 @@
 
 @property(nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
 @property(nonatomic, strong) IBOutlet UILabel *nameLabel, *costLabel, *portionLabel, *unitLabel, *status;
-@property(nonatomic, strong) IBOutlet UITextField *nameField, *costField, *ingrdNameField, *itemNameField, *portionField, *unitField;
+@property(nonatomic, strong) IBOutlet UITextField *nameField, *costField, *ingrdNameField, *portionField, *unitField;
 @property(nonatomic, strong) IBOutlet UIButton *exampleBtn, *ingredientBtn;
 
 @property(nonatomic, strong) NSArray *ingredients;

@@ -21,6 +21,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped)];
+        tap.delegate = self;
+        [self.view addGestureRecognizer:tap];
     }
     return self;
 }
@@ -50,6 +53,10 @@
     Ingredient *ingredient = [[Ingredient alloc] initWithIgrdName:grocery.itemName withType:grocery.unitType withPortion:[[portionField text]doubleValue]];
     [itemManager.ingredients addObject:ingredient];
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)viewTapped {
+    [portionField resignFirstResponder];
 }
 
 @end

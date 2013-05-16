@@ -15,7 +15,7 @@
 
 @implementation LogFoodViewController
 
-@synthesize segmentedControl, nameField, costField, portionLabel, unitLabel, ingredients, nameLabel, ingrdNameField, itemNameField, portionField, unitField, exampleBtn, status,
+@synthesize segmentedControl, nameField, costField, portionLabel, unitLabel, ingredients, nameLabel, ingrdNameField, portionField, unitField, exampleBtn, status,
 ingredientBtn, costLabel, itemManager, delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -87,17 +87,17 @@ ingredientBtn, costLabel, itemManager, delegate;
     switch ([segmentedControl selectedSegmentIndex]) {
         case RECIPE:
         {
-            result = [self addRecipeItem:itemNameField.text withIngredients:ingredients];
+            result = [self addRecipeItem:nameField.text withIngredients:ingredients];
         }
             break;
         case PURCHASE:
         {
-            result = [self addPurchaseItem:itemNameField.text withCost:[costField.text doubleValue]];
+            result = [self addPurchaseItem:nameField.text withCost:[costField.text doubleValue]];
         }
             break;
         case GROCERY:
         {
-            result = [self addGroceryItem:itemNameField.text withCost:[costField.text doubleValue] withUnitAmount:[portionField.text doubleValue] withUnitType:unitField.text];
+            result = [self addGroceryItem:nameField.text withCost:[costField.text doubleValue] withUnitAmount:[portionField.text doubleValue] withUnitType:unitField.text];
         }
             
     }
@@ -174,6 +174,9 @@ ingredientBtn, costLabel, itemManager, delegate;
 - (void)viewTapped {
     [nameField resignFirstResponder];
     [costField resignFirstResponder];
+    [unitField resignFirstResponder];
+    [portionField resignFirstResponder];
+    [ingrdNameField resignFirstResponder];
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "ItemManager.h"
 #import "Ingredient.h"
 
-@interface IngredientDetailViewController : UIViewController
+@interface IngredientDetailViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property(nonatomic, strong) IBOutlet UILabel *unitTypeLabel;

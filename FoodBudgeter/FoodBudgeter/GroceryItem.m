@@ -30,6 +30,10 @@
     return [NSString stringWithFormat:@"INSERT INTO grocery (groceryID, itemCost, unitAmount, unitType) VALUES (%d, \"%.2f\", \"%.2f\", \"%@\")", self.itemId, self.itemCost, self.unitAmount, self.unitType];
 }
 
+- (NSString*)createRemoveSubtableQuery {
+    return [NSString stringWithFormat:@"DELETE FROM grocery WHERE groceryID = %d", self.itemId];
+}
+
 - (int)numOfProperties {
     return 6;
 }

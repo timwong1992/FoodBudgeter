@@ -48,7 +48,6 @@
                 item = [[PurchasedItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId withType:type]];
             }
             // else if type is grocery
-#warning grocery item creation incomplete
             else if ([type isEqualToString:@"Grocery"]) {
                 NSMutableArray *groceryData  = [self groceryItemData:itemName];
                 item = [[GroceryItem alloc] initWithID:itemId withName:itemName withDate:itemDate withCost:[self itemCost:itemId withType:type] unitAmount:[[groceryData objectAtIndex:0]doubleValue] unitType:[groceryData objectAtIndex:1]];
@@ -332,8 +331,9 @@
 }
 
 - (NSMutableArray*)groceryItemData:(NSString*)groceryItemName {
-    const char *dbpath = [databasePath UTF8String];
     NSMutableArray *data = nil;
+
+    const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &itemDB) == SQLITE_OK) {
         // prepare query
         sqlite3_stmt *statement;
@@ -342,11 +342,11 @@
         // run query
         sqlite3_prepare(itemDB, [query UTF8String], -1, &statement, NULL);
         
-        
         // gather results and return if any are found
         if (sqlite3_step(statement) == SQLITE_ROW) {
             NSNumber *unitAmount = [NSNumber numberWithDouble:sqlite3_column_double(statement, 0)];
             NSString *unitType = [NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 1)];
+                        NSLog(@"%@ %@", unitAmount, unitType);
             data = [[NSMutableArray alloc]initWithObjects:unitAmount, unitType, nil];
         }
         
@@ -361,23 +361,22 @@
 
 #pragma mark removing items
 
-- (BOOL)removeItem:(NSString *)itemName {
+- (BOOL)removeItem:(Item*)item {
     // get item ID in order to find it in other tables
-    int itemID = [self itemID:itemName];
+    int itemID = [self itemID:item.itemName];
     if (itemID == -1) {
         return false;
     }
     // delete the item
-    NSString *query = [NSString stringWithFormat:@"DELETE FROM item WHERE item.itemName = \"%@\"", itemName];
+    NSString *query = [NSString stringWithFormat:@"DELETE FROM item WHERE item.itemName = \"%@\"", item.itemName];
     
     if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Item table failed"] != SQLITE_OK) {
         return false;
     }
-#warning only works for purchase at the moment, must add in support for recipe
     NSLog(@"Deleting from item table success");
     
-    query = [NSString stringWithFormat:@"DELETE FROM purchase WHERE purchaseID = %d", itemID];
-    if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from Purchase table failed"] != SQLITE_OK) {
+    query = [item createRemoveSubtableQuery];
+    if ([self runQuery:[query UTF8String] onDatabase:itemDB withErrorMessage:"Deleting from subtable failed"] != SQLITE_OK) {
         return false;
     }
     return true;

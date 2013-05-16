@@ -69,7 +69,7 @@ withErrorMessage:(char *)errMsg;
 /*
  Given item data, remove it from database. Returns false if the database is not changed.
  */
-- (BOOL)removeItem:(NSString*)itemName;
+- (BOOL)removeItem:(Item*)item;
 
 /*
  Given ingredient data, remove it from the database. Returns false if the database is not changed.

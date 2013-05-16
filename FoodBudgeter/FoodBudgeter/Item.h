@@ -17,6 +17,8 @@
 
 - (NSString *)createAddSubtableQuery;
 
+- (NSString *)createRemoveSubtableQuery;
+
 @end
 
 @interface Item : NSObject <ItemProtocol>

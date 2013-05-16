@@ -125,7 +125,7 @@
         case OTHER_DATA:
         {
             if ([[item itemType] isEqualToString:@"Grocery"]) {
-                cell.textLabel.text = [NSString stringWithFormat:@"%.2f",[(GroceryItem*)item unitAmount]];
+                cell.textLabel.text = [NSString stringWithFormat:@"%.2f %@",[(GroceryItem*)item unitAmount], [(GroceryItem*)item unitType]];
             }
             else if ([[item itemType] isEqualToString:@"Recipe"]) {
                 cell.textLabel.text = @"Ingredients";

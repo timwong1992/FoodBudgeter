@@ -10,7 +10,7 @@
 #import "DBManager.h"
 #import "Item.h"
 #import "PurchasedItem.h"
-@protocol ViewItemsProtocol <NSObject>
+@protocol ViewItemsProtocol < NSObject>
 @required
 - (void)updateItemInView:(id)item;
 

@@ -29,10 +29,10 @@
     FoodTableViewController *foodTableVC = [[FoodTableViewController alloc] initWithNibName:@"FoodTableViewController" bundle:nil];
     foodTableVC.itemManager = itemManager;
     foodTableVC.title = @"Items";
-    [foodTableVC reloadItems];
+    foodTableVC.items = itemManager.items;
     
     LogFoodViewController *logFoodVC = [[LogFoodViewController alloc] initWithNibName:@"LogFoodViewController" bundle:nil];
-    logFoodVC.foodVC = foodTableVC;
+    logFoodVC.delegate = foodTableVC;
     logFoodVC.itemManager = itemManager;
     
     RemoveItemCommand *removeItemCommand = [[RemoveItemCommand alloc] init];
@@ -45,6 +45,7 @@
     [foodNav.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
     [logFoodNav.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
     [logFoodNav setNavigationBarHidden:YES];
+    //logFoodVC.delegate = foodTableVC;
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[foodNav, logFoodNav];

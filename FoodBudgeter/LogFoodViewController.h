@@ -6,6 +6,13 @@
 //  Copyright (c) 2013 Akia Vongdara. All rights reserved.
 //
 
+
+@protocol AddItemProtocol <NSObject>
+
+- (void)update;
+
+@end
+
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import "sqlite3.h"
@@ -14,7 +21,7 @@
 #import "FoodTableViewController.h"
 #import "RemoveItemCommand.h"
 
-@interface LogFoodViewController : UIViewController <DBDelegate, UIGestureRecognizerDelegate>
+@interface LogFoodViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
 @property(nonatomic, strong) IBOutlet UILabel *nameLabel, *costLabel, *portionLabel, *unitLabel, *status;
@@ -26,7 +33,8 @@
 @property(nonatomic, strong) RemoveItemCommand *removeItemCommand;
 
 // temp reference to food table vc
-@property(nonatomic, strong) FoodTableViewController *foodVC;
+//@property(nonatomic, strong) FoodTableViewController *foodVC;
+@property(nonatomic, strong) id<AddItemProtocol> delegate;
 
 - (IBAction)addButtonClicked:(id)sender;
 - (IBAction)segmentController:(id)sender;

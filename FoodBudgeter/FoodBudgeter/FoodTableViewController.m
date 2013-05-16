@@ -38,11 +38,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) reloadItems {
-    items = [itemManager items];
-    [self.tableView reloadData];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -98,6 +93,12 @@
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
+}
+
+- (void)update {
+    NSLog(@"DELEGATION!");
+    [self.tableView reloadData];
+    NSLog(@"%d",[self.itemManager.items count]);
 }
 
 

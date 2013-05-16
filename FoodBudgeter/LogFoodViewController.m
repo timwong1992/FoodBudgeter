@@ -15,8 +15,8 @@
 
 @implementation LogFoodViewController
 
-@synthesize segmentedControl, nameField, costField, portionLabel, unitLabel, ingredients, nameLabel, foodVC, ingrdNameField, itemNameField, portionField, unitField, exampleBtn, status,
-ingredientBtn, costLabel, itemManager;
+@synthesize segmentedControl, nameField, costField, portionLabel, unitLabel, ingredients, nameLabel, ingrdNameField, itemNameField, portionField, unitField, exampleBtn, status,
+ingredientBtn, costLabel, itemManager, delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -111,7 +111,7 @@ ingredientBtn, costLabel, itemManager;
 }
 
 - (void) refreshTable {
-    [foodVC reloadItems];
+    [delegate update];
 }
 
 - (IBAction)anAction {

@@ -118,14 +118,13 @@ ingredientBtn, costLabel, itemManager;
     IngredientsTableViewController *ingrdTableViewController = [[IngredientsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     ingrdTableViewController.title = @"Ingredients";
     [self.navigationController pushViewController:ingrdTableViewController animated:YES];
-    [self.navigationController setNavigationBarHidden:NO];
-    //nameField.hidden = true;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // If on the add recipe item screen, create the appropriate view
+    
     if( segmentedControl.selectedSegmentIndex == RECIPE ) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [button addTarget:self
@@ -141,10 +140,6 @@ ingredientBtn, costLabel, itemManager;
         [ingredientBtn setHidden: NO];
         [costLabel setHidden: YES];
         [costField setHidden: YES];
-    }
-    // If on the add bought item screen, create the appropriate view
-    else if( segmentedControl.selectedSegmentIndex == 1 ) {
-        
     }
     /*
      label = [[UILabel alloc] init];

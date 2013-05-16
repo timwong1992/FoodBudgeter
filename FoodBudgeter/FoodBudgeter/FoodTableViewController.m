@@ -66,13 +66,11 @@
     }
     
     // Configure the cell...
-    //NSLog(@"%@",[items objectAtIndex:indexPath.row]);
     cell.textLabel.text = [[items objectAtIndex:indexPath.row]itemName];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
     cell.detailTextLabel.text = [formatter stringFromDate:[[items objectAtIndex:indexPath.row]dateLogged]];
     
-    //NSLog(@"Made it here");
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;

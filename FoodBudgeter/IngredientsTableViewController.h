@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RecipeItem.h"
+#import "Ingredient.h"
 
 @interface IngredientsTableViewController : UITableViewController
+
+@property(nonatomic, strong)RecipeItem *recipe;
+@property(nonatomic, strong)NSMutableArray *ingredients;
 
 @end

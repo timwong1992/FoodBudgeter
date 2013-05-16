@@ -118,6 +118,7 @@
      IngredientDetailViewController *detailViewController = [[IngredientDetailViewController alloc] initWithNibName:@"IngredientDetailViewController" bundle:nil];
      // ...
     detailViewController.grocery = [groceries objectAtIndex:indexPath.row];
+    detailViewController.title = @"Add Ingredient";
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
     

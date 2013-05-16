@@ -12,6 +12,7 @@
 #import "FoodDetailTableViewController.h"
 #import "LogFoodViewController.h"
 #import "QueryCommand.h"
+#import "BudgetControllerViewController.h"
 
 @implementation AppDelegate
 
@@ -35,6 +36,10 @@
     logFoodVC.delegate = foodTableVC;
     logFoodVC.itemManager = itemManager;
     
+    BudgetControllerViewController *budgetVC = [[BudgetControllerViewController alloc] initWithNibName:@"BudgetControllerViewController" bundle:nil];
+    budgetVC.itemManager = itemManager;
+    budgetVC.title = @"Budget";
+    
     RemoveItemCommand *removeItemCommand = [[RemoveItemCommand alloc] init];
     removeItemCommand.itemManager = itemManager;
     
@@ -48,14 +53,12 @@
     //logFoodVC.delegate = foodTableVC;
     
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[foodNav, logFoodNav];
+    self.tabBarController.viewControllers = @[foodNav, logFoodNav, budgetVC];
    
     UITabBarItem *listItem = [[UITabBarItem alloc] initWithTitle:@"Items" image:[UIImage imageNamed:@"eye.png"] tag:0];
     UITabBarItem *logItem = [[UITabBarItem alloc] initWithTitle:@"Log Item" image:[UIImage imageNamed:@"AddRecipe.png"] tag:1];
     foodNav.tabBarItem = listItem;
     logFoodVC.tabBarItem = logItem;
-    
-    //foodTableVC.viewDelegate = logFoodVC;
     
     self.window.rootViewController = self.tabBarController;
         

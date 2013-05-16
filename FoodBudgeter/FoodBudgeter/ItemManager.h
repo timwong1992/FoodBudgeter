@@ -64,4 +64,6 @@
 
 - (NSMutableArray*)retrieveGroceryItems;
 
+- (double)totalAmountSpent;
+
 @end

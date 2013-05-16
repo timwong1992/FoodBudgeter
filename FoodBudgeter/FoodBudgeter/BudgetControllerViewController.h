@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ItemManager.h"
 
 @interface BudgetControllerViewController : UIViewController
+
+@property(nonatomic, strong)ItemManager *itemManager;
+@property(nonatomic, strong)IBOutlet UITextView *textView;
 
 @end

@@ -14,6 +14,8 @@
 
 @implementation BudgetControllerViewController
 
+@synthesize textView, itemManager;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,6 +29,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    textView.text = [NSString stringWithFormat:@"You have spent %.2f dollars.", [itemManager totalAmountSpent]];
 }
 
 - (void)didReceiveMemoryWarning

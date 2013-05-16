@@ -93,4 +93,12 @@
     return groceryItems;
 }
 
+- (double)totalAmountSpent {
+    double cost = 0;
+    for (Item *item in items) {
+        cost += [item itemCost];
+    }
+    return cost;
+}
+
 @end

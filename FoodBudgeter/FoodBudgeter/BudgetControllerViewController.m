@@ -38,4 +38,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    textView.text = [NSString stringWithFormat:@"You have spent %.2f dollars.", [itemManager totalAmountSpent]];
+    [super viewWillAppear:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+}
+
 @end

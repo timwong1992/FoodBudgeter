@@ -46,4 +46,10 @@
     unitTypeLabel.text = _unitType;
 }
 
+- (IBAction)submitSelected:(id)sender {
+    Ingredient *ingredient = [[Ingredient alloc] initWithIgrdName:grocery.itemName withType:grocery.unitType withPortion:[[portionField text]doubleValue]];
+    [itemManager.ingredients addObject:ingredient];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 @end

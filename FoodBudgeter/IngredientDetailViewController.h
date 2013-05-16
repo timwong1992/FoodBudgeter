@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ItemManager.h"
+#import "Ingredient.h"
 
 @interface IngredientDetailViewController : UIViewController
 

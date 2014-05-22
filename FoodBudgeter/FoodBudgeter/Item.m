@@ -50,4 +50,8 @@
     return nil;
 }
 
+- (NSString *)createRemoveSubtableQuery {
+    return nil;
+}
+
 @end

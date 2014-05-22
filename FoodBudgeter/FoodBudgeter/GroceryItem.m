@@ -27,11 +27,11 @@
 }
 
 - (NSString*)createAddSubtableQuery {
-    return [NSString stringWithFormat:@"INSERT INTO grocery (groceryID, itemCost, unitAmount, unitType) VALUES (%d, \"%.2f\", \"%.2f\", \"%@\")", self.itemId, self.itemCost, self.unitAmount, self.unitType];
+    return [NSString stringWithFormat:@"INSERT INTO grocery (groceryID, itemCost, unitAmount, unitType) VALUES (%ld, \"%.2f\", \"%.2f\", \"%@\")", (long)self.itemId, self.itemCost, self.unitAmount, self.unitType];
 }
 
 - (NSString*)createRemoveSubtableQuery {
-    return [NSString stringWithFormat:@"DELETE FROM grocery WHERE groceryID = %d", self.itemId];
+    return [NSString stringWithFormat:@"DELETE FROM grocery WHERE groceryID = %ld", (long)self.itemId];
 }
 
 - (int)numOfProperties {

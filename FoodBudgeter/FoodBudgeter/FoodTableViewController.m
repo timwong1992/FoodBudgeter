@@ -98,7 +98,7 @@
 - (void)update {
     NSLog(@"DELEGATION!");
     [self.tableView reloadData];
-    NSLog(@"%d",[self.itemManager.items count]);
+    NSLog(@"%lu",(unsigned long)[self.itemManager.items count]);
 }
 
 

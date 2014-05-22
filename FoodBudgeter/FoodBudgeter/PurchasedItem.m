@@ -25,11 +25,11 @@
 }
 
 - (NSString*)createAddSubtableQuery {
-    return [NSString stringWithFormat:@"INSERT INTO purchase (purchaseID, itemCost) VALUES (%d, \"%.2f\")", self.itemId, self.itemCost];
+    return [NSString stringWithFormat:@"INSERT INTO purchase (purchaseID, itemCost) VALUES (%ld, \"%.2f\")", (long)self.itemId, self.itemCost];
 }
 
 - (NSString*)createRemoveSubtableQuery {
-    return [NSString stringWithFormat:@"DELETE FROM purchase WHERE purchaseID = %d", self.itemId];
+    return [NSString stringWithFormat:@"DELETE FROM purchase WHERE purchaseID = %ld", (long)self.itemId];
 }
 
 - (int)numOfProperties {

@@ -154,7 +154,7 @@
     if ([[item itemType] isEqualToString:@"Recipe"]) {
         NSLog(@"This runs");
         for (Ingredient *ingredient in ((RecipeItem*)item).itemIngredients) {
-            insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe_ingredient VALUES \"%d\", \"%d\", \"%.2f\"", item.itemId, ingredient.ingredientID, ingredient.portion];
+            insertQuery = [NSString stringWithFormat:@"INSERT INTO recipe_ingredient VALUES \"%ld\", \"%d\", \"%.2f\"", (long)item.itemId, ingredient.ingredientID, ingredient.portion];
             if ([self runQuery:[insertQuery UTF8String] onDatabase:itemDB withErrorMessage:"Join table insert failed!"] != SQLITE_OK) {
                 return false;
             }

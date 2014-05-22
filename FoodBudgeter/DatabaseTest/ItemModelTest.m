@@ -35,53 +35,53 @@
 
 - (void)testPurchase {
     // adding
-    STAssertTrue([itemManager addPurchaseItem:@"Test Food" withCost:10.00], @"Adding item should succeed");
-    STAssertEquals([itemManager numOfItems], 1, @"Only one item should be in mutable array");
+    XCTAssertTrue([itemManager addPurchaseItem:@"Test Food" withCost:10.00], @"Adding item should succeed");
+    XCTAssertEqual([itemManager numOfItems], 1, @"Only one item should be in mutable array");
     
-    STAssertEquals([itemManager.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
+    XCTAssertEqual([itemManager.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
     
-    STAssertFalse([itemManager addPurchaseItem:@"Test Food" withCost:10.00], @"Adding duplicate item should fail");
-    STAssertEquals([itemManager numOfItems], 1, @"Only one item should be in mutable array");
-    STAssertEquals([itemManager.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
+    XCTAssertFalse([itemManager addPurchaseItem:@"Test Food" withCost:10.00], @"Adding duplicate item should fail");
+    XCTAssertEqual([itemManager numOfItems], 1, @"Only one item should be in mutable array");
+    XCTAssertEqual([itemManager.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
     
-    STAssertTrue([itemManager addPurchaseItem:@"Another Food" withCost:10.00], @"Adding item should succeed");
-    STAssertEquals([itemManager numOfItems], 2, @"Only two items should be in mutable array");
-    STAssertEquals([itemManager.dbManager numItemsInDatabase], 2, @"Only two items should be in database");
+    XCTAssertTrue([itemManager addPurchaseItem:@"Another Food" withCost:10.00], @"Adding item should succeed");
+    XCTAssertEqual([itemManager numOfItems], 2, @"Only two items should be in mutable array");
+    XCTAssertEqual([itemManager.dbManager numItemsInDatabase], 2, @"Only two items should be in database");
     
     // retrieving
-    STAssertTrue([itemManager getItemByName:@"Test Food"] != nil, @"Retrieving existing item should succeed");
-    STAssertTrue([itemManager.dbManager itemID:@"Test Food"] != -1, @"Retrieving existing item should succeed");
-    STAssertFalse([itemManager getItemByName:@"Not food"] != nil, @"Retrieving existing item should succeed");
-    STAssertFalse([itemManager.dbManager itemID:@"Not food"] != -1, @"Retrieving nonexistent item should fail");
+    XCTAssertTrue([itemManager getItemByName:@"Test Food"] != nil, @"Retrieving existing item should succeed");
+    XCTAssertTrue([itemManager.dbManager itemID:@"Test Food"] != -1, @"Retrieving existing item should succeed");
+    XCTAssertFalse([itemManager getItemByName:@"Not food"] != nil, @"Retrieving existing item should succeed");
+    XCTAssertFalse([itemManager.dbManager itemID:@"Not food"] != -1, @"Retrieving nonexistent item should fail");
     
     // removing
-    STAssertTrue([itemManager removeItemByName:@"Test Food"], @"Removing existing item should succeed");
-    STAssertFalse([itemManager removeItemByName:@"Not Food"], @"Removing existing item should succeed");
+    XCTAssertTrue([itemManager removeItemByName:@"Test Food"], @"Removing existing item should succeed");
+    XCTAssertFalse([itemManager removeItemByName:@"Not Food"], @"Removing existing item should succeed");
 
-    STAssertEquals([itemManager numOfItems], 1, @"Only one item should be in mutable array");
-    STAssertEquals([itemManager.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
+    XCTAssertEqual([itemManager numOfItems], 1, @"Only one item should be in mutable array");
+    XCTAssertEqual([itemManager.dbManager numItemsInDatabase], 1, @"Only one item should be in database");
     
-    STAssertTrue([itemManager removeItemByName:@"Another Food"], @"Removing existing item should succeed");
+    XCTAssertTrue([itemManager removeItemByName:@"Another Food"], @"Removing existing item should succeed");
     
-    STAssertEquals([itemManager numOfItems], 0, @"No item should be in mutable array");
-    STAssertEquals([itemManager.dbManager numItemsInDatabase], 0, @"No item should be in database");
+    XCTAssertEqual([itemManager numOfItems], 0, @"No item should be in mutable array");
+    XCTAssertEqual([itemManager.dbManager numItemsInDatabase], 0, @"No item should be in database");
      
 }
 
 - (void)testBuildingFromDB {
     PurchasedItem *item = [[PurchasedItem alloc] initWithName:@"test food"];
     PurchasedItem *item2 = [[PurchasedItem alloc] initWithName:@"another food"];
-    STAssertTrue([itemManager.dbManager addItem:item], @"derp");
-    STAssertTrue([itemManager.dbManager addItem:item2], @"more derp");
+    XCTAssertTrue([itemManager.dbManager addItem:item], @"derp");
+    XCTAssertTrue([itemManager.dbManager addItem:item2], @"more derp");
     
-    STAssertEquals([itemManager.dbManager numItemsInDatabase], 2, @"2 items should be in database");
-    STAssertEquals([itemManager numOfItems], 0, @"No items should exist in object based model");
+    XCTAssertEqual([itemManager.dbManager numItemsInDatabase], 2, @"2 items should be in database");
+    XCTAssertEqual([itemManager numOfItems], 0, @"No items should exist in object based model");
     [itemManager buildItems];
-    STAssertTrue([[[[itemManager items]objectAtIndex:0]itemName] isEqualToString:@"test food"], @"names should be the same");
+    XCTAssertTrue([[[[itemManager items]objectAtIndex:0]itemName] isEqualToString:@"test food"], @"names should be the same");
     
     //cleanup
-    STAssertTrue([itemManager removeItemByName:@"test food"], @"Removing existing item should succeed");
-    STAssertTrue([itemManager removeItemByName:@"another food"], @"Removing existing item should succeed");
+    XCTAssertTrue([itemManager removeItemByName:@"test food"], @"Removing existing item should succeed");
+    XCTAssertTrue([itemManager removeItemByName:@"another food"], @"Removing existing item should succeed");
 }
 
 

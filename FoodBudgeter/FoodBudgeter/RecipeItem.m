@@ -26,11 +26,11 @@
 }
 
 - (NSString*)createAddSubtableQuery {
-    return [NSString stringWithFormat:@"INSERT INTO recipe VALUES (%d)", self.itemId];
+    return [NSString stringWithFormat:@"INSERT INTO recipe VALUES (%ld)", (long)self.itemId];
 }
 
 - (NSString*)createRemoveSubtableQuery {
-    return [NSString stringWithFormat:@"DELETE FROM recipe WHERE recipeID = %d", self.itemId];
+    return [NSString stringWithFormat:@"DELETE FROM recipe WHERE recipeID = %ld", (long)self.itemId];
 }
 
 - (int)numOfProperties {

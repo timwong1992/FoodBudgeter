@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Tim Wong, Akia Vongdara. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "ItemManager.h"
 #import "DBManager.h"
 
-@interface ItemModelTest : SenTestCase
+@interface ItemModelTest : XCTestCase
 
 @property(nonatomic, strong)ItemManager *itemManager;
 @property(nonatomic, strong)DBManager *dbManager;
